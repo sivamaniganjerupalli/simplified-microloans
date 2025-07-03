@@ -1,0 +1,53 @@
+# Node.js
+node_modules/
+.env
+.env.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Hardhat / Ethereum
+artifacts/
+cache/
+typechain/
+coverage/
+coverage.json
+hardhat.log
+*.tsbuildinfo
+
+# VSCode
+.vscode/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.pid
+*.seed
+
+# Compiled Contracts
+*.abi
+*.bin
+
+# Frontend (React/Flutter - optional)
+frontend/node_modules/
+frontend/.env
+frontend/build/
+frontend/dist/
+frontend/.next/
+frontend/.expo/
+frontend/.flutter-plugins
+frontend/.dart_tool
+frontend/pubspec.lock
+
+# Oracles (if logs or dumps exist)
+oracles/*.log
+oracles/*.json
+
+# Misc
+*.bak
+*.tmp
