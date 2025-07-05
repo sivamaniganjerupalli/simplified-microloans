@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { sendOTP, verifyOTP } = require('../utils/otpService');
 const Vendor = require('../models/Vendor');
-const Lender = require('../models/lender'); // <-- Import Lender model
+const Lender = require('../models/Lender'); // <-- Import Lender model
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || "secret_key";
