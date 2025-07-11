@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const path = require('path'); // ✅ REQUIRED for path.join()
+
 const connectDB = require('./config/db');
 
 // Load environment variables
@@ -25,8 +27,10 @@ app.use('/api/vendor', require('./routes/vendorRoutes'));
 app.use('/api/loan', require('./routes/loanRoutes'));
 app.use('/api/otp', require('./routes/otpRoutes'));
 app.use('/api/totp', require('./routes/totpRoutes'));
-app.use('/api/lender', lenderDashboardRoutes); // ✅ Register this
-app.use('/uploads', express.static('uploads'));
+app.use('/api/lender', lenderDashboardRoutes);
+
+// Static file serving for uploads
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Health check route
 app.get('/', (req, res) => {
