@@ -50,7 +50,7 @@ const registerLender = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Lender registered successfully",
-      data: { email: newLder.email },
+      data: { email: newLender.email },
     });
   } catch (error) {
     console.error("Error in registerLender:", error.message);
