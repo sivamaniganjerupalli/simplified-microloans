@@ -6,7 +6,7 @@ const multer = require("multer");
 const bcrypt = require("bcrypt");
 const { ethers } = require("ethers");
 
-const provider = new ethers.JsonRpcProvider(http://127.0.0.1:8545); // or any valid endpoin
+const provider = new ethers.JsonRpcProvider(process.env.GANACHE_RPC_URL); // or any valid endpoin
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
