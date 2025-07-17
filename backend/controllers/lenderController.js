@@ -26,7 +26,14 @@ const upload = multer({ storage: storage }).single("image"); // "image" is the k
 // POST /api/lender/register
 const registerLender = async (req, res) => {
   try {
-    const { fullname, email, password, ...rest } = req.body;
+    const { fullname, email, password,walletAddress, ...rest } = req.body;
+
+     if (!walletAddress) {
+      return res.status(400).json({
+        success: false,
+        message: "Wallet address is required",
+      });
+    }
 
     // Check if lender already exists
     const existingLender = await Lender.findOne({ email });
@@ -41,7 +48,8 @@ const registerLender = async (req, res) => {
     const newLender = new Lender({
       fullname,
       email,
-      password, // Store password as raw text
+      password,
+      walletAddress,// Store password as raw text
       ...rest,
     });
 
