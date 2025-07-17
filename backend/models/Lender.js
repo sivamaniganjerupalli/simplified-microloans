@@ -5,6 +5,7 @@ const lenderSchema = new mongoose.Schema(
     fullname: { type: String, required: true },
     surname: { type: String },
     email: { type: String, required: true, unique: true },
+    aadhaarNumber: { type: String, unique: true }, 
     phone: { type: String },
     walletAddress: { type: String },
     profileImage: { type: String },
