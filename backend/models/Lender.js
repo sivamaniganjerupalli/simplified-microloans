@@ -8,7 +8,7 @@ const lenderSchema = new mongoose.Schema(
     aadhaarNumber: { type: String, unique: true }, 
     phone: { type: String },
     walletAddress: { type: String, required: true },
-      encryptedKYC: { type: String, required: true },
+    encryptedKYC: { type: String, required: true },
     profileImage: { type: String },
     password: { type: String, required: true },
     walletBalance: { type: String, default: "0.00" },
