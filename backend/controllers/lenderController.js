@@ -45,7 +45,7 @@ const registerLender = async (req, res) => {
     }
 
     // Create new lender with raw password
-      const newlender = new Lender({
+      const newLender = new Lender({
       fullname,
       surname,
       email,
