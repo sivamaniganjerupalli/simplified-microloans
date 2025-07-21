@@ -45,13 +45,18 @@ const registerLender = async (req, res) => {
     }
 
     // Create new lender with raw password
-    const newLender = new Lender({
+      const newlender = new Lender({
       fullname,
+      surname,
       email,
+      phone,
       password,
-      walletAddress,// Store password as raw text
-      ...rest,
+      role: role || 'lender',
+      aadhaarNumber,
+      encryptedKYC,
+      walletAddress,
     });
+
 
     await newLender.save();
 
