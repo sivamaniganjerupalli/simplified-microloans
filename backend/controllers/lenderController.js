@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const bcrypt = require("bcrypt");
 const { ethers } = require("ethers");
+const { encryptKYC } = require("../utils/kycEncryption");
 
 const provider = new ethers.JsonRpcProvider(process.env.GANACHE_RPC_URL); // or any valid endpoin
 
@@ -27,68 +28,71 @@ const upload = multer({ storage: storage }).single("image"); // "image" is the k
 // POST /api/lender/register
 
 const registerLender = async (req, res) => {
-  try {
-    const {
-      fullname,
-      surname,
-      email,
-      phone,
-      password, // storing as plain text (not secure)
-      role,
-      aadhaarNumber,
-      encryptedKYC,
-      walletAddress,
-    } = req.body;
+  const {
+    fullname,
+    surname,
+    email,
+    phone,
+    password,
+    role,
+    aadhaarNumber,
+    walletAddress,
+  } = req.body;
 
-    // Check required fields
-    if (!fullname || !email || !password || !walletAddress) {
+  try {
+    // Validate required fields
+    if (!fullname || !email || !aadhaarNumber || !walletAddress || !password) {
       return res.status(400).json({
         success: false,
-        message: "Fullname, email, password, and wallet address are required",
+        message: "Required fields are missing.",
       });
     }
 
-    // Check if lender already exists
-    const existingLender = await Lender.findOne({ email });
+    // Check for existing lender
+    const existingLender = await Lender.findOne({
+      $or: [{ email }, { aadhaarNumber }],
+    });
+
     if (existingLender) {
       return res.status(400).json({
         success: false,
-        message: "Email already registered",
+        message: "You have already registered. Please login.",
       });
     }
 
-    // Create new lender with plain text password
+    // Encrypt KYC (Aadhaar number)
+    const encryptedKYC = encryptKYC(String(aadhaarNumber));
+
+    // Create new lender
     const newLender = new Lender({
       fullname,
       surname,
       email,
       phone,
-      password, // stored in plain text as per your request
-      role: role || 'lender',
+      password, // stored as plain text (NOT recommended for production)
+      role: role || "lender",
       aadhaarNumber,
       encryptedKYC,
       walletAddress,
     });
 
-    await newLender.save();
+    // Save to DB
+    await lender.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       success: true,
       message: "Lender registered successfully",
-      data: {
-        email: newLender.email,
-        walletAddress: newLender.walletAddress,
-      },
+      lender,
     });
-  } catch (error) {
-    console.error("Error in registerLender:", error.message);
-    res.status(500).json({
+  } catch (err) {
+    console.error("Lender Registration Error:", err.message);
+    return res.status(500).json({
       success: false,
-      message: "Server error during registration",
+      message: "Server error",
+      error: err.message,
     });
   }
 };
-
 // POST /api/lender/login
 const loginLender = async (req, res) => {
   try {
