@@ -43,6 +43,8 @@ const registerLender = async (req, res) => {
       notifyByEmail,
       notifyBySMS,
     } = req.body;
+    
+      console.log("Received data:", req.body.walletAddress);
 
     // Validation
     if (!fullname || !email || !password || !aadhaarNumber || !walletAddress) {
