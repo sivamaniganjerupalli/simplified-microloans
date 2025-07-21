@@ -3,7 +3,6 @@ const Transaction = require("../models/Transaction");
 const Lender = require("../models/Lender");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-const bcrypt = require("bcrypt");
 const { ethers } = require("ethers");
 
 const provider = new ethers.JsonRpcProvider(process.env.GANACHE_RPC_URL); // or any valid endpoin
