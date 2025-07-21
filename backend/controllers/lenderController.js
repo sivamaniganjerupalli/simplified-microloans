@@ -44,7 +44,7 @@ const registerLender = async (req, res) => {
       notifyBySMS,
     } = req.body;
     
-      console.log("Received data:", req.body.walletAddress);
+      
 
     // Validation
     if (!fullname || !email || !password || !aadhaarNumber || !walletAddress) {
@@ -61,7 +61,7 @@ const registerLender = async (req, res) => {
     const encryptedKYC = encryptKYC(aadhaarNumber);
 
     // Save new Lender
-    const Lender = new Lender({
+    const newLender = new Lender({
       fullname,
       surname,
       email,
@@ -77,10 +77,10 @@ const registerLender = async (req, res) => {
       notifyBySMS,
     });
 
-    await Lender.save();
+    await newLender.save();
 
     // Generate token
-    const token = jwt.sign({ userId: Lender._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId: newLender._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
@@ -88,10 +88,10 @@ const registerLender = async (req, res) => {
       message: "Lender registered successfully.",
       token,
       lender: {
-        id: Lender._id,
-        fullname: Lender.fullname,
-        email: Lender.email,
-        walletAddress: Lender.walletAddress,
+        id: newLender._id,
+        fullname: newLender.fullname,
+        email: newLender.email,
+        walletAddress: newLender.walletAddress,
       },
     });
   } catch (error) {
