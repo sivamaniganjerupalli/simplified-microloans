@@ -24,47 +24,72 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("image"); // "image" is the key used to upload the file
 
 // POST /api/lender/register
+// Import necessary modules
+const bcrypt = require("bcrypt");
+const Lender = require("../models/Lender"); // adjust path if needed
+
+// POST /api/lender/register
 const registerLender = async (req, res) => {
   try {
-    const { fullname, email, password,walletAddress, ...rest } = req.body;
-
-     if (!walletAddress) {
-      return res.status(400).json({
-        success: false,
-        message: "Wallet address is required",
-      });
-    }
-
-    // Check if lender already exists
-    const existingLender = await Lender.findOne({ email });
-    if (existingLender) {
-      return res.status(400).json({
-        success: false,
-        message: "Email already registered",
-      });
-    }
-
-    // Create new lender with raw password
-      const newLender = new Lender({
+    const {
       fullname,
       surname,
       email,
       phone,
       password,
-      role: role || 'lender',
+      role,
+      aadhaarNumber,
+      encryptedKYC,
+      walletAddress,
+    } = req.body;
+
+    // Validate required fields
+    if (!fullname || !email || !password || !walletAddress) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide all required fields: fullname, email, password, walletAddress",
+      });
+    }
+
+    // Check if email already exists
+    const existingLender = await Lender.findOne({ email });
+    if (existingLender) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is already registered",
+      });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create new lender
+    const newLender = new Lender({
+      fullname,
+      surname,
+      email,
+      phone,
+      password: hashedPassword,
+      role: role || "lender",
       aadhaarNumber,
       encryptedKYC,
       walletAddress,
     });
 
-
+    // Save to DB
     await newLender.save();
 
+    // Success response
     res.status(201).json({
       success: true,
       message: "Lender registered successfully",
-      data: { email: newLender.email },
+      data: {
+        id: newLender._id,
+        email: newLender.email,
+        walletAddress: newLender.walletAddress,
+      },
     });
+
   } catch (error) {
     console.error("Error in registerLender:", error.message);
     res.status(500).json({
