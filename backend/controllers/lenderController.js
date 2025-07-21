@@ -29,6 +29,10 @@ const bcrypt = require("bcrypt");
 const Lender = require("../models/Lender"); // adjust path if needed
 
 // POST /api/lender/register
+// POST /api/lender/register
+
+const Lender = require("../models/Lender"); // Make sure path is correct
+
 const registerLender = async (req, res) => {
   try {
     const {
@@ -36,60 +40,53 @@ const registerLender = async (req, res) => {
       surname,
       email,
       phone,
-      password,
+      password, // storing as plain text (not secure)
       role,
       aadhaarNumber,
       encryptedKYC,
       walletAddress,
     } = req.body;
 
-    // Validate required fields
+    // Check required fields
     if (!fullname || !email || !password || !walletAddress) {
       return res.status(400).json({
         success: false,
-        message: "Please provide all required fields: fullname, email, password, walletAddress",
+        message: "Fullname, email, password, and wallet address are required",
       });
     }
 
-    // Check if email already exists
+    // Check if lender already exists
     const existingLender = await Lender.findOne({ email });
     if (existingLender) {
       return res.status(400).json({
         success: false,
-        message: "Email is already registered",
+        message: "Email already registered",
       });
     }
 
-    // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create new lender
+    // Create new lender with plain text password
     const newLender = new Lender({
       fullname,
       surname,
       email,
       phone,
-      password: hashedPassword,
-      role: role || "lender",
+      password, // stored in plain text as per your request
+      role: role || 'lender',
       aadhaarNumber,
       encryptedKYC,
       walletAddress,
     });
 
-    // Save to DB
     await newLender.save();
 
-    // Success response
     res.status(201).json({
       success: true,
       message: "Lender registered successfully",
       data: {
-        id: newLender._id,
         email: newLender.email,
         walletAddress: newLender.walletAddress,
       },
     });
-
   } catch (error) {
     console.error("Error in registerLender:", error.message);
     res.status(500).json({
