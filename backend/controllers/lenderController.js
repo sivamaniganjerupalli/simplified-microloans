@@ -28,69 +28,73 @@ const upload = multer({ storage: storage }).single("image"); // "image" is the k
 // POST /api/lender/register
 
 const registerLender = async (req, res) => {
-  const {
-    fullname,
-    surname,
-    email,
-    phone,
-    password,
-    role,
-    aadhaarNumber,
-    walletAddress,
-  } = req.body;
-
   try {
-    // Validate required fields
-    if (!fullname || !email || !aadhaarNumber || !walletAddress || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Required fields are missing.",
-      });
+    const {
+      fullname,
+      surname,
+      email,
+      aadhaarNumber,
+      phone,
+      walletAddress,
+      profileImage,
+      password, // plain text as requested
+      language,
+      theme,
+      notifyByEmail,
+      notifyBySMS,
+    } = req.body;
+
+    // Validation
+    if (!fullname || !email || !password || !aadhaarNumber || !walletAddress) {
+      return res.status(400).json({ message: "Required fields are missing." });
     }
 
-    // Check for existing lender
-    const existingLender = await Lender.findOne({
-      $or: [{ email }, { aadhaarNumber }],
-    });
-
-    if (existingLender) {
-      return res.status(400).json({
-        success: false,
-        message: "You have already registered. Please login.",
-      });
+    // Check if user already exists
+    const existingUser = await Lender.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Lender already registered with this email." });
     }
 
-    // Encrypt KYC (Aadhaar number)
-    const encryptedKYC = encryptKYC(String(aadhaarNumber));
+    // Encrypt Aadhaar Number for KYC
+    const encryptedKYC = encryptKYC(aadhaarNumber);
 
-    // Create new lender
+    // Save new Lender
     const newLender = new Lender({
       fullname,
       surname,
       email,
+      aadhaarNumber, // store original Aadhaar too
       phone,
-      password, // stored as plain text (NOT recommended for production)
-      role: role || "lender",
-      aadhaarNumber,
-      encryptedKYC,
       walletAddress,
+      encryptedKYC,
+      profileImage,
+      password, // plain text, as requested
+      language,
+      theme,
+      notifyByEmail,
+      notifyBySMS,
     });
 
-    // Save to DB
-    await lender.save();
+    await newLender.save();
 
-    return res.status(201).json({
-      success: true,
-      message: "Lender registered successfully",
-      lender,
+    // Generate token
+    const token = jwt.sign({ userId: newLender._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
     });
-  } catch (err) {
-    console.error("Lender Registration Error:", err.message);
-    return res.status(500).json({
-      success: false,
-      message: "Server error",
-      error: err.message,
+
+    res.status(201).json({
+      message: "Lender registered successfully.",
+      token,
+      lender: {
+        id: newLender._id,
+        fullname: newLender.fullname,
+        email: newLender.email,
+        walletAddress: newLender.walletAddress,
+      },
     });
+  } catch (error) {
+    console.error("Registration error:", error);
+    res.status(500).json({ message: "Server error during lender registration." });
   }
 };
 // POST /api/lender/login
