@@ -3,6 +3,7 @@ const Transaction = require("../models/Transaction");
 const Lender = require("../models/Lender");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 const { ethers } = require("ethers");
 
 const provider = new ethers.JsonRpcProvider(process.env.GANACHE_RPC_URL); // or any valid endpoin
@@ -23,14 +24,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single("image"); // "image" is the key used to upload the file
 
 // POST /api/lender/register
-// Import necessary modules
-const bcrypt = require("bcrypt");
-const Lender = require("../models/Lender"); // adjust path if needed
-
 // POST /api/lender/register
-// POST /api/lender/register
-
-const Lender = require("../models/Lender"); // Make sure path is correct
 
 const registerLender = async (req, res) => {
   try {
