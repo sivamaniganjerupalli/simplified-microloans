@@ -179,6 +179,7 @@ const getLenderDashboard = async (req, res) => {
     // ✅ Final response
     res.status(200).json({
       walletBalance: parseFloat(walletBalance).toFixed(4), // 👈 shows like 0.0000
+      walletAddress: lender.walletAddress || "N/A", // 👈 Add this line
       loansFunded: loansFunded.toFixed(4),
       activeVendors: activeVendorsSet.size,
       lastFundedLoan: {
