@@ -1,5 +1,5 @@
 // src/pages/Lender/LenderWithdrawal.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Wallet, CheckCircle, AlertCircle, ArrowRight, DollarSign } from "lucide-react";
 import { API_BASE_URL } from "../../utils/constants";
@@ -11,9 +11,33 @@ const LenderWithdrawal = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [transactionHash, setTransactionHash] = useState("");
+  const [walletBalance, setWalletBalance] = useState("0.0000 ETH");
+  const [availableToWithdraw, setAvailableToWithdraw] = useState(0);
 
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchPortfolio = async () => {
+      try {
+        if (!userId || !token) return;
+        const res = await axios.get(`${API_BASE_URL}/lender/portfolio/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (res.data?.success) {
+          setWalletBalance(res.data.walletBalance || "0.0000 ETH");
+          setAvailableToWithdraw(Number(res.data.availableToWithdraw || 0));
+          if (res.data.walletAddress) {
+            setWalletAddress(res.data.walletAddress);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to load withdrawal summary:", err.message);
+      }
+    };
+
+    fetchPortfolio();
+  }, [token, userId]);
 
   const handleWithdrawal = async (e) => {
     e.preventDefault();
@@ -43,8 +67,8 @@ const LenderWithdrawal = () => {
 
       setSuccess(true);
       setTransactionHash(res.data.transactionHash);
+      setAvailableToWithdraw(Number(res.data.availableToWithdraw || 0));
       setWithdrawalAmount("");
-      setWalletAddress("");
     } catch (err) {
       setError(err.response?.data?.message || "Withdrawal failed");
     } finally {
@@ -60,6 +84,8 @@ const LenderWithdrawal = () => {
           <p className="text-sm font-semibold text-blue-700 uppercase tracking-wide">Manage Funds</p>
           <h1 className="text-4xl font-bold text-gray-900">Withdraw Funds</h1>
           <p className="text-gray-600">Transfer your earnings to your wallet</p>
+          <p className="text-sm text-gray-700">Wallet Balance: <span className="font-semibold">{walletBalance}</span></p>
+          <p className="text-sm text-gray-700">Available to Withdraw: <span className="font-semibold">{availableToWithdraw.toFixed(4)} ETH</span></p>
         </div>
 
         {/* Success State */}

@@ -1,34 +1,69 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { Radar, Star, Clock3, ShieldCheck } from "lucide-react";
-
-const opportunities = [
-  {
-    id: "A11",
-    vendor: "Ravi Stores",
-    sector: "Retail Grocery",
-    amount: "3.2 ETH",
-    tenure: "4 months",
-    score: 82,
-  },
-  {
-    id: "B09",
-    vendor: "Maya Foods",
-    sector: "Food Processing",
-    amount: "6.4 ETH",
-    tenure: "8 months",
-    score: 76,
-  },
-  {
-    id: "C27",
-    vendor: "Anil Logistics",
-    sector: "Local Delivery",
-    amount: "4.1 ETH",
-    tenure: "6 months",
-    score: 74,
-  },
-];
+import { API_BASE_URL } from "../../utils/constants";
 
 const LenderOpportunityRadar = () => {
+  const [opportunities, setOpportunities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const lenderId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchLoans = async () => {
+      try {
+        setLoading(true);
+        if (!lenderId || !token) {
+          setOpportunities([]);
+          setError("Please login to view opportunities.");
+          return;
+        }
+
+        const res = await axios.get(`${API_BASE_URL}/lender/${lenderId}/loans`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+
+        const pending = (res.data?.loans || [])
+          .filter((loan) => loan.status === "Pending")
+          .map((loan) => {
+            const amount = Number(loan.loanAmount || 0);
+            const tenureMonths = Number(loan.repayTime || 0);
+            const amountFactor = Math.max(0, 100 - Math.min(amount * 4, 40));
+            const tenureFactor = Math.max(0, 100 - Math.min(tenureMonths * 3, 36));
+            const score = Math.round((amountFactor * 0.5) + (tenureFactor * 0.5));
+            return {
+              id: loan._id,
+              vendor: `${loan.fullName || "Vendor"} ${loan.surname || ""}`.trim(),
+              sector: loan.businessType || "Business",
+              amount: `${amount.toFixed(3)} ETH`,
+              tenure: `${tenureMonths} months`,
+              score,
+            };
+          })
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10);
+
+        setOpportunities(pending);
+        setError("");
+      } catch (err) {
+        setError(err.response?.data?.message || "Failed to load opportunities");
+        setOpportunities([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLoans();
+  }, [lenderId, token]);
+
+  const averageScore = useMemo(() => {
+    if (!opportunities.length) return "0.0";
+    const sum = opportunities.reduce((acc, item) => acc + Number(item.score || 0), 0);
+    return (sum / opportunities.length).toFixed(1);
+  }, [opportunities]);
+
   return (
     <div className="min-h-screen">
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-8">
@@ -46,7 +81,7 @@ const LenderOpportunityRadar = () => {
           </div>
           <div className="rounded-2xl border border-amber-200/30 bg-white/5 p-5 backdrop-blur-xl">
             <p className="text-sm text-amber-200">Avg Quality Score</p>
-            <p className="text-3xl font-bold text-amber-300 mt-1">77.3</p>
+            <p className="text-3xl font-bold text-amber-300 mt-1">{averageScore}</p>
           </div>
           <div className="rounded-2xl border border-amber-200/30 bg-white/5 p-5 backdrop-blur-xl">
             <p className="text-sm text-amber-200">Priority Window</p>
@@ -54,7 +89,22 @@ const LenderOpportunityRadar = () => {
           </div>
         </div>
 
+        {error && (
+          <div className="rounded-xl border border-amber-300/40 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {error}
+          </div>
+        )}
+
+        {loading && (
+          <div className="text-slate-200 text-sm">Loading opportunities...</div>
+        )}
+
         <div className="space-y-4">
+          {!loading && opportunities.length === 0 && (
+            <div className="rounded-2xl border border-amber-200/30 bg-white/5 p-6 text-slate-300">
+              No pending loan opportunities available right now.
+            </div>
+          )}
           {opportunities.map((item) => (
             <div key={item.id} className="rounded-2xl border border-amber-200/30 bg-white/5 p-6 backdrop-blur-xl">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

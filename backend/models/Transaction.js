@@ -10,7 +10,7 @@ const transactionSchema = new mongoose.Schema(
     borrowerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Vendor",
-      required: true,
+      required: false,
     },
     amount: {
       type: Number,
@@ -18,7 +18,7 @@ const transactionSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["Loan Disbursement", "Repayment"],
+      enum: ["Loan Disbursement", "Repayment", "Withdrawal"],
       required: true,
     },
     purpose: {

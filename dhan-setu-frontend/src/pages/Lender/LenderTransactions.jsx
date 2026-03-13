@@ -32,6 +32,7 @@ const getTxDirection = (tx) => {
     raw.includes("loan") ||
     raw.includes("disbursement") ||
     raw.includes("payout") ||
+    raw.includes("withdrawal") ||
     raw.includes("funding")
   ) {
     return "debit";

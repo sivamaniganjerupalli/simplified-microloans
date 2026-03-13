@@ -713,6 +713,208 @@ const getLenderById = async (req, res) => {
   }
 };
 
+const getLenderPortfolio = async (req, res) => {
+  try {
+    const { lenderId } = req.params;
+    if (!lenderId || !mongoose.isValidObjectId(lenderId)) {
+      return res.status(400).json({ success: false, message: "Invalid lender ID" });
+    }
+
+    const lender = await Lender.findById(lenderId).lean();
+    if (!lender) {
+      return res.status(404).json({ success: false, message: "Lender not found" });
+    }
+
+    const loans = await Loan.find({ lenderId: lender._id }).lean();
+    const txns = await Transaction.find({ lenderId: lender._id }).lean();
+
+    const fundedLoans = loans.filter((loan) => loan.status === "Approved" || loan.status === "Repaid");
+    const totalInvestedNum = fundedLoans.reduce((sum, loan) => sum + (parseFloat(loan.loanAmount) || 0), 0);
+    const totalReturnsNum = txns
+      .filter((tx) => tx.type === "Repayment")
+      .reduce((sum, tx) => sum + (parseFloat(tx.amount) || 0), 0);
+
+    const returnPercentage = totalInvestedNum > 0
+      ? ((totalReturnsNum / totalInvestedNum) * 100).toFixed(2)
+      : "0.00";
+
+    const activeLoans = loans.filter((loan) => loan.status === "Approved").length;
+    const completedLoans = loans.filter((loan) => loan.status === "Repaid").length;
+
+    const distributionBuckets = [
+      { name: "Small Loans (< 5 ETH)", value: 0 },
+      { name: "Medium Loans (5-10 ETH)", value: 0 },
+      { name: "Large Loans (> 10 ETH)", value: 0 },
+    ];
+
+    fundedLoans.forEach((loan) => {
+      const amount = parseFloat(loan.loanAmount) || 0;
+      if (amount < 5) distributionBuckets[0].value += 1;
+      else if (amount <= 10) distributionBuckets[1].value += 1;
+      else distributionBuckets[2].value += 1;
+    });
+
+    const totalBucketCount = distributionBuckets.reduce((sum, b) => sum + b.value, 0);
+    const distribution = distributionBuckets.map((bucket) => ({
+      ...bucket,
+      value: totalBucketCount > 0 ? Number(((bucket.value / totalBucketCount) * 100).toFixed(1)) : 0,
+    }));
+
+    const monthFormatter = new Intl.DateTimeFormat("en-IN", { month: "short" });
+    const monthMap = new Map();
+    const monthlyPerformance = [];
+    for (let i = 5; i >= 0; i -= 1) {
+      const d = new Date();
+      d.setDate(1);
+      d.setMonth(d.getMonth() - i);
+      const key = `${d.getFullYear()}-${d.getMonth()}`;
+      const bucket = { month: monthFormatter.format(d), returns: 0, invested: 0 };
+      monthMap.set(key, bucket);
+      monthlyPerformance.push(bucket);
+    }
+
+    fundedLoans.forEach((loan) => {
+      const date = new Date(loan.approvedAt || loan.createdAt || loan.updatedAt);
+      if (Number.isNaN(date.getTime())) return;
+      const key = `${date.getFullYear()}-${date.getMonth()}`;
+      const bucket = monthMap.get(key);
+      if (bucket) bucket.invested += parseFloat(loan.loanAmount) || 0;
+    });
+
+    txns
+      .filter((tx) => tx.type === "Repayment")
+      .forEach((tx) => {
+        const date = new Date(tx.createdAt);
+        if (Number.isNaN(date.getTime())) return;
+        const key = `${date.getFullYear()}-${date.getMonth()}`;
+        const bucket = monthMap.get(key);
+        if (bucket) bucket.returns += parseFloat(tx.amount) || 0;
+      });
+
+    const walletBalanceRaw = lender.walletAddress && ethers.isAddress(lender.walletAddress)
+      ? await provider.getBalance(lender.walletAddress)
+      : 0n;
+    const walletBalanceNum = Number(ethers.formatEther(walletBalanceRaw));
+
+    const roundedPerformance = monthlyPerformance.map((m) => ({
+      month: m.month,
+      returns: Number(m.returns.toFixed(4)),
+      invested: Number(m.invested.toFixed(4)),
+    }));
+
+    return res.status(200).json({
+      success: true,
+      walletAddress: lender.walletAddress || "",
+      walletBalance: `${walletBalanceNum.toFixed(4)} ETH`,
+      totalInvested: `${totalInvestedNum.toFixed(4)} ETH`,
+      totalReturns: `${totalReturnsNum.toFixed(4)} ETH`,
+      returnPercentage: `${returnPercentage}%`,
+      activeLoans,
+      completedLoans,
+      distribution,
+      monthlyPerformance: roundedPerformance,
+      availableToWithdraw: Number(Math.max(totalReturnsNum, 0).toFixed(4)),
+    });
+  } catch (error) {
+    console.error("getLenderPortfolio error:", error.message);
+    return res.status(500).json({ success: false, message: "Failed to load portfolio" });
+  }
+};
+
+const getLenderInvestments = async (req, res) => {
+  try {
+    const { lenderId } = req.params;
+    if (!lenderId || !mongoose.isValidObjectId(lenderId)) {
+      return res.status(400).json({ success: false, message: "Invalid lender ID" });
+    }
+
+    const loans = await Loan.find({ lenderId: new mongoose.Types.ObjectId(lenderId) })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    const investments = loans.map((loan) => {
+      const amount = parseFloat(loan.loanAmount) || 0;
+      const status = loan.status === "Repaid" ? "Repaid" : "Active";
+      const returns = 0;
+      const roi = amount > 0 ? ((returns / amount) * 100).toFixed(2) : "0.00";
+      return {
+        id: loan._id,
+        vendor: `${loan.fullName || "Vendor"} ${loan.surname || ""}`.trim(),
+        amount: amount.toFixed(3),
+        date: loan.approvedAt || loan.createdAt,
+        status,
+        returns: returns.toFixed(3),
+        roi: `${roi}%`,
+      };
+    });
+
+    return res.status(200).json({ success: true, investments });
+  } catch (error) {
+    console.error("getLenderInvestments error:", error.message);
+    return res.status(500).json({ success: false, message: "Failed to load investments" });
+  }
+};
+
+const requestLenderWithdrawal = async (req, res) => {
+  try {
+    const { lenderId } = req.params;
+    const { amount, destinationWallet } = req.body;
+
+    if (!lenderId || !mongoose.isValidObjectId(lenderId)) {
+      return res.status(400).json({ success: false, message: "Invalid lender ID" });
+    }
+
+    const numericAmount = Number(amount);
+    if (!numericAmount || numericAmount <= 0) {
+      return res.status(400).json({ success: false, message: "Invalid withdrawal amount" });
+    }
+
+    if (!destinationWallet || !ethers.isAddress(destinationWallet)) {
+      return res.status(400).json({ success: false, message: "Invalid destination wallet address" });
+    }
+
+    const lender = await Lender.findById(lenderId);
+    if (!lender) {
+      return res.status(404).json({ success: false, message: "Lender not found" });
+    }
+
+    const txns = await Transaction.find({ lenderId: lender._id }).lean();
+    const totalRepayments = txns
+      .filter((tx) => tx.type === "Repayment")
+      .reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0);
+    const totalWithdrawals = txns
+      .filter((tx) => tx.type === "Withdrawal")
+      .reduce((sum, tx) => sum + (Number(tx.amount) || 0), 0);
+    const availableToWithdraw = totalRepayments - totalWithdrawals;
+
+    if (numericAmount > availableToWithdraw) {
+      return res.status(400).json({
+        success: false,
+        message: `Insufficient withdrawable balance. Available: ${Math.max(availableToWithdraw, 0).toFixed(4)} ETH`,
+      });
+    }
+
+    const pseudoHash = `withdrawal-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    await Transaction.create({
+      lenderId: lender._id,
+      amount: numericAmount,
+      type: "Withdrawal",
+      purpose: `Withdrawal to ${destinationWallet}`,
+      hash: pseudoHash,
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Withdrawal request recorded",
+      transactionHash: pseudoHash,
+      availableToWithdraw: Number((availableToWithdraw - numericAmount).toFixed(4)),
+    });
+  } catch (error) {
+    console.error("requestLenderWithdrawal error:", error.message);
+    return res.status(500).json({ success: false, message: "Failed to process withdrawal" });
+  }
+};
+
 module.exports = {
   registerLender,
   loginLender,
@@ -726,4 +928,7 @@ module.exports = {
   getAllLoans,
   rejectLoan,
   getLenderById,
+  getLenderPortfolio,
+  getLenderInvestments,
+  requestLenderWithdrawal,
 };

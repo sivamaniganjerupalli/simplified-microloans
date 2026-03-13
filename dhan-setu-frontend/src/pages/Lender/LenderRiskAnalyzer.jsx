@@ -1,28 +1,77 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { AlertTriangle, ShieldCheck, TrendingUp, CircleGauge } from "lucide-react";
-
-const riskBands = [
-  { id: "low", label: "Low", score: 22, note: "Stable cashflow and short tenure", color: "text-emerald-300" },
-  { id: "medium", label: "Medium", score: 49, note: "Balanced risk with moderate returns", color: "text-amber-300" },
-  { id: "high", label: "High", score: 78, note: "Higher volatility and longer recovery", color: "text-rose-300" },
-];
+import { API_BASE_URL } from "../../utils/constants";
 
 const LenderRiskAnalyzer = () => {
-  const [selectedBand, setSelectedBand] = useState("medium");
+  const [availableLoans, setAvailableLoans] = useState([]);
+  const [selectedLoanId, setSelectedLoanId] = useState("");
   const [loanAmount, setLoanAmount] = useState("5");
   const [tenureMonths, setTenureMonths] = useState("6");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const selected = useMemo(() => riskBands.find((b) => b.id === selectedBand) || riskBands[1], [selectedBand]);
+  const lenderId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const fetchLoans = async () => {
+      try {
+        setLoading(true);
+        if (!lenderId || !token) {
+          setAvailableLoans([]);
+          setError("Please login to analyze risk.");
+          return;
+        }
+        const res = await axios.get(`${API_BASE_URL}/lender/${lenderId}/loans`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const pending = (res.data?.loans || []).filter((loan) => loan.status === "Pending");
+        setAvailableLoans(pending);
+        if (pending.length > 0) {
+          const first = pending[0];
+          setSelectedLoanId(first._id);
+          setLoanAmount(String(first.loanAmount || 0));
+          setTenureMonths(String(first.repayTime || 0));
+        }
+        setError("");
+      } catch (err) {
+        setError(err.response?.data?.message || "Failed to load loans for analysis");
+        setAvailableLoans([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLoans();
+  }, [lenderId, token]);
+
+  const riskScore = useMemo(() => {
+    const amount = Number(loanAmount) || 0;
+    const tenure = Number(tenureMonths) || 0;
+    const amountRisk = Math.min((amount / 15) * 45, 45);
+    const tenureRisk = Math.min((tenure / 24) * 35, 35);
+    const baseRisk = 20;
+    return Math.round(Math.min(100, baseRisk + amountRisk + tenureRisk));
+  }, [loanAmount, tenureMonths]);
+
+  const riskLabel = riskScore < 35 ? "Low" : riskScore < 65 ? "Medium" : "High";
+  const riskColor = riskScore < 35 ? "text-emerald-300" : riskScore < 65 ? "text-amber-300" : "text-rose-300";
+  const riskNote = riskScore < 35
+    ? "Stable risk profile with manageable downside."
+    : riskScore < 65
+      ? "Balanced risk; prefer staged disbursement."
+      : "High volatility; consider lower ticket size or stronger collateral evidence.";
 
   const stressLoss = useMemo(() => {
     const amount = Number(loanAmount) || 0;
     const tenure = Number(tenureMonths) || 0;
-    const baseFactor = selected.score / 100;
+    const baseFactor = riskScore / 100;
     const tenureImpact = Math.min(tenure / 24, 1);
     return (amount * (0.06 + baseFactor * 0.18 + tenureImpact * 0.08)).toFixed(3);
-  }, [loanAmount, selected.score, tenureMonths]);
+  }, [loanAmount, riskScore, tenureMonths]);
 
-  const confidence = Math.max(12, 100 - selected.score);
+  const confidence = Math.max(12, 100 - riskScore);
 
   return (
     <div className="min-h-screen">
@@ -43,15 +92,22 @@ const LenderRiskAnalyzer = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm text-slate-300 mb-2">Risk Band</label>
+                <label className="block text-sm text-slate-300 mb-2">Select Loan</label>
                 <select
-                  value={selectedBand}
-                  onChange={(e) => setSelectedBand(e.target.value)}
+                  value={selectedLoanId}
+                  onChange={(e) => {
+                    setSelectedLoanId(e.target.value);
+                    const loan = availableLoans.find((l) => l._id === e.target.value);
+                    if (loan) {
+                      setLoanAmount(String(loan.loanAmount || 0));
+                      setTenureMonths(String(loan.repayTime || 0));
+                    }
+                  }}
                   className="w-full rounded-xl border border-cyan-200/30 bg-slate-950/40 px-3 py-2 text-slate-100"
                 >
-                  {riskBands.map((band) => (
-                    <option key={band.id} value={band.id}>
-                      {band.label}
+                  {availableLoans.map((loan) => (
+                    <option key={loan._id} value={loan._id}>
+                      {`${loan.fullName || "Vendor"} ${loan.surname || ""}`.trim()} ({loan.loanAmount} ETH)
                     </option>
                   ))}
                 </select>
@@ -79,7 +135,7 @@ const LenderRiskAnalyzer = () => {
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="rounded-xl border border-cyan-200/25 bg-cyan-500/10 p-4">
                 <p className="text-sm text-cyan-200">Risk Score</p>
-                <p className={`text-2xl font-bold mt-1 ${selected.color}`}>{selected.score}/100</p>
+                <p className={`text-2xl font-bold mt-1 ${riskColor}`}>{riskScore}/100 ({riskLabel})</p>
               </div>
               <div className="rounded-xl border border-cyan-200/25 bg-cyan-500/10 p-4">
                 <p className="text-sm text-cyan-200">Estimated Stress Loss</p>
@@ -98,7 +154,7 @@ const LenderRiskAnalyzer = () => {
                 <ShieldCheck className="w-5 h-5 text-emerald-300" />
                 Recommended Move
               </h3>
-              <p className="text-slate-300 text-sm">{selected.note}</p>
+              <p className="text-slate-300 text-sm">{riskNote}</p>
             </div>
             <div className="rounded-2xl border border-cyan-200/30 bg-white/5 p-5 backdrop-blur-xl">
               <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
@@ -116,6 +172,11 @@ const LenderRiskAnalyzer = () => {
             </div>
           </div>
         </div>
+        {loading && <p className="text-slate-300 text-sm">Loading loans for analysis...</p>}
+        {error && <p className="text-amber-300 text-sm">{error}</p>}
+        {!loading && !error && availableLoans.length === 0 && (
+          <p className="text-slate-300 text-sm">No pending loans available for risk analysis.</p>
+        )}
       </div>
     </div>
   );

@@ -17,6 +17,9 @@ const {
   getAllLoans,
   rejectLoan,
   getLenderById,
+  getLenderPortfolio,
+  getLenderInvestments,
+  requestLenderWithdrawal,
 } = require("../controllers/lenderController");
 
 // Configure multer for image uploads
@@ -49,6 +52,9 @@ router.post(
 router.put("/update/:lenderId", authMiddleware, updateLenderSettings);
 
 router.get("/transactions/:lenderId", authMiddleware, getLenderTransactions);
+router.get("/portfolio/:lenderId", authMiddleware, getLenderPortfolio);
+router.get("/:lenderId/investments", authMiddleware, getLenderInvestments);
+router.post("/:lenderId/withdrawal", authMiddleware, requestLenderWithdrawal);
 
 // 📝 Optional: Manual transaction recording endpoint (for testing or admin use)
 router.post("/transactions/record", authMiddleware, recordTransaction);

@@ -4,17 +4,10 @@ import axios from "axios";
 import { TrendingUp, Calendar, ArrowUpRight, Filter, Search, Coins, Wallet, BadgeCheck, Layers3 } from "lucide-react";
 import { API_BASE_URL } from "../../utils/constants";
 
-const MOCK_INVESTMENTS = [
-  { id: 1, vendor: "Raj Kumar", amount: "2.50", date: "2026-03-01", status: "Repaid", returns: "0.35", roi: "14%" },
-  { id: 2, vendor: "Priya Singh", amount: "5.00", date: "2026-02-15", status: "Repaid", returns: "0.75", roi: "15%" },
-  { id: 3, vendor: "Arjun Patel", amount: "3.75", date: "2026-02-01", status: "Active", returns: "0.25", roi: "6.7%" },
-  { id: 4, vendor: "Meera Sharma", amount: "4.20", date: "2026-01-20", status: "Active", returns: "0.52", roi: "12.4%" },
-  { id: 5, vendor: "Vikram Das", amount: "6.00", date: "2025-12-15", status: "Repaid", returns: "1.08", roi: "18%" },
-];
-
 const LenderInvestmentHistory = () => {
   const [investments, setInvestments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -24,14 +17,20 @@ const LenderInvestmentHistory = () => {
   const fetchInvestmentHistory = useCallback(async () => {
     try {
       setLoading(true);
+      if (!userId || !token) {
+        setError("Please login to view investment history.");
+        setInvestments([]);
+        return;
+      }
       const res = await axios.get(
         `${API_BASE_URL}/lender/${userId}/investments`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setInvestments(res.data.investments || MOCK_INVESTMENTS);
+      setInvestments(res.data.investments || []);
+      setError("");
     } catch (err) {
-      // Use mock data for demo
-      setInvestments(MOCK_INVESTMENTS);
+      setInvestments([]);
+      setError(err.response?.data?.message || "Failed to load investment history");
     } finally {
       setLoading(false);
     }
@@ -48,8 +47,8 @@ const LenderInvestmentHistory = () => {
   });
 
   const stats = {
-    totalInvested: investments.reduce((sum, inv) => sum + parseFloat(inv.amount), 0),
-    totalReturns: investments.reduce((sum, inv) => sum + parseFloat(inv.returns), 0),
+    totalInvested: investments.reduce((sum, inv) => sum + (parseFloat(inv.amount) || 0), 0),
+    totalReturns: investments.reduce((sum, inv) => sum + (parseFloat(inv.returns) || 0), 0),
     activeLoans: investments.filter(inv => inv.status === "Active").length,
     completedLoans: investments.filter(inv => inv.status === "Repaid").length,
   };
@@ -68,6 +67,11 @@ const LenderInvestmentHistory = () => {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-6xl mx-auto space-y-8">
+        {error && (
+          <div className="rounded-2xl border border-amber-300/40 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            {error}
+          </div>
+        )}
         {/* Header */}
         <div className="relative overflow-hidden rounded-3xl border border-cyan-300/20 bg-gradient-to-r from-[#0d2f48] to-[#25335a] p-8">
           <div className="absolute -top-16 -right-12 h-52 w-52 rounded-full bg-cyan-400/20 blur-3xl" />

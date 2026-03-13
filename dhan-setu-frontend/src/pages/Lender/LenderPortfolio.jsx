@@ -16,15 +16,21 @@ const LenderPortfolio = () => {
   const fetchPortfolioData = useCallback(async () => {
     try {
       setLoading(true);
+      if (!userId || !token) {
+        setPortfolioData(null);
+        setError("Please login to view portfolio");
+        return;
+      }
       const res = await axios.get(
         `${API_BASE_URL}/lender/portfolio/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setPortfolioData(res.data);
+      setPortfolioData(res.data?.success ? res.data : null);
       setError("");
     } catch (err) {
       setError("Failed to load portfolio data");
       console.error(err);
+      setPortfolioData(null);
     } finally {
       setLoading(false);
     }
@@ -34,26 +40,19 @@ const LenderPortfolio = () => {
     fetchPortfolioData();
   }, [fetchPortfolioData]);
 
-  const mockPortfolioData = {
-    walletBalance: "15.420 ETH",
-    totalInvested: "50.000 ETH",
-    totalReturns: "8.250 ETH",
-    returnPercentage: "16.5%",
-    activeLoans: 12,
-    completedLoans: 8,
+  const emptyPortfolio = {
+    walletBalance: "0.0000 ETH",
+    totalInvested: "0.0000 ETH",
+    totalReturns: "0.0000 ETH",
+    returnPercentage: "0.00%",
+    activeLoans: 0,
+    completedLoans: 0,
     distribution: [
-      { name: "Small Loans (< 5 ETH)", value: 30 },
-      { name: "Medium Loans (5-10 ETH)", value: 45 },
-      { name: "Large Loans (> 10 ETH)", value: 25 }
+      { name: "Small Loans (< 5 ETH)", value: 0 },
+      { name: "Medium Loans (5-10 ETH)", value: 0 },
+      { name: "Large Loans (> 10 ETH)", value: 0 },
     ],
-    monthlyPerfomance: [
-      { month: 'Jan', returns: 500, invested: 5000 },
-      { month: 'Feb', returns: 650, invested: 6000 },
-      { month: 'Mar', returns: 800, invested: 7000 },
-      { month: 'Apr', returns: 950, invested: 6500 },
-      { month: 'May', returns: 1100, invested: 7500 },
-      { month: 'Jun', returns: 1250, invested: 8000 },
-    ],
+    monthlyPerformance: [],
   };
 
   const colors = ["#2563eb", "#9333ea", "#7c3aed"];
@@ -69,7 +68,7 @@ const LenderPortfolio = () => {
     );
   }
 
-  const data = portfolioData || mockPortfolioData;
+  const data = portfolioData || emptyPortfolio;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100 p-6">
@@ -157,7 +156,7 @@ const LenderPortfolio = () => {
               Monthly Performance
             </h2>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={data.monthlyPerfomance}>
+              <LineChart data={data.monthlyPerformance || []}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="month" stroke="#6b7280" />
                 <YAxis stroke="#6b7280" />
@@ -166,6 +165,9 @@ const LenderPortfolio = () => {
                 <Line type="monotone" dataKey="invested" stroke="#9333ea" strokeWidth={3} />
               </LineChart>
             </ResponsiveContainer>
+            {(!data.monthlyPerformance || data.monthlyPerformance.length === 0) && (
+              <p className="text-sm text-gray-500 mt-2">No investment activity yet.</p>
+            )}
           </div>
         </div>
 
