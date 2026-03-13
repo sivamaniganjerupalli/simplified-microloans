@@ -14,7 +14,6 @@ const VerifyOTP = () => {
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState(location.state?.registrationSuccess || "");
   const [timeLeft, setTimeLeft] = useState(0);
-  const [autoSendAttempted, setAutoSendAttempted] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -76,15 +75,6 @@ const VerifyOTP = () => {
     setSuccessMsg("");
     await sendOtpRequest();
   };
-
-  useEffect(() => {
-    if (!location.state?.autoSendOtp || !email || autoSendAttempted || otpSent) {
-      return;
-    }
-
-    setAutoSendAttempted(true);
-    sendOtpRequest();
-  }, [autoSendAttempted, email, location.state?.autoSendOtp, otpSent, sendOtpRequest]);
 
   const handleOtpChange = (value, index) => {
     if (!/^[0-9]?$/.test(value)) return;

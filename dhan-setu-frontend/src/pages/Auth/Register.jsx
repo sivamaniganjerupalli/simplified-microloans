@@ -171,7 +171,6 @@ const Register = () => {
         navigate("/verify-otp", {
           state: {
             email: formData.email,
-            autoSendOtp: true,
             registrationSuccess: "Registration successful! Please verify your email.",
           },
         });
