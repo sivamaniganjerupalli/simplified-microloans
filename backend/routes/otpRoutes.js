@@ -19,8 +19,12 @@ router.post('/send', async (req, res) => {
     res.json({ success: true, message: 'OTP sent successfully' });
   } catch (err) {
     const message = err.message || 'Failed to send OTP';
+    const lower = String(message).toLowerCase();
     const status =
-      message.includes('Missing SMTP credentials') || message.includes('timed out')
+      lower.includes('missing smtp credentials') ||
+      lower.includes('timed out') ||
+      lower.includes('timeout') ||
+      lower.includes('connection')
         ? 503
         : 500;
 

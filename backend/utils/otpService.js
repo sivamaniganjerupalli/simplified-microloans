@@ -3,6 +3,7 @@ const { createTransporter } = require('./emailService');
 const otpStore = new Map(); // In-memory store
 const OTP_EXPIRY_MS = 5 * 60 * 1000;
 const EMAIL_TIMEOUT_MS = 15000;
+const OTP_EMAIL_RETRIES = Number(process.env.OTP_EMAIL_RETRIES || 2);
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
 
@@ -16,6 +17,48 @@ const withTimeout = (promise, timeoutMs, message) =>
     }),
   ]);
 
+const isRetryableEmailError = (error) => {
+  const msg = String(error?.message || '').toLowerCase();
+  const code = String(error?.code || '').toUpperCase();
+  return (
+    msg.includes('timeout') ||
+    msg.includes('connection') ||
+    code === 'ETIMEDOUT' ||
+    code === 'ESOCKET' ||
+    code === 'ECONNECTION'
+  );
+};
+
+const sendOtpEmailWithRetry = async (normalizedEmail, otp) => {
+  let lastError;
+  const attempts = Math.max(1, OTP_EMAIL_RETRIES + 1);
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      const transporter = createTransporter();
+      await withTimeout(
+        transporter.sendMail({
+          from: process.env.EMAIL_FROM || process.env.OTP_EMAIL || process.env.EMAIL_USER,
+          to: normalizedEmail,
+          subject: 'Your OTP Code',
+          text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
+        }),
+        EMAIL_TIMEOUT_MS,
+        'Connection timeout'
+      );
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt >= attempts || !isRetryableEmailError(error)) {
+        throw lastError;
+      }
+      await new Promise((resolve) => setTimeout(resolve, attempt * 1500));
+    }
+  }
+
+  throw lastError || new Error('Failed to send OTP email');
+};
+
 exports.sendOTP = async (email) => {
   const normalizedEmail = normalizeEmail(email);
   if (!normalizedEmail) {
@@ -23,18 +66,7 @@ exports.sendOTP = async (email) => {
   }
 
   const otp = generateOTP();
-  const transporter = createTransporter();
-
-  await withTimeout(
-    transporter.sendMail({
-      from: process.env.EMAIL_FROM || process.env.OTP_EMAIL || process.env.EMAIL_USER,
-      to: normalizedEmail,
-      subject: 'Your OTP Code',
-      text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
-    }),
-    EMAIL_TIMEOUT_MS,
-    'OTP email request timed out. Please try again.'
-  );
+  await sendOtpEmailWithRetry(normalizedEmail, otp);
 
   otpStore.set(normalizedEmail, { otp, expires: Date.now() + OTP_EXPIRY_MS });
 
