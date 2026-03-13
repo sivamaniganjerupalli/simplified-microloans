@@ -1,4 +1,4 @@
-const { createTransporter } = require('./emailService');
+const { sendEmail } = require('./emailService');
 
 const otpStore = new Map(); // In-memory store
 const OTP_EXPIRY_MS = 5 * 60 * 1000;
@@ -35,13 +35,13 @@ const sendOtpEmailWithRetry = async (normalizedEmail, otp) => {
 
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
-      const transporter = createTransporter();
       await withTimeout(
-        transporter.sendMail({
+        sendEmail({
           from: process.env.EMAIL_FROM || process.env.OTP_EMAIL || process.env.EMAIL_USER,
           to: normalizedEmail,
           subject: 'Your OTP Code',
           text: `Your OTP is ${otp}. It will expire in 5 minutes.`,
+          html: `<p>Your OTP is <strong>${otp}</strong>. It will expire in 5 minutes.</p>`,
         }),
         EMAIL_TIMEOUT_MS,
         'Connection timeout'

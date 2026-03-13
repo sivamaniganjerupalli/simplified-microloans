@@ -1,6 +1,7 @@
 // backend/utils/emailService.js
 
 const nodemailer = require('nodemailer');
+const axios = require('axios');
 
 const SMTP_USER = process.env.OTP_EMAIL || process.env.EMAIL_USER;
 const SMTP_PASS = process.env.OTP_PASS || process.env.EMAIL_PASSWORD;
@@ -10,6 +11,7 @@ const SMTP_PORT = Number(process.env.SMTP_PORT || 465);
 const SMTP_SECURE =
   process.env.SMTP_SECURE === 'true' ||
   (process.env.SMTP_SECURE !== 'false' && SMTP_PORT === 465);
+const BREVO_API_KEY = process.env.BREVO_API_KEY || '';
 
 const assertEmailEnv = () => {
   if (!SMTP_USER || !SMTP_PASS) {
@@ -32,6 +34,71 @@ const createTransporter = () => {
       user: SMTP_USER,
       pass: SMTP_PASS,
     },
+  });
+};
+
+const parseFromHeader = (fromValue = '') => {
+  const input = String(fromValue || '').trim();
+  const match = input.match(/^(.*)<([^>]+)>$/);
+  if (!match) {
+    return {
+      name: process.env.EMAIL_FROM_NAME || 'DhanSetu',
+      email: input,
+    };
+  }
+
+  return {
+    name: match[1].replace(/"/g, '').trim() || process.env.EMAIL_FROM_NAME || 'DhanSetu',
+    email: match[2].trim(),
+  };
+};
+
+const sendViaBrevoApi = async ({ from, to, subject, html, text }) => {
+  const sender = parseFromHeader(from || EMAIL_FROM);
+  if (!sender.email) {
+    throw new Error('EMAIL_FROM must contain a valid sender email when using BREVO_API_KEY.');
+  }
+
+  const toEmail = String(to || '').trim();
+  if (!toEmail) {
+    throw new Error('Recipient email is required');
+  }
+
+  const response = await axios.post(
+    'https://api.brevo.com/v3/smtp/email',
+    {
+      sender,
+      to: [{ email: toEmail }],
+      subject,
+      htmlContent: html,
+      textContent: text,
+    },
+    {
+      headers: {
+        'api-key': BREVO_API_KEY,
+        'Content-Type': 'application/json',
+      },
+      timeout: 12000,
+    }
+  );
+
+  return {
+    messageId: response.data?.messageId || 'brevo-api',
+  };
+};
+
+const sendEmail = async ({ from, to, subject, html, text }) => {
+  if (BREVO_API_KEY) {
+    return sendViaBrevoApi({ from, to, subject, html, text });
+  }
+
+  const transporter = createTransporter();
+  return transporter.sendMail({
+    from,
+    to,
+    subject,
+    html,
+    text,
   });
 };
 
@@ -259,8 +326,6 @@ const sendLenderApiKeyEmail = async (email, userName = 'Lender', apiKey = '') =>
       return { success: false, error: 'Lender API key is missing in environment configuration.' };
     }
 
-    const transporter = createTransporter();
-
     const mailOptions = {
       from: `"DhanSetu" <${EMAIL_FROM}>`,
       to: email,
@@ -319,7 +384,13 @@ const sendLenderApiKeyEmail = async (email, userName = 'Lender', apiKey = '') =>
       `,
     };
 
-    const info = await transporter.sendMail(mailOptions);
+    const info = await sendEmail({
+      from: mailOptions.from,
+      to: mailOptions.to,
+      subject: mailOptions.subject,
+      html: mailOptions.html,
+      text: mailOptions.text,
+    });
     console.log('Lender API key email sent:', info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {
@@ -330,6 +401,7 @@ const sendLenderApiKeyEmail = async (email, userName = 'Lender', apiKey = '') =>
 
 module.exports = {
   createTransporter,
+  sendEmail,
   sendPasswordResetEmail,
   send2FAEnabledEmail,
   sendWelcomeEmail,
