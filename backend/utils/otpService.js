@@ -59,14 +59,17 @@ const sendOtpEmailWithRetry = async (normalizedEmail, otp) => {
   throw lastError || new Error('Failed to send OTP email');
 };
 
-exports.sendOTP = async (email) => {
+exports.sendOTP = async (email, options = {}) => {
   const normalizedEmail = normalizeEmail(email);
   if (!normalizedEmail) {
     throw new Error('Email is required');
   }
 
   const otp = generateOTP();
-  await sendOtpEmailWithRetry(normalizedEmail, otp);
+  const skipEmail = Boolean(options.skipEmail);
+  if (!skipEmail) {
+    await sendOtpEmailWithRetry(normalizedEmail, otp);
+  }
 
   otpStore.set(normalizedEmail, { otp, expires: Date.now() + OTP_EXPIRY_MS });
 

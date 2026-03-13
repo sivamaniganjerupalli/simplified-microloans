@@ -6,20 +6,41 @@ const Lender = require('../models/Lender'); // <-- Import Lender model
 const jwt = require('jsonwebtoken');
 
 const JWT_SECRET = process.env.JWT_SECRET || "secret_key";
+const OTP_BYPASS_ON_EMAIL_FAILURE = process.env.OTP_BYPASS_ON_EMAIL_FAILURE === 'true';
+const OTP_RETURN_CODE_IN_RESPONSE = process.env.OTP_RETURN_CODE_IN_RESPONSE === 'true';
 
 // Send OTP
 router.post('/send', async (req, res) => {
   const { email } = req.body;
+  const normalizedEmail = String(email || '').trim().toLowerCase();
   try {
-    if (!email || !String(email).trim()) {
+    if (!normalizedEmail) {
       return res.status(400).json({ success: false, message: 'Email is required' });
     }
 
-    await sendOTP(email);
+    await sendOTP(normalizedEmail);
     res.json({ success: true, message: 'OTP sent successfully' });
   } catch (err) {
     const message = err.message || 'Failed to send OTP';
     const lower = String(message).toLowerCase();
+
+    if (OTP_BYPASS_ON_EMAIL_FAILURE) {
+      try {
+        const fallbackOtp = await sendOTP(normalizedEmail, { skipEmail: true });
+        const response = {
+          success: true,
+          bypassedEmail: true,
+          message: 'OTP generated in fallback mode because email delivery failed.',
+        };
+        if (OTP_RETURN_CODE_IN_RESPONSE) {
+          response.otp = fallbackOtp;
+        }
+        return res.status(200).json(response);
+      } catch (fallbackError) {
+        console.error('OTP fallback failed:', fallbackError.message);
+      }
+    }
+
     const status =
       lower.includes('missing smtp credentials') ||
       lower.includes('timed out') ||

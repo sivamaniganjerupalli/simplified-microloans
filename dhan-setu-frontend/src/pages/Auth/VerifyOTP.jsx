@@ -51,7 +51,13 @@ const VerifyOTP = () => {
       if (response.data.success) {
         setEmail(normalizedEmail);
         setOtpSent(true);
-        setSuccessMsg("OTP has been sent to " + normalizedEmail);
+        const fallbackNote = response.data.bypassedEmail
+          ? " (email fallback mode enabled)"
+          : "";
+        const otpPreview = response.data.otp
+          ? ` OTP: ${response.data.otp}`
+          : "";
+        setSuccessMsg("OTP has been sent to " + normalizedEmail + fallbackNote + otpPreview);
         setTimeLeft(120); // 2 minutes
       } else {
         setError(response.data.message || "Failed to send OTP");
