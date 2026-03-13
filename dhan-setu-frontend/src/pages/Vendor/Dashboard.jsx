@@ -183,25 +183,26 @@ const VendorDashboard = () => {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden rounded-3xl bg-white/90 backdrop-blur-xl border border-gray-200/50 hover:border-gray-300 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-in"
+              className="group relative overflow-hidden rounded-3xl bg-white border-2 border-slate-200 hover:border-slate-300 transition-all duration-500 hover:scale-105 hover:shadow-2xl animate-fade-in"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${stat.bgGradient} opacity-70 group-hover:opacity-100 transition-opacity duration-500`} />
+              <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-slate-900/10 to-slate-900/0" />
               
-              <div className="relative p-6 space-y-4">
+              <div className="relative p-6 space-y-5">
                 <div className="flex items-start justify-between">
                   <div className={`p-3 rounded-2xl bg-gradient-to-br ${stat.gradient} shadow-lg transform group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}>
                     <stat.icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                    stat.trend === 'up' ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-600'
+                  <span className={`text-xs font-bold px-3 py-1.5 rounded-full shadow-sm ${
+                    stat.trend === 'up' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-700 border border-slate-200'
                   }`}>
                     {stat.change}
                   </span>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-sm font-semibold text-slate-800">{stat.label}</p>
-                  <p className="text-2xl font-bold text-slate-950">
+                <div className="space-y-2">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-700">{stat.label}</p>
+                  <p className="text-3xl md:text-[2rem] leading-none font-extrabold text-slate-950 tracking-tight drop-shadow-sm">
                     {stat.value}
                   </p>
                 </div>

@@ -154,12 +154,13 @@ const VendorLoans = () => {
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className="group relative overflow-hidden rounded-3xl bg-white/90 backdrop-blur-xl border border-gray-200/50 p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105"
+              className="group relative overflow-hidden rounded-3xl bg-white border-2 border-slate-200 p-6 hover:shadow-2xl transition-all duration-500 hover:scale-105"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
-              <div className="relative space-y-2">
-                <p className="text-sm font-semibold text-slate-800">{stat.label}</p>
-                <p className="text-3xl font-bold text-slate-950">
+              <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-10 group-hover:opacity-15 transition-opacity duration-500`} />
+              <div className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-slate-900/10 to-slate-900/0" />
+              <div className="relative space-y-2.5">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-700">{stat.label}</p>
+                <p className="text-4xl leading-none font-extrabold text-slate-950 tracking-tight drop-shadow-sm">
                   {stat.value}
                 </p>
               </div>
