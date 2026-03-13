@@ -1,6 +1,3 @@
-# Frontend Environment Configuration
-# Copy this to dhan-setu-frontend/src/config/blockchain.config.js
-
 export const BLOCKCHAIN_CONFIG = {
   // Contract Address - Update when deploying to new network
   CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS || '0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f',

@@ -5,6 +5,7 @@ import { BrowserProvider, parseEther } from "ethers";
 import { Layers3, Clock3, CircleCheck, CircleX, Sparkles } from "lucide-react";
 import Button from "../../components/common/Button";
 import { API_BASE_URL } from "../../utils/constants";
+import { BLOCKCHAIN_CONFIG } from "../../config/blockchain.config";
 
 /* -------------------------- Small UI Components -------------------------- */
 
@@ -392,6 +393,46 @@ const LenderLoans = () => {
     return new Promise((resolve) => setTimeout(resolve, delay));
   };
 
+  const ensureSepoliaNetwork = async () => {
+    if (!window.ethereum) {
+      throw new Error("MetaMask is not available.");
+    }
+
+    const currentChainId = await window.ethereum.request({ method: "eth_chainId" });
+    if (currentChainId === BLOCKCHAIN_CONFIG.METAMASK.chainHex) {
+      return;
+    }
+
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: BLOCKCHAIN_CONFIG.METAMASK.chainHex }],
+      });
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: BLOCKCHAIN_CONFIG.METAMASK.chainHex,
+              chainName: BLOCKCHAIN_CONFIG.NETWORK.name,
+              rpcUrls: [BLOCKCHAIN_CONFIG.NETWORK.rpcUrl],
+              nativeCurrency: {
+                name: "Sepolia ETH",
+                symbol: "ETH",
+                decimals: 18,
+              },
+              blockExplorerUrls: [BLOCKCHAIN_CONFIG.NETWORK.explorerUrl],
+            },
+          ],
+        });
+        return;
+      }
+
+      throw switchError;
+    }
+  };
+
   // Send transaction with retry logic for RPC rate limits
   const sendTransactionWithRetry = async (
     signer,
@@ -415,19 +456,32 @@ const LenderLoans = () => {
       } catch (err) {
         const errorCode = err.code || "";
         const errorMessage = err.message || "";
+        const normalizedMessage = errorMessage.toLowerCase();
+        const isPendingWalletRequest =
+          String(errorCode) === "-32002" ||
+          normalizedMessage.includes("request already pending") ||
+          normalizedMessage.includes("already processing") ||
+          normalizedMessage.includes("already pending");
         const isRateLimitError =
-          errorCode === "-32002" ||
-          errorMessage.includes("too many requests") ||
-          errorMessage.includes("rate limit") ||
-          errorMessage.includes("RPC endpoint returned too many errors");
+          normalizedMessage.includes("too many requests") ||
+          normalizedMessage.includes("rate limit") ||
+          normalizedMessage.includes("rpc endpoint returned too many errors") ||
+          normalizedMessage.includes("429") ||
+          normalizedMessage.includes("too many errors");
+
+        if (isPendingWalletRequest) {
+          throw new Error(
+            "A MetaMask request is already pending. Open MetaMask and approve or reject the existing request first."
+          );
+        }
 
         if (isRateLimitError && attempt < maxRetries - 1) {
           console.warn(
             `RPC rate limit. Retrying in ${Math.pow(2, attempt)}s... (Attempt ${attempt + 1}/${maxRetries})`
           );
-          alert(
-            `Network busy. Retrying in ${Math.pow(2, attempt)} seconds...`
-          );
+          if (attempt === 0) {
+            alert(`Network busy. Retrying in ${Math.pow(2, attempt)} seconds...`);
+          }
           continue;
         }
 
@@ -443,6 +497,9 @@ const LenderLoans = () => {
         alert("MetaMask is not available.");
         return null;
       }
+
+      await ensureSepoliaNetwork();
+      await window.ethereum.request({ method: "eth_requestAccounts" });
 
       const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
@@ -463,13 +520,18 @@ const LenderLoans = () => {
 
       const errorCode = err.code || "";
       const errorMessage = err.message || "";
+      const normalizedMessage = errorMessage.toLowerCase();
 
-      if (errorCode === "-32002" || errorMessage.includes("too many errors")) {
+      if (normalizedMessage.includes("metamask request is already pending")) {
+        alert("MetaMask already has a pending approval request. Open MetaMask and complete or reject it first.");
+      } else if (normalizedMessage.includes("too many requests") || normalizedMessage.includes("too many errors") || normalizedMessage.includes("rate limit") || normalizedMessage.includes("429")) {
         alert(
-          "Network is overloaded. Please wait 1-2 minutes and try again."
+          `Sepolia RPC is rate-limited. Switch MetaMask to a stable custom Sepolia RPC and try again. Suggested RPC: ${BLOCKCHAIN_CONFIG.NETWORK.rpcUrl}`
         );
-      } else if (errorMessage.includes("User denied")) {
-        alert("You cancelled the transaction.");
+      } else if (errorCode === 4001 || errorMessage.includes("User denied")) {
+        alert("You cancelled the transaction in MetaMask.");
+      } else if (normalizedMessage.includes("chain") && normalizedMessage.includes("switch")) {
+        alert("Please switch MetaMask to Sepolia and try again.");
       } else if (errorMessage.includes("insufficient funds")) {
         alert("Insufficient ETH in your wallet.");
       } else {
