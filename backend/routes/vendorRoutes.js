@@ -12,6 +12,7 @@ const {
   uploadProfilePhoto,
   updateVendorSettings,
   recordRepayment,
+  getActiveLoanInfo,
 } = require('../controllers/vendorController');
 
 const authMiddleware = require('../middlewares/auth');
@@ -46,6 +47,9 @@ router.put('/:vendorId/update', authMiddleware, updateVendorSettings);
 router.put('/profile/:vendorId', authMiddleware, updateVendorProfile);
 
 router.post('/repay', authMiddleware, recordRepayment);
+
+// Get active loan info (lender wallet) for on-chain repayment
+router.get('/:vendorId/active-loan-info', authMiddleware, getActiveLoanInfo);
 
 // Alias route for profile style access
 router.get('/profile/:vendorId', authMiddleware, getVendorById);

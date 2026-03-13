@@ -229,6 +229,7 @@ const SecuritySection = () => (
 /* ------------------------------ Main Component ------------------------------ */
 
 const LenderProfile = () => {
+  const navigate = useNavigate();
   const lenderId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
@@ -280,7 +281,7 @@ const LenderProfile = () => {
       setError("Authentication required. Please log in.");
       setLoading(false);
     }
-  }, [lenderId, token]);
+  }, [lenderId, token, navigate]);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];

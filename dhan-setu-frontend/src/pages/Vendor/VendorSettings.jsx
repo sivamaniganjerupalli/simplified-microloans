@@ -1,7 +1,8 @@
-// Modern Vendor Settings - Save as src/pages/Vendor/VendorSettings_NEW.jsx
-// After testing, rename to VendorSettings.jsx
+// src/pages/Vendor/VendorSettings.jsx
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../../utils/constants";
 import { 
   Settings, 
   Bell, 
@@ -24,6 +25,9 @@ import {
 } from "lucide-react";
 
 const VendorSettings = () => {
+  const vendorId = localStorage.getItem("userId");
+  const token = localStorage.getItem("token");
+
   const [activeTab, setActiveTab] = useState("notifications");
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
@@ -50,13 +54,65 @@ const VendorSettings = () => {
     confirmPassword: "",
   });
 
+  // Load real vendor settings on mount
+  useEffect(() => {
+    if (!vendorId || !token) return;
+    axios.get(`${API_BASE_URL}/vendor/profile/${vendorId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    }).then((res) => {
+      const v = res.data?.vendor;
+      if (!v) return;
+      setSettings((prev) => ({
+        ...prev,
+        emailNotifications: v.notifyByEmail ?? true,
+        smsNotifications: v.notifyBySMS ?? false,
+        twoFactorAuth: v.enable2FA ?? false,
+        language: v.language || "en",
+        darkMode: v.theme === "dark",
+      }));
+    }).catch(() => {});
+  }, [vendorId, token]);
+
   const handleSave = async (tab) => {
     setSaving(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setMessage({ type: "success", text: `${tab} settings saved successfully!` });
-    setSaving(false);
-    setTimeout(() => setMessage({ type: "", text: "" }), 3000);
+    setMessage({ type: "", text: "" });
+    try {
+      const payload = {};
+
+      if (tab === "Notification") {
+        payload.notifyByEmail = settings.emailNotifications;
+        payload.notifyBySMS = settings.smsNotifications;
+      } else if (tab === "Security") {
+        payload.enable2FA = settings.twoFactorAuth;
+        if (settings.newPassword) {
+          if (settings.newPassword !== settings.confirmPassword) {
+            setMessage({ type: "error", text: "New passwords do not match." });
+            setSaving(false);
+            return;
+          }
+          payload.newPassword = settings.newPassword;
+        }
+      } else if (tab === "Preferences") {
+        payload.language = settings.language;
+        payload.theme = settings.darkMode ? "dark" : "light";
+      }
+
+      await axios.put(
+        `${API_BASE_URL}/vendor/${vendorId}/update`,
+        payload,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setMessage({ type: "success", text: `${tab} settings saved successfully!` });
+      if (tab === "Security") {
+        setSettings((prev) => ({ ...prev, oldPassword: "", newPassword: "", confirmPassword: "" }));
+      }
+    } catch (err) {
+      setMessage({ type: "error", text: err.response?.data?.message || `Failed to save ${tab} settings.` });
+    } finally {
+      setSaving(false);
+      setTimeout(() => setMessage({ type: "", text: "" }), 4000);
+    }
   };
 
   const tabs = [

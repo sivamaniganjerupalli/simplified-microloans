@@ -129,8 +129,8 @@ const VendorTransactions = () => {
   const vendorId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
-  // Approximate ETH â†’ INR rate (you can later fetch live rate from an API)
-  const ETH_TO_INR = 250000;
+  const [ethToInr, setEthToInr] = useState(null);
+  const [activeLoanInfo, setActiveLoanInfo] = useState(null);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -167,7 +167,36 @@ const VendorTransactions = () => {
       }
     };
 
+    // Fetch live ETH/INR rate from CoinGecko
+    const fetchEthRate = async () => {
+      try {
+        const res = await fetch(
+          "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=inr"
+        );
+        const data = await res.json();
+        if (data?.ethereum?.inr) setEthToInr(data.ethereum.inr);
+      } catch {
+        setEthToInr(250000); // fallback if CoinGecko unavailable
+      }
+    };
+
+    // Fetch active loan info to get lender wallet address for repayment
+    const fetchActiveLoan = async () => {
+      if (!vendorId || !token) return;
+      try {
+        const res = await axios.get(
+          `${API_BASE_URL}/vendor/${vendorId}/active-loan-info`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (res.data?.success) setActiveLoanInfo(res.data);
+      } catch {
+        // No active loan — that's fine
+      }
+    };
+
     fetchTransactions();
+    fetchEthRate();
+    fetchActiveLoan();
   }, [vendorId, token]);
 
   // Helper function to wait with exponential backoff
@@ -218,6 +247,12 @@ const VendorTransactions = () => {
   };
 
   const handleRepay = async (transaction) => {
+    const lenderWallet = activeLoanInfo?.lenderWalletAddress;
+    if (!lenderWallet) {
+      toast.error("No active approved loan found, or lender wallet not available.");
+      return;
+    }
+
     const confirm = window.confirm(
       `Do you want to repay ${transaction.amount} ETH for the transaction on ${transaction.date}?`
     );
@@ -246,7 +281,7 @@ const VendorTransactions = () => {
       // Send transaction with retry logic
       const tx = await sendTransactionWithRetry(
         signer,
-        "0xe7Fe68d35Bd922f9f9795e5B29c498a71f0C01b3", // Replace with actual recipient
+        lenderWallet,
         ethers.parseEther(amount.toString()),
         3 // Max 3 retries
       );
@@ -338,12 +373,18 @@ const VendorTransactions = () => {
   };
 
   const handleManualRepay = () => {
-    const dummyTx = {
-      amount: 0.1,
+    const amount = parseFloat(activeLoanInfo?.loanAmount);
+    if (!amount || isNaN(amount) || amount <= 0) {
+      toast.error("No active approved loan amount available for repayment.");
+      return;
+    }
+
+    const loanTx = {
+      amount,
       date: new Date().toISOString().split("T")[0],
       type: "Loan Credit",
     };
-    handleRepay(dummyTx);
+    handleRepay(loanTx);
   };
 
   /* --------------------------- Filtering & Summary --------------------------- */
@@ -490,7 +531,7 @@ const VendorTransactions = () => {
                     style: "currency",
                     currency: "INR",
                     maximumFractionDigits: 0,
-                  }).format(ETH_TO_INR)}
+                  }).format(ethToInr || 250000)}
                 </p>
               )}
             </div>
@@ -567,7 +608,7 @@ const VendorTransactions = () => {
                         <AmountCell
                           amount={tx.amount}
                           showINR={showINR}
-                          rate={ETH_TO_INR}
+                          rate={ethToInr || 250000}
                         />
                       </td>
                       <td className="px-4 py-2.5 align-middle">

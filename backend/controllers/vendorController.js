@@ -7,9 +7,14 @@ const Loan = require("../models/Loan");
 const Transaction = require("../models/Transaction");
 const { encryptKYC } = require("../utils/kycEncryption");
 
-const provider = new ethers.JsonRpcProvider(
-  process.env.GANACHE_RPC_URL || "http://127.0.0.1:8545"
-);
+const getRpcUrl = () => {
+  if (process.env.BLOCKCHAIN_NETWORK === "sepolia" && process.env.SEPOLIA_RPC_URL) {
+    return process.env.SEPOLIA_RPC_URL;
+  }
+  return process.env.GANACHE_RPC_URL || "http://127.0.0.1:8545";
+};
+
+const provider = new ethers.JsonRpcProvider(getRpcUrl());
 
 const JWT_SECRET = process.env.JWT_SECRET || "dummy_secret";
 
@@ -611,5 +616,41 @@ exports.recordRepayment = async (req, res) => {
       message: "Failed to record repayment.",
       error: err.message,
     });
+  }
+};
+
+// Returns active loan info including lender wallet address for on-chain repayment
+exports.getActiveLoanInfo = async (req, res) => {
+  const { vendorId } = req.params;
+  try {
+    if (!req.user?.id || req.user.id.toString() !== vendorId.toString()) {
+      return res.status(403).json({ success: false, message: "Unauthorized access to vendor data." });
+    }
+
+    const Lender = require("../models/Lender");
+    const loan = await Loan.findOne({
+      vendorId,
+      repaid: false,
+      status: { $in: ["Approved", "approved"] },
+    }).sort({ createdAt: -1 }).lean();
+
+    if (!loan) {
+      return res.status(404).json({ success: false, message: "No active approved loan found." });
+    }
+
+    let lenderWalletAddress = null;
+    if (loan.lenderId) {
+      const lender = await Lender.findById(loan.lenderId).select("walletAddress").lean();
+      lenderWalletAddress = lender?.walletAddress || null;
+    }
+
+    return res.status(200).json({
+      success: true,
+      loanId: loan._id,
+      loanAmount: loan.loanAmount,
+      lenderWalletAddress,
+    });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err.message });
   }
 };

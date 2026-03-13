@@ -87,12 +87,17 @@ const VendorDashboard = () => {
     );
   }
 
+  const pendingLoans = (dashboardData?.loanRequests || 0) - (dashboardData?.activeLoans || 0);
+  const repaymentDue = dashboardData?.nextRepaymentDue && dashboardData.nextRepaymentDue !== "N/A"
+    ? `Due: ${dashboardData.nextRepaymentDue}`
+    : "No active loans";
+
   const stats = [
     {
       label: "Wallet Balance",
       value: `${dashboardData?.walletBalance || "0.000"} ETH`,
-      change: "+12.5%",
-      trend: "up",
+      change: "Live balance",
+      trend: "neutral",
       icon: Wallet,
       gradient: "from-blue-500 to-cyan-500",
       bgGradient: "from-blue-500/20 to-cyan-500/10"
@@ -100,8 +105,8 @@ const VendorDashboard = () => {
     {
       label: "Total Loans",
       value: dashboardData?.loanRequests || "0",
-      change: "+3 this month",
-      trend: "up",
+      change: `${pendingLoans} pending`,
+      trend: pendingLoans > 0 ? "up" : "neutral",
       icon: CreditCard,
       gradient: "from-purple-500 to-pink-500",
       bgGradient: "from-purple-500/20 to-pink-500/10"
@@ -109,8 +114,8 @@ const VendorDashboard = () => {
     {
       label: "Active Loans",
       value: dashboardData?.activeLoans || "0",
-      change: "2 pending",
-      trend: "neutral",
+      change: repaymentDue,
+      trend: (dashboardData?.activeLoans || 0) > 0 ? "up" : "neutral",
       icon: TrendingUp,
       gradient: "from-emerald-500 to-teal-500",
       bgGradient: "from-emerald-500/20 to-teal-500/10"
@@ -118,8 +123,8 @@ const VendorDashboard = () => {
     {
       label: "Total Repaid",
       value: `${dashboardData?.totalRepaid || "0.000"} ETH`,
-      change: "On time",
-      trend: "up",
+      change: (dashboardData?.totalRepaid && parseFloat(dashboardData.totalRepaid) > 0) ? "Repaid on chain" : "No repayments yet",
+      trend: (dashboardData?.totalRepaid && parseFloat(dashboardData.totalRepaid) > 0) ? "up" : "neutral",
       icon: CheckCircle,
       gradient: "from-orange-500 to-red-500",
       bgGradient: "from-orange-500/20 to-red-500/10"

@@ -274,8 +274,8 @@ const VendorProfile = () => {
             </div>
 
             <div className="space-y-4">
-              <StatsCard label="Account Status" value="Active" icon={CheckCircle} />
-              <StatsCard label="Verification" value="Verified" icon={Shield} />
+              <StatsCard label="Account Status" value={vendor.createdAt ? "Active" : "Inactive"} icon={CheckCircle} />
+              <StatsCard label="KYC Verification" value={vendor.aadhaarNumber ? "Verified" : "Pending"} icon={Shield} />
             </div>
           </div>
 
