@@ -1,8 +1,8 @@
-# âœ… Deployment Verification Checklist
+# Ã¢Å“â€¦ Deployment Verification Checklist
 
 Last Updated: March 12, 2026
 
-## Backend Configuration âœ…
+## Backend Configuration Ã¢Å“â€¦
 
 - [x] `.env` file has `CONTRACT_ADDRESS=0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f`
 - [x] `.env` file has `BLOCKCHAIN_NETWORK=sepolia`
@@ -12,28 +12,28 @@ Last Updated: March 12, 2026
 - [x] `backend/tests/testSepoliaContract.js` created and passing
 - [x] Hardhat config uses etherscan v2 API (simple string key)
 
-## Frontend Configuration âœ…
+## Frontend Configuration Ã¢Å“â€¦
 
 - [x] `dhan-setu-frontend/src/config/blockchain.config.js` created
 - [x] `dhan-setu-frontend/.env.example` created
 - [ ] `dhan-setu-frontend/.env` copied from .env.example (USER ACTION)
 - [ ] Frontend can import `BLOCKCHAIN_CONFIG` (verify in components)
 
-## Smart Contract Verification âœ…
+## Smart Contract Verification Ã¢Å“â€¦
 
 - [x] Contract deployed to Sepolia: `0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f`
-- [x] Contract verified on Etherscan âœ“
+- [x] Contract verified on Etherscan Ã¢Å“â€œ
 - [x] Etherscan explorer shows source code
 - [x] Contract code matches local `/contracts/LoanContract.sol`
 
-## Documentation âœ…
+## Documentation Ã¢Å“â€¦
 
 - [x] `DEPLOYMENT_STRATEGY.md` created (phases, checklist, mainnet plan)
 - [x] `SEPOLIA_TESTING_GUIDE.md` created (quick start, troubleshooting)
 - [x] `DEPLOYMENT_SUMMARY.md` created (status, changes, timeline)
 - [x] This checklist created (`DEPLOYMENT_CHECKLIST.md`)
 
-## Testing & Validation âœ…
+## Testing & Validation Ã¢Å“â€¦
 
 - [x] `testSepoliaContract.js` runs without errors
 - [x] RPC connection to Sepolia working
@@ -41,7 +41,7 @@ Last Updated: March 12, 2026
 - [x] Account has test ETH: 0.1198 ETH
 - [x] Latest block number fetched: 10429063+
 
-## Ready for User Testing ðŸš€
+## Ready for User Testing Ã°Å¸Å¡â‚¬
 
 ### Before Starting Backend
 
@@ -56,7 +56,7 @@ Last Updated: March 12, 2026
 cd backend
 npm install  # if not done
 node server.js
-# âœ… Should see: Server running on port 5000
+# Ã¢Å“â€¦ Should see: Server running on port 5000
 ```
 
 ### Starting Frontend
@@ -65,7 +65,7 @@ node server.js
 cd dhan-setu-frontend
 npm install  # if not done
 npm start
-# âœ… Should open http://localhost:3000
+# Ã¢Å“â€¦ Should open http://localhost:3000
 ```
 
 ### First Test Flow
@@ -82,12 +82,12 @@ npm start
 
 | Setting | Value | Status |
 |---------|-------|--------|
-| Network | Sepolia | âœ… |
-| Chain ID | 11155111 | âœ… |
-| RPC URL | Infura Sepolia | âœ… |
-| Contract Address | 0x43eb6... | âœ… |
-| Signer Wallet | 0x1593... | âœ… |
-| Test ETH Balance | 0.1198 | âœ… |
+| Network | Sepolia | Ã¢Å“â€¦ |
+| Chain ID | 11155111 | Ã¢Å“â€¦ |
+| RPC URL | Infura Sepolia | Ã¢Å“â€¦ |
+| Contract Address | 0x43eb6... | Ã¢Å“â€¦ |
+| Signer Wallet | 0x1593... | Ã¢Å“â€¦ |
+| Test ETH Balance | 0.1198 | Ã¢Å“â€¦ |
 
 ## Files Modified
 
@@ -149,10 +149,19 @@ cd dhan-setu-frontend && npm start
 
 ---
 
-**Status**: âœ… All systems ready for Sepolia testnet testing!
+**Status**: Ã¢Å“â€¦ All systems ready for Sepolia testnet testing!
 
 Last verified: March 12, 2026
 
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

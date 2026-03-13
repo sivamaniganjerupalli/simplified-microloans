@@ -1,6 +1,6 @@
 # Sepolia Testnet Quick Start Guide
 
-## ðŸš€ Getting Started with DhanSetu on Sepolia
+## Ã°Å¸Å¡â‚¬ Getting Started with DhanSetu on Sepolia
 
 ### Prerequisites
 - MetaMask wallet extension installed
@@ -12,8 +12,8 @@
 
 1. **Install MetaMask**: https://metamask.io
 2. **Add Sepolia Network**:
-   - Open MetaMask â†’ Settings â†’ Networks
-   - Click "Add Network" â†’ "Add a popular network"
+   - Open MetaMask Ã¢â€ â€™ Settings Ã¢â€ â€™ Networks
+   - Click "Add Network" Ã¢â€ â€™ "Add a popular network"
    - Select "Sepolia"
 3. **Get Test ETH**: Free from faucets:
    - https://sepoliafaucet.com
@@ -94,15 +94,15 @@ You should see:
 ### Step 6: Verify Data Consistency
 
 Check that:
-- âœ… Loan appears in MongoDB
-- âœ… Status matches blockchain
-- âœ… Amount and dates are correct
-- âœ… User wallets match MetaMask
-- âœ… Transaction hashes visible on Etherscan
+- Ã¢Å“â€¦ Loan appears in MongoDB
+- Ã¢Å“â€¦ Status matches blockchain
+- Ã¢Å“â€¦ Amount and dates are correct
+- Ã¢Å“â€¦ User wallets match MetaMask
+- Ã¢Å“â€¦ Transaction hashes visible on Etherscan
 
 ---
 
-## ðŸ› Troubleshooting
+## Ã°Å¸Ââ€º Troubleshooting
 
 ### "Network sepolia doesn't exist"
 - Update hardhat.config.js network name to match
@@ -129,7 +129,7 @@ Check that:
 
 ---
 
-## ðŸ“Š Common Actions & Gas Costs
+## Ã°Å¸â€œÅ  Common Actions & Gas Costs
 
 | Action | Gas Used | Cost (in ETH) | Est. Cost (USD) |
 |--------|----------|---------------|-----------------|
@@ -142,17 +142,17 @@ Check that:
 
 ---
 
-## ðŸ”— Useful Links
+## Ã°Å¸â€â€” Useful Links
 
 - **Smart Context**: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f#code
 - **Your Contract Events**: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f#events
 - **Network Status**: https://sepolia.etherscan.io
 - **Gas Tracker**: https://sepolia.etherscan.io/gastracker
-- **Test Accounts**: MetaMask â†’ Create multiple accounts to test different roles
+- **Test Accounts**: MetaMask Ã¢â€ â€™ Create multiple accounts to test different roles
 
 ---
 
-## âœ… Testing Checklist
+## Ã¢Å“â€¦ Testing Checklist
 
 Before moving to production, test:
 
@@ -171,7 +171,7 @@ Before moving to production, test:
 
 ---
 
-## ðŸš¨ Production Migration Checklist
+## Ã°Å¸Å¡Â¨ Production Migration Checklist
 
 When ready for mainnet, ensure:
 - [ ] All Sepolia tests passed
@@ -187,3 +187,12 @@ When ready for mainnet, ensure:
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

@@ -1,16 +1,16 @@
-# ðŸš€ PRODUCTION DEPLOYMENT - QUICK START
+# Ã°Å¸Å¡â‚¬ PRODUCTION DEPLOYMENT - QUICK START
 
 **Get your app live in <15 minutes!**
 
 ---
 
-## ðŸ“Š What We're Doing
+## Ã°Å¸â€œÅ  What We're Doing
 
 ```
 Your Computer              Render (Backend)          Netlify (Frontend)
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚   Local Dev  â”‚  â”€â”€â”€â”€â”€â”€â–º â”‚  Node.js API â”‚  â—„â”€â”€â”€â”€â”€  â”‚   React App  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â          Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â          Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
+Ã¢â€â€š   Local Dev  Ã¢â€â€š  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº Ã¢â€â€š  Node.js API Ã¢â€â€š  Ã¢â€”â€žÃ¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬  Ã¢â€â€š   React App  Ã¢â€â€š
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ          Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ          Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
 (localhost)             (Public Internet)        (Public Internet)
 
 Users access: https://your-app.netlify.app
@@ -18,7 +18,7 @@ Users access: https://your-app.netlify.app
 
 ---
 
-## ðŸŽ¯ Step-by-Step (Just Follow These Steps)
+## Ã°Å¸Å½Â¯ Step-by-Step (Just Follow These Steps)
 
 ### STEP 1: Create Accounts (2 minutes)
 
@@ -34,7 +34,7 @@ Users access: https://your-app.netlify.app
 - [ ] Choose "GitHub" (easiest)
 - [ ] Authorize & confirm
 
-âœ… Both accounts created? Move to Step 2.
+Ã¢Å“â€¦ Both accounts created? Move to Step 2.
 
 ---
 
@@ -42,8 +42,8 @@ Users access: https://your-app.netlify.app
 
 **On Render:**
 
-1. Dashboard â†’ **New +** â†’ **Web Service**
-2. "Build from repository" â†’ GitHub â†’ Select your repo
+1. Dashboard Ã¢â€ â€™ **New +** Ã¢â€ â€™ **Web Service**
+2. "Build from repository" Ã¢â€ â€™ GitHub Ã¢â€ â€™ Select your repo
 3. Fill in form:
    ```
    Name:            dhansetu-api
@@ -52,9 +52,9 @@ Users access: https://your-app.netlify.app
    Branch:          main
    Build command:   npm install
    Start command:   npm start
-   Root directory:  backend âš ï¸ IMPORTANT
+   Root directory:  backend Ã¢Å¡Â Ã¯Â¸Â IMPORTANT
    ```
-4. Scroll down â†’ **Add Environment Variable**
+4. Scroll down Ã¢â€ â€™ **Add Environment Variable**
    
    Copy-paste these (get values from `ENV_VARIABLES_REFERENCE.md`):
    ```
@@ -74,11 +74,11 @@ Users access: https://your-app.netlify.app
    FRONTEND_URL          = (leave empty for now; must be exact Netlify origin later)
    ```
 5. **Create Web Service** button
-6. â³ Wait 3-5 minutes for deployment
-7. âœ… You'll see: "Live" (green checkmark)
-8. ðŸ“ **COPY THIS URL:** `https://dhansetu-api.onrender.com` (or shown in dashboard)
+6. Ã¢ÂÂ³ Wait 3-5 minutes for deployment
+7. Ã¢Å“â€¦ You'll see: "Live" (green checkmark)
+8. Ã°Å¸â€œÂ **COPY THIS URL:** `https://dhansetu-api.onrender.com` (or shown in dashboard)
 
-âœ… Backend live? Move to Step 3.
+Ã¢Å“â€¦ Backend live? Move to Step 3.
 
 ---
 
@@ -86,15 +86,15 @@ Users access: https://your-app.netlify.app
 
 **On Netlify:**
 
-1. Dashboard â†’ **Add new site** â†’ **Import an existing project**
-2. "GitHub" â†’ Select your repository
+1. Dashboard Ã¢â€ â€™ **Add new site** Ã¢â€ â€™ **Import an existing project**
+2. "GitHub" Ã¢â€ â€™ Select your repository
 3. Configure build settings:
    ```
    Base directory:    dhan-setu-frontend
    Build command:     npm run build
    Publish directory: build
    ```
-4. Scroll down â†’ **Add environment variable**
+4. Scroll down Ã¢â€ â€™ **Add environment variable**
    
    Copy-paste these (replace `YOUR_RENDER_URL` with the URL from Step 2):
    ```
@@ -105,11 +105,11 @@ Users access: https://your-app.netlify.app
    REACT_APP_ENV                  = production
    ```
 5. **Deploy site** button
-6. â³ Wait 3-5 minutes for build
-7. âœ… You'll see: "Published" (green checkmark)
-8. ðŸ“ **COPY THIS URL:** `https://your-site-name.netlify.app`
+6. Ã¢ÂÂ³ Wait 3-5 minutes for build
+7. Ã¢Å“â€¦ You'll see: "Published" (green checkmark)
+8. Ã°Å¸â€œÂ **COPY THIS URL:** `https://your-site-name.netlify.app`
 
-âœ… Frontend live? Move to Step 4.
+Ã¢Å“â€¦ Frontend live? Move to Step 4.
 
 ---
 
@@ -118,8 +118,8 @@ Users access: https://your-app.netlify.app
 **Back on Render:**
 
 1. Go to your backend service
-2. **Environment** â†’ Edit
-3. Find `FRONTEND_URL` â†’ Update to:
+2. **Environment** Ã¢â€ â€™ Edit
+3. Find `FRONTEND_URL` Ã¢â€ â€™ Update to:
    ```
    FRONTEND_URL = https://your-site-name.netlify.app
    ```
@@ -127,65 +127,65 @@ Users access: https://your-app.netlify.app
    Example for this project: FRONTEND_URL = https://dhan-setu.netlify.app
 4. **Save** button
 5. Render auto-redeploys (~1 minute)
-6. âœ… Done!
+6. Ã¢Å“â€¦ Done!
 
 ---
 
 ### STEP 5: Test Everything (2 minutes)
 
 1. **Open** `https://your-site-name.netlify.app` in browser
-2. **DevTools** â†’ Network tab
+2. **DevTools** Ã¢â€ â€™ Network tab
 3. **Register** a new account
 4. **Connect** MetaMask wallet
 5. **Check Network tab:**
    - See API calls to `https://dhansetu-api.onrender.com`?
-   - No red errors? âœ…
+   - No red errors? Ã¢Å“â€¦
 6. **Create** a loan request
 7. **Check Etherscan:** https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
-   - Recent transaction? âœ…
+   - Recent transaction? Ã¢Å“â€¦
 
 ---
 
-## ðŸŽ‰ Done! Your App is Live!
+## Ã°Å¸Å½â€° Done! Your App is Live!
 
 ### Share These URLs:
 ```
-ðŸŒ App:      https://your-site-name.netlify.app
-ðŸ“¡ API:      https://dhansetu-api.onrender.com/api
-â›“ï¸  Contract: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
+Ã°Å¸Å’Â App:      https://your-site-name.netlify.app
+Ã°Å¸â€œÂ¡ API:      https://dhansetu-api.onrender.com/api
+Ã¢â€ºâ€œÃ¯Â¸Â  Contract: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
 ```
 
 ---
 
-## âŒ If Something Breaks
+## Ã¢ÂÅ’ If Something Breaks
 
 ### "CORS error" in browser
-âžœ Wait 1 min, reload page (Ctrl+Shift+R to clear cache)
+Ã¢Å¾Å“ Wait 1 min, reload page (Ctrl+Shift+R to clear cache)
 
 ### "Cannot reach API"
-âžœ Check Render dashboard: Is it "Live" (green)?
+Ã¢Å¾Å“ Check Render dashboard: Is it "Live" (green)?
 
 ### "API returns 404"
-âžœ Check `REACT_APP_API_URL` in Netlify environment variables
+Ã¢Å¾Å“ Check `REACT_APP_API_URL` in Netlify environment variables
 
 ### "MetaMask won't connect"
-âžœ Make sure MetaMask is set to "Sepolia" network
+Ã¢Å¾Å“ Make sure MetaMask is set to "Sepolia" network
 
 ### "Build fails on Netlify"
-âžœ Check build logs â†’ look for "npm ERR!"
+Ã¢Å¾Å“ Check build logs Ã¢â€ â€™ look for "npm ERR!"
 
 ### "Render backend is sleeping"
-âžœ Free tier sleeps after 15 min â†’ first request takes 30 sec
-âžœ Upgrade to paid ($7/mo) if needed
+Ã¢Å¾Å“ Free tier sleeps after 15 min Ã¢â€ â€™ first request takes 30 sec
+Ã¢Å¾Å“ Upgrade to paid ($7/mo) if needed
 
 ---
 
-## ðŸ“ž Need Help?
+## Ã°Å¸â€œÅ¾ Need Help?
 
 **Before troubleshooting:**
-1. Render Dashboard â†’ Logs â†’ See if there are errors?
-2. Netlify Dashboard â†’ Deployments â†’ Click latest â†’ Build logs
-3. Browser DevTools â†’ Console â†’ Any red errors?
+1. Render Dashboard Ã¢â€ â€™ Logs Ã¢â€ â€™ See if there are errors?
+2. Netlify Dashboard Ã¢â€ â€™ Deployments Ã¢â€ â€™ Click latest Ã¢â€ â€™ Build logs
+3. Browser DevTools Ã¢â€ â€™ Console Ã¢â€ â€™ Any red errors?
 
 **Common fixes:**
 - Clear browser cache: `Ctrl+Shift+Delete`
@@ -195,7 +195,7 @@ Users access: https://your-app.netlify.app
 
 ---
 
-## ðŸ“— Full Documentation
+## Ã°Å¸â€œâ€” Full Documentation
 
 If you need more details, read these files:
 - `PRODUCTION_DEPLOYMENT_GUIDE.md` - Deep dive guide
@@ -204,33 +204,33 @@ If you need more details, read these files:
 
 ---
 
-## âœ¨ What Happens Now
+## Ã¢Å“Â¨ What Happens Now
 
 Your application:
-- âœ… **Runs on real servers** (not your computer)
-- âœ… **Accessible 24/7** to anyone on internet
-- âœ… **Auto-deploys** when you push code to GitHub
-- âœ… **Uses real blockchain** (Sepolia testnet)
-- âœ… **Stores data** in MongoDB Atlas (cloud)
+- Ã¢Å“â€¦ **Runs on real servers** (not your computer)
+- Ã¢Å“â€¦ **Accessible 24/7** to anyone on internet
+- Ã¢Å“â€¦ **Auto-deploys** when you push code to GitHub
+- Ã¢Å“â€¦ **Uses real blockchain** (Sepolia testnet)
+- Ã¢Å“â€¦ **Stores data** in MongoDB Atlas (cloud)
 
 ---
 
-## ðŸ”— Live Monitoring
+## Ã°Å¸â€â€” Live Monitoring
 
 Check if everything is working:
 
 **Render Health:**
-- https://render.com/dashboard â†’ Your service â†’ Check status
+- https://render.com/dashboard Ã¢â€ â€™ Your service Ã¢â€ â€™ Check status
 
 **Netlify Health:**
-- https://netlify.com/dashboard â†’ Your site â†’ Check status
+- https://netlify.com/dashboard Ã¢â€ â€™ Your site Ã¢â€ â€™ Check status
 
 **Contract Activity:**
-- https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f â†’ See recent transactions
+- https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f Ã¢â€ â€™ See recent transactions
 
 ---
 
-## ðŸŽ“ Pro Tips
+## Ã°Å¸Å½â€œ Pro Tips
 
 - Push code to GitHub = auto-redeploy (both services)
 - Free tier Render sleeps = first request slow (upgrade if needed)
@@ -244,3 +244,12 @@ Check if everything is working:
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

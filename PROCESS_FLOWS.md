@@ -1,4 +1,4 @@
-# DhanSetu â€” Complete Process Flows & System Documentation
+# DhanSetu Ã¢â‚¬â€ Complete Process Flows & System Documentation
 
 > This document explains every process in the DhanSetu platform end-to-end, with detailed flowcharts using Mermaid syntax. Render in GitHub, VS Code (Markdown Preview Enhanced), or any Mermaid-compatible viewer.
 
@@ -21,7 +21,7 @@
 13. [Oracle Sales Data Flow](#13-oracle-sales-data-flow)
 14. [JWT Authorization Flow](#14-jwt-authorization-flow)
 15. [Frontend Routing & Protected Routes](#15-frontend-routing--protected-routes)
-16. [Data Flow Diagram â€” Full System](#16-data-flow-diagram--full-system)
+16. [Data Flow Diagram Ã¢â‚¬â€ Full System](#16-data-flow-diagram--full-system)
 17. [State Machines](#17-state-machines)
 18. [Database Entity Relationships](#18-database-entity-relationships)
 19. [Component Architecture (Frontend)](#19-component-architecture-frontend)
@@ -33,12 +33,12 @@
 
 ```mermaid
 flowchart TD
-    User([ðŸ‘¤ User Browser]) -->|HTTPS| FE[React Frontend\nPort 3000]
+    User([Ã°Å¸â€˜Â¤ User Browser]) -->|HTTPS| FE[React Frontend\nPort 3000]
     FE -->|REST API / JSON| BE[Express Backend\nPort 5000]
     BE -->|Mongoose ODM| DB[(MongoDB)]
     BE -->|Ethers.js| ETH[Ethereum Node\nGanache / Infura]
     ETH -->|EVM| SC[LoanContract.sol\nSmart Contract]
-    Oracle[ðŸ• Oracle Cron Job\nDaily 9 AM] -->|MongoDB read| DB
+    Oracle[Ã°Å¸â€¢Â Oracle Cron Job\nDaily 9 AM] -->|MongoDB read| DB
     Oracle -->|recordSales tx| ETH
     BE -->|Send OTP email| SMTP[Gmail SMTP\nNodemailer]
     SMTP -->|Email| User
@@ -74,7 +74,7 @@ flowchart TD
     E --> F{Validate Step 2}
     F -- Invalid --> G[Show field error] --> E
     F -- Valid --> H[Step 3: Security & Wallet\nPassword, Aadhaar, Wallet Address]
-    H --> I{Validate Step 3\nPassword â‰¥8 chars\nAadhaar 12 digits\n0x wallet address}
+    H --> I{Validate Step 3\nPassword Ã¢â€°Â¥8 chars\nAadhaar 12 digits\n0x wallet address}
     I -- Invalid --> J[Show error] --> H
     I -- Valid --> K[POST /api/vendor/register]
     
@@ -84,13 +84,13 @@ flowchart TD
     L -- Email already exists --> O[409: Duplicate email] --> H
     L -- Aadhaar already exists --> P[409: Duplicate Aadhaar] --> H
     
-    L -- All valid --> Q[Encrypt Aadhaar\nAES-256-CBC â†’ encryptedKYC]
+    L -- All valid --> Q[Encrypt Aadhaar\nAES-256-CBC Ã¢â€ â€™ encryptedKYC]
     Q --> R[Hash password\nbcrypt salt=10]
     R --> S[Save Vendor to MongoDB]
     S --> T[Response: success=true]
     T --> U[Navigate to /verify-otp\nwith email in state]
     U --> V{OTP Verification\nsee Flow 5}
-    V -- Verified --> W([Vendor Account Active âœ…])
+    V -- Verified --> W([Vendor Account Active Ã¢Å“â€¦])
 ```
 
 ---
@@ -106,13 +106,13 @@ flowchart TD
     D --> E{Check existing\nby email / Aadhaar / phone}
     E -- Exists in DEV mode --> F[Update existing record\n test mode only]
     E -- Exists in PROD --> G[409: Lender already registered]
-    E -- Not exists --> H[Encrypt Aadhaar â†’ encryptedKYC]
+    E -- Not exists --> H[Encrypt Aadhaar Ã¢â€ â€™ encryptedKYC]
     H --> I[Hash password bcrypt]
     I --> J[Create Lender document\nin MongoDB]
     J --> K[JWT not issued yet\nEmail verification required]
     K --> L[Navigate to /verify-otp]
     L --> M{Email OTP verified?\nsee Flow 5}
-    M -- Yes --> N([Lender Account Active âœ…])
+    M -- Yes --> N([Lender Account Active Ã¢Å“â€¦])
 
     subgraph Additional Lender Fields
         J --> J1[walletBalance: 0.00\nrole: lender\nenable2FA: false\nnotifyByEmail: true]
@@ -155,7 +155,7 @@ flowchart TD
     U -- lender --> W[Navigate to /lender]
     U -- other --> X[Navigate to /dashboard]
 
-    V --> Y([Dashboard Loaded âœ…])
+    V --> Y([Dashboard Loaded Ã¢Å“â€¦])
     W --> Y
 ```
 
@@ -179,7 +179,7 @@ sequenceDiagram
     BE->>Store: Generate 6-digit OTP via crypto.randomBytes
     BE->>Store: Store { otp, expires: now + 5min }
     BE->>SMTP: sendMail(to=email, subject="Your OTP Code", text="Your OTP is XXXXXX")
-    SMTP-->>U: ðŸ“§ Email delivered
+    SMTP-->>U: Ã°Å¸â€œÂ§ Email delivered
 
     BE-->>FE: { success: true, message: "OTP sent" }
     FE->>U: Show 6-box OTP input, start 2-min countdown
@@ -194,8 +194,8 @@ sequenceDiagram
 
     alt OTP valid
         BE-->>FE: { success: true }
-        FE->>U: Show "âœ… Email verified! Redirecting..."
-        FE->>U: setTimeout 1.5s â†’ Navigate /login
+        FE->>U: Show "Ã¢Å“â€¦ Email verified! Redirecting..."
+        FE->>U: setTimeout 1.5s Ã¢â€ â€™ Navigate /login
     else OTP expired
         BE-->>FE: { success: false, message: "OTP expired" }
         FE->>U: Show error, allow resend
@@ -219,7 +219,7 @@ flowchart TD
     E -- Yes --> G[Generate secure reset token\ncrypto.randomBytes 32 hex]
     G --> H[Store: resetToken + resetTokenExpiry\n= now + 1 hour in DB]
     H --> I[Send email via Nodemailer\nLink: /reset-password?token=xxx]
-    I --> J[ðŸ“§ Email sent to user]
+    I --> J[Ã°Å¸â€œÂ§ Email sent to user]
     J --> K[Show: Check your inbox]
 
     K --> L[User clicks link in email]
@@ -227,17 +227,17 @@ flowchart TD
     M --> N[useSearchParams extracts token]
     N --> O[POST /api/auth/validate-reset-token\ntoken]
     O --> P{Token valid & not expired?}
-    P -- No --> Q[Show: Invalid link Ã— \nOffer Request New Link]
+    P -- No --> Q[Show: Invalid link Ãƒâ€” \nOffer Request New Link]
     P -- Yes --> R[Show reset password form]
 
     R --> S[Enter new password + confirm]
-    S --> T{Client validation\nâ‰¥8 chars, uppercase, number}
+    S --> T{Client validation\nÃ¢â€°Â¥8 chars, uppercase, number}
     T -- Fails --> U[Show strength indicator + error] --> S
     T -- Passes --> V[POST /api/auth/reset-password\ntoken + password]
     V --> W[bcrypt hash new password]
     W --> X[Clear resetToken from DB]
     X --> Y[Return success]
-    Y --> Z[Show: Password reset! âœ…\nRedirecting in 3s...]
+    Y --> Z[Show: Password reset! Ã¢Å“â€¦\nRedirecting in 3s...]
     Z --> AA([Navigate to /login])
 ```
 
@@ -270,9 +270,9 @@ flowchart TD
     R -- No --> S[Error: Invalid code] --> O
     R -- Yes --> T[Enable 2FA on user account\ntotp_enabled: true\nsave totp_secret encrypted]
     T --> U[Generate backup codes\n8 single-use codes]
-    U --> V[Step 3: Backup Codes\nShow codes â€” save safely!]
+    U --> V[Step 3: Backup Codes\nShow codes Ã¢â‚¬â€ save safely!]
     V --> W[Click Finish]
-    W --> X([2FA Active âœ…\nNext login requires TOTP code])
+    W --> X([2FA Active Ã¢Å“â€¦\nNext login requires TOTP code])
 
     subgraph Skip Option
         D --> Y[Click Skip for now]
@@ -310,7 +310,7 @@ flowchart TD
     N --> O[Save to MongoDB]
     O --> P[201: Loan submitted\nReturn loan object]
     P --> Q[Frontend: Show success toast\nLoan ID: xxx]
-    Q --> R([Loan visible in /vendor/loans\nstatus: Pending â³])
+    Q --> R([Loan visible in /vendor/loans\nstatus: Pending Ã¢ÂÂ³])
 ```
 
 ---
@@ -333,20 +333,20 @@ flowchart TD
     J --> K[Backend: Find loan by ID]
     K --> L{Loan is Pending?}
     L -- No --> M[400: Already processed]
-    L -- Yes --> N[Update Loan:\nstatus â†’ Approved\nlenderId â†’ this lender\napprovedAt â†’ now]
+    L -- Yes --> N[Update Loan:\nstatus Ã¢â€ â€™ Approved\nlenderId Ã¢â€ â€™ this lender\napprovedAt Ã¢â€ â€™ now]
     N --> O[Create Transaction record\ntype: Approval]
     O --> P[Blockchain interaction\ncontract.approveLoan loanId, vendorAddress]
     P --> Q[Store txHash in loan document]
-    Q --> R[200: Loan approved âœ…]
+    Q --> R[200: Loan approved Ã¢Å“â€¦]
     R --> S[Vendor notified on next\ndashboard visit]
 
     I -- Reject --> T[PUT /api/lender/loans/:loanId/reject]
-    T --> U[Update Loan:\nstatus â†’ Rejected]
-    U --> V[200: Loan rejected âŒ]
+    T --> U[Update Loan:\nstatus Ã¢â€ â€™ Rejected]
+    U --> V[200: Loan rejected Ã¢ÂÅ’]
 
     subgraph Vendor sees result
-        S --> W[/vendor/loans â†’ status: Approved âœ…]
-        V --> X[/vendor/loans â†’ status: Rejected âŒ]
+        S --> W[/vendor/loans Ã¢â€ â€™ status: Approved Ã¢Å“â€¦]
+        V --> X[/vendor/loans Ã¢â€ â€™ status: Rejected Ã¢ÂÅ’]
     end
 ```
 
@@ -384,8 +384,8 @@ sequenceDiagram
     BE->>DB: Create Transaction record\ntype: Repayment, txHash
     DB-->>BE: Updated
     BE-->>FE: { success: true }
-    FE->>V: Show âœ… Repayment successful toast
-    FE->>V: Update loan card status â†’ Repaid
+    FE->>V: Show Ã¢Å“â€¦ Repayment successful toast
+    FE->>V: Update loan card status Ã¢â€ â€™ Repaid
 
     Note over BC: On-chain:\nmakePayment() called\nCredit score updated\n+50 points on full repayment
 ```
@@ -398,8 +398,8 @@ sequenceDiagram
 flowchart LR
     subgraph Registration
         A[Aadhaar: 123456789012] --> B[encryptKYC function]
-        B --> C[crypto.createHash SHA-256\nKYC_SECRET â†’ 32-byte KEY]
-        C --> D[crypto.randomBytes 16\nâ†’ random IV]
+        B --> C[crypto.createHash SHA-256\nKYC_SECRET Ã¢â€ â€™ 32-byte KEY]
+        C --> D[crypto.randomBytes 16\nÃ¢â€ â€™ random IV]
         D --> E[AES-256-CBC encrypt\ncipher.update + cipher.final]
         E --> F[ivHex:encryptedHex\ne.g. a3f9...5c:8d2e...7f]
         F --> G[(MongoDB\nencryptedKYC field)]
@@ -407,15 +407,15 @@ flowchart LR
 
     subgraph Retrieval
         G --> H[decryptKYC function]
-        H --> I[Split on : â†’ ivHex + encryptedHex]
-        I --> J[Buffer.from ivHex hex â†’ IV]
+        H --> I[Split on : Ã¢â€ â€™ ivHex + encryptedHex]
+        I --> J[Buffer.from ivHex hex Ã¢â€ â€™ IV]
         J --> K[AES-256-CBC decrypt\ncreateDecipheriv]
         K --> L[Original Aadhaar: 123456789012]
     end
 
     subgraph Never Stored
-        M[âŒ Raw Aadhaar never in DB]
-        M --> N[âŒ Not logged or transmitted]
+        M[Ã¢ÂÅ’ Raw Aadhaar never in DB]
+        M --> N[Ã¢ÂÅ’ Not logged or transmitted]
     end
 ```
 
@@ -461,25 +461,25 @@ stateDiagram-v2
 
 ```mermaid
 flowchart TD
-    A[ðŸ• node-cron\nSchedule: 0 9 * * *\nEvery day 09:00 AM] --> B[simulateAndPushSales]
+    A[Ã°Å¸â€¢Â node-cron\nSchedule: 0 9 * * *\nEvery day 09:00 AM] --> B[simulateAndPushSales]
     B --> C[Connect to MongoDB]
-    C --> D[Vendor.find â€” get all vendors]
+    C --> D[Vendor.find Ã¢â‚¬â€ get all vendors]
     D --> E{Vendors found?}
     E -- None --> F[Log: No vendors] --> Z
     E -- Found --> G[For each vendor loop]
-    G --> H[Simulate sales\nMath.random Ã— 100â€“1000 INR\nâš ï¸ Replace with real POS/UPI data]
-    H --> I[Log: Updating vendorAddress â‚¹amount]
+    G --> H[Simulate sales\nMath.random Ãƒâ€” 100Ã¢â‚¬â€œ1000 INR\nÃ¢Å¡Â Ã¯Â¸Â Replace with real POS/UPI data]
+    H --> I[Log: Updating vendorAddress Ã¢â€šÂ¹amount]
     I --> J[updateSalesDataToBlockchain\nvendor.walletAddress, amount]
     J --> K[contract.recordSales\naddress, amount via Ethers.js]
     K --> L{Transaction confirmed?}
     L -- Error --> M[console.error Oracle update error]
-    L -- Success --> N[tx.wait â€” block confirmed]
+    L -- Success --> N[tx.wait Ã¢â‚¬â€ block confirmed]
     N --> O[Event: SalesRecorded emitted on-chain]
     O --> P[vendor.totalSales += amount\non blockchain state]
     P --> G
     G --> Q{All vendors\nprocessed?}
     Q -- No --> G
-    Q -- Yes --> Z([Oracle run complete âœ…])
+    Q -- Yes --> Z([Oracle run complete Ã¢Å“â€¦])
 
     subgraph Production Integration
         H2[Real-world data sources:\n- UPI payment APIs\n- POS terminal webhooks\n- WhatsApp Business API\n- Bank statement parsing]
@@ -514,7 +514,7 @@ sequenceDiagram
         MW-->>C: 403 Invalid or expired token.
     else Valid token
         MW->>MW: Decoded = { userId, role, email, iat, exp }
-        MW->>H: req.user = decoded â†’ next()
+        MW->>H: req.user = decoded Ã¢â€ â€™ next()
         H->>DB: Query with req.user.id
         DB-->>H: Data
         H-->>C: 200 Response with data
@@ -554,19 +554,19 @@ flowchart TD
     Q --> S[Footer renders]
 
     subgraph Route Definitions in App.js
-        T1[/vendor â†’ VendorDashboard index]
-        T2[/vendor/loans â†’ VendorLoans]
-        T3[/vendor/request-loan â†’ LoanRequestForm]
+        T1[/vendor Ã¢â€ â€™ VendorDashboard index]
+        T2[/vendor/loans Ã¢â€ â€™ VendorLoans]
+        T3[/vendor/request-loan Ã¢â€ â€™ LoanRequestForm]
         T4[... 12 more vendor routes]
-        T5[/lender â†’ LenderDashboard index]
-        T6[/lender/loans â†’ LenderLoans]
+        T5[/lender Ã¢â€ â€™ LenderDashboard index]
+        T6[/lender/loans Ã¢â€ â€™ LenderLoans]
         T7[... 11 more lender routes]
     end
 ```
 
 ---
 
-## 16. Data Flow Diagram â€” Full System
+## 16. Data Flow Diagram Ã¢â‚¬â€ Full System
 
 ```mermaid
 flowchart LR
@@ -759,7 +759,7 @@ flowchart TD
     APP --> PROT[ProtectedRoute\nJWT + role check]
     PROT --> DL[DashboardLayout.jsx\nSidebar + Hamburger + Footer]
     
-    DL --> OUTLET[Outlet â€” child pages]
+    DL --> OUTLET[Outlet Ã¢â‚¬â€ child pages]
     DL --> QAD[QuickAccessDock.jsx\nFloating shortcuts]
     DL --> FOOTER[Footer.jsx]
 
@@ -811,7 +811,7 @@ flowchart TD
     end
 
     subgraph Build & Test
-        DEV5 --> B1[npm test â€” React + Hardhat tests]
+        DEV5 --> B1[npm test Ã¢â‚¬â€ React + Hardhat tests]
         B1 --> B2[npm run build\nCreate React App production bundle]
         B2 --> B3{Build success?\nno errors}
         B3 -- Fail --> DEV1
@@ -844,18 +844,18 @@ flowchart TD
 
 | # | Process | Trigger | Key Steps | Output |
 |---|---|---|---|---|
-| 1 | Vendor Registration | `/register` form submit | Validate â†’ Encrypt KYC â†’ Hash PW â†’ Save MongoDB | Vendor account created |
+| 1 | Vendor Registration | `/register` form submit | Validate Ã¢â€ â€™ Encrypt KYC Ã¢â€ â€™ Hash PW Ã¢â€ â€™ Save MongoDB | Vendor account created |
 | 2 | Lender Registration | `/register` (lender role) | Same as vendor + API key required at login | Lender account created |
-| 3 | Login | `/login` form submit | Validate â†’ Find user â†’ Compare bcrypt â†’ Sign JWT | JWT token in localStorage |
-| 4 | OTP Verification | After registration | Generate OTP â†’ Send email â†’ Verify â†’ Activate account | Email verified |
-| 5 | Password Reset | `/forgot-password` | Generate token â†’ Email link â†’ Validate token â†’ Hash new PW | Password updated |
-| 6 | 2FA Setup | `/2fa-setup` | Generate TOTP secret â†’ QR code â†’ Verify code â†’ Enable | 2FA active |
-| 7 | Loan Application | `/vendor/request-loan` | Fill form â†’ Upload docs â†’ POST to API â†’ Status=Pending | Loan in MongoDB |
-| 8 | Loan Approval | Lender dashboard | Review loan â†’ PUT approve â†’ Blockchain tx â†’ Status=Approved | Loan funded on-chain |
-| 9 | Loan Repayment | Vendor dashboard | MetaMask tx â†’ POST txHash â†’ Status=Repaid â†’ Credit score++ | Loan closed |
-| 10 | Oracle Sync | Daily 9 AM cron | Read vendors from DB â†’ Simulate sales â†’ recordSales() on-chain | Sales updated on blockchain |
-| 11 | KYC Encrypt | Registration | AES-256-CBC â†’ iv:ciphertext â†’ MongoDB | Aadhaar never in plaintext |
-| 12 | JWT Auth | Every protected request | Extract Bearer token â†’ jwt.verify â†’ req.user = decoded | Access granted or 401/403 |
+| 3 | Login | `/login` form submit | Validate Ã¢â€ â€™ Find user Ã¢â€ â€™ Compare bcrypt Ã¢â€ â€™ Sign JWT | JWT token in localStorage |
+| 4 | OTP Verification | After registration | Generate OTP Ã¢â€ â€™ Send email Ã¢â€ â€™ Verify Ã¢â€ â€™ Activate account | Email verified |
+| 5 | Password Reset | `/forgot-password` | Generate token Ã¢â€ â€™ Email link Ã¢â€ â€™ Validate token Ã¢â€ â€™ Hash new PW | Password updated |
+| 6 | 2FA Setup | `/2fa-setup` | Generate TOTP secret Ã¢â€ â€™ QR code Ã¢â€ â€™ Verify code Ã¢â€ â€™ Enable | 2FA active |
+| 7 | Loan Application | `/vendor/request-loan` | Fill form Ã¢â€ â€™ Upload docs Ã¢â€ â€™ POST to API Ã¢â€ â€™ Status=Pending | Loan in MongoDB |
+| 8 | Loan Approval | Lender dashboard | Review loan Ã¢â€ â€™ PUT approve Ã¢â€ â€™ Blockchain tx Ã¢â€ â€™ Status=Approved | Loan funded on-chain |
+| 9 | Loan Repayment | Vendor dashboard | MetaMask tx Ã¢â€ â€™ POST txHash Ã¢â€ â€™ Status=Repaid Ã¢â€ â€™ Credit score++ | Loan closed |
+| 10 | Oracle Sync | Daily 9 AM cron | Read vendors from DB Ã¢â€ â€™ Simulate sales Ã¢â€ â€™ recordSales() on-chain | Sales updated on blockchain |
+| 11 | KYC Encrypt | Registration | AES-256-CBC Ã¢â€ â€™ iv:ciphertext Ã¢â€ â€™ MongoDB | Aadhaar never in plaintext |
+| 12 | JWT Auth | Every protected request | Extract Bearer token Ã¢â€ â€™ jwt.verify Ã¢â€ â€™ req.user = decoded | Access granted or 401/403 |
 
 ---
 
@@ -863,3 +863,12 @@ flowchart TD
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

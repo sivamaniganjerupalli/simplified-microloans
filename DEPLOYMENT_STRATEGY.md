@@ -1,11 +1,11 @@
 # DhanSetu Blockchain Deployment Strategy
 
-## Current Status âœ…
+## Current Status Ã¢Å“â€¦
 
 - **Smart Contract**: Deployed to Sepolia Testnet
 - **Contract Address**: `0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f`
 - **Network**: Sepolia (Chain ID: 11155111)
-- **Verification**: Verified on Etherscan âœ“
+- **Verification**: Verified on Etherscan Ã¢Å“â€œ
 - **Explorer**: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
 - **Backend**: Configured to use Sepolia RPC via `SEPOLIA_RPC_URL`
 - **Test ETH Balance**: 0.1198 ETH available
@@ -41,7 +41,7 @@ File: `hardhat.config.js`
 
 ---
 
-## Phase 1: Sepolia Testnet Testing (CURRENT) ðŸŸ¢
+## Phase 1: Sepolia Testnet Testing (CURRENT) Ã°Å¸Å¸Â¢
 
 ### What to Test
 1. **User Registration & KYC**
@@ -116,11 +116,11 @@ Before mainnet, address:
 ## Phase 3: Production Mainnet Deployment (FUTURE)
 
 ### Prerequisites
-- âœ… Full Sepolia testing complete (2-4 weeks minimum)
-- âœ… No critical bugs in transaction flow
-- âœ… Smart contract audited (optional but recommended)
-- âœ… Mainnet ETH secured for deployment + operations
-- âœ… Production infrastructure ready
+- Ã¢Å“â€¦ Full Sepolia testing complete (2-4 weeks minimum)
+- Ã¢Å“â€¦ No critical bugs in transaction flow
+- Ã¢Å“â€¦ Smart contract audited (optional but recommended)
+- Ã¢Å“â€¦ Mainnet ETH secured for deployment + operations
+- Ã¢Å“â€¦ Production infrastructure ready
 
 ### Mainnet Deployment Steps
 1. **Update hardhat.config.js** - Add Ethereum mainnet network
@@ -164,37 +164,37 @@ Key LoanContract functions (call from backend/frontend):
 
 ```solidity
 // Core Loan Operations
-- createLoan(amount, duration, interestRate) â†’ returns loanId
-- approveLoan(loanId) â†’ lender approves
-- disburseLoan(loanId) â†’ send funds to vendor
-- repayLoan(loanId, amount) â†’ make payment
+- createLoan(amount, duration, interestRate) Ã¢â€ â€™ returns loanId
+- approveLoan(loanId) Ã¢â€ â€™ lender approves
+- disburseLoan(loanId) Ã¢â€ â€™ send funds to vendor
+- repayLoan(loanId, amount) Ã¢â€ â€™ make payment
 
 // View Functions
-- getLoans(borrower) â†’ array of loans
-- getLoan(loanId) â†’ loan details
-- getTotalBorrowed(borrower) â†’ total amount
-- getInterestDue(loanId) â†’ interest calculation
+- getLoans(borrower) Ã¢â€ â€™ array of loans
+- getLoan(loanId) Ã¢â€ â€™ loan details
+- getTotalBorrowed(borrower) Ã¢â€ â€™ total amount
+- getInterestDue(loanId) Ã¢â€ â€™ interest calculation
 ```
 
 ---
 
 ## Important Notes
 
-âš ï¸ **Before Mainnet:**
+Ã¢Å¡Â Ã¯Â¸Â **Before Mainnet:**
 - Test withdrawal/transfer functions thoroughly
 - Verify gas cost calculations
 - Test with different user types (vendor, lender, borrower)
 - Ensure database-blockchain synchronization works reliably
 - Have a rollback plan ready
 
-ðŸ” **Security Checklist:**
+Ã°Å¸â€Â **Security Checklist:**
 - No hardcoded private keys in code
 - Use environment variables for all secrets
 - Enable rate limiting on API endpoints
 - Implement transaction validation on both sides
 - Monitor for unusual contract activity on Etherscan
 
-ðŸ“Š **Monitoring After Deployment:**
+Ã°Å¸â€œÅ  **Monitoring After Deployment:**
 - Set up alerts for failed transactions
 - Track gas prices and costs
 - Monitor contract balance
@@ -215,14 +215,23 @@ Key LoanContract functions (call from backend/frontend):
 
 ## Next Immediate Actions
 
-1. âœ… Add `.env` to frontend with contract address
-2. âœ… Test loan creation flow end-to-end
-3. âœ… Verify all transactions appear on Etherscan
-4. âœ… Test with multiple MetaMask accounts
-5. â³ Plan 2-4 week Sepolia testing phase
-6. â³ Document any bugs/improvements found
-7. â³ Schedule mainnet deployment review
+1. Ã¢Å“â€¦ Add `.env` to frontend with contract address
+2. Ã¢Å“â€¦ Test loan creation flow end-to-end
+3. Ã¢Å“â€¦ Verify all transactions appear on Etherscan
+4. Ã¢Å“â€¦ Test with multiple MetaMask accounts
+5. Ã¢ÂÂ³ Plan 2-4 week Sepolia testing phase
+6. Ã¢ÂÂ³ Document any bugs/improvements found
+7. Ã¢ÂÂ³ Schedule mainnet deployment review
 
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

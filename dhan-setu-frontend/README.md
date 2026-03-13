@@ -1,6 +1,6 @@
-# DhanSetu â€” Frontend
+# DhanSetu Ã¢â‚¬â€ Frontend
 
-> React 19 Â· Tailwind CSS Â· React Router v7 Â· Ethers.js Â· Dark Theme
+> React 19 Ã‚Â· Tailwind CSS Ã‚Â· React Router v7 Ã‚Â· Ethers.js Ã‚Â· Dark Theme
 
 This is the frontend application for **DhanSetu**, a blockchain-powered microloan platform for India's street vendors.
 
@@ -54,19 +54,19 @@ REACT_APP_API_URL=http://localhost:5000
 
 ```
 src/
-â”œâ”€â”€ App.js                 # Root router
-â”œâ”€â”€ index.css              # Global dark theme CSS
-â”œâ”€â”€ layouts/
-â”‚   â””â”€â”€ DashboardLayout.jsx  # Sidebar + hamburger nav
-â”œâ”€â”€ pages/
-â”‚   â”œâ”€â”€ Home.jsx           # Public landing page
-â”‚   â”œâ”€â”€ Auth/              # Login, Register, OTP, ForgotPwd, Reset, 2FA
-â”‚   â”œâ”€â”€ Vendor/            # All vendor dashboard pages (15 pages)
-â”‚   â””â”€â”€ Lender/            # All lender dashboard pages (12 pages)
-â”œâ”€â”€ components/
-â”‚   â””â”€â”€ common/            # Button, Input, Select, Alert, Badge, Table, StatCard,
-â”‚                          # Header, Footer, QuickAccessDock, ProtectedRoute, ErrorBoundary
-â””â”€â”€ utils/                 # constants, formatters, validators
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ App.js                 # Root router
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ index.css              # Global dark theme CSS
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ layouts/
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ DashboardLayout.jsx  # Sidebar + hamburger nav
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ pages/
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Home.jsx           # Public landing page
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Auth/              # Login, Register, OTP, ForgotPwd, Reset, 2FA
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Vendor/            # All vendor dashboard pages (15 pages)
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Lender/            # All lender dashboard pages (12 pages)
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ components/
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ common/            # Button, Input, Select, Alert, Badge, Table, StatCard,
+Ã¢â€â€š                          # Header, Footer, QuickAccessDock, ProtectedRoute, ErrorBoundary
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ utils/                 # constants, formatters, validators
 ```
 
 ---
@@ -119,7 +119,7 @@ src/
 - **Dashboard bg:** `#0A0F1E`
 - **Card bg:** `bg-slate-900/55` with `backdrop-blur`
 - **Borders:** `border-slate-600/30`
-- **Primary accent:** cyan â†’ blue gradient (`from-cyan-500 to-blue-600`)
+- **Primary accent:** cyan Ã¢â€ â€™ blue gradient (`from-cyan-500 to-blue-600`)
 - **Text:** slate-100 / slate-300 / slate-400
 - **CSS scope classes:** `vendor-modern-scope`, `lender-modern-scope` (applied in DashboardLayout)
 
@@ -198,3 +198,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

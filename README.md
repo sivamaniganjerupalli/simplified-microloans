@@ -1,6 +1,6 @@
-# DhanSetu â€” Blockchain-Powered Microloan Platform
+# DhanSetu Ã¢â‚¬â€ Blockchain-Powered Microloan Platform
 
-> **Empowering India's street vendors with instant, transparent, and secure microloans â€” backed by Ethereum smart contracts.**
+> **Empowering India's street vendors with instant, transparent, and secure microloans Ã¢â‚¬â€ backed by Ethereum smart contracts.**
 
 ---
 
@@ -31,9 +31,9 @@
 
 ## 1. Project Overview
 
-**DhanSetu** (meaning "Bridge of Wealth" in Hindi) is a full-stack decentralized microloan platform built to help street vendors â€” vegetable sellers, food stall owners, artisans â€” access small business loans quickly, without needing a bank account or collateral.
+**DhanSetu** (meaning "Bridge of Wealth" in Hindi) is a full-stack decentralized microloan platform built to help street vendors Ã¢â‚¬â€ vegetable sellers, food stall owners, artisans Ã¢â‚¬â€ access small business loans quickly, without needing a bank account or collateral.
 
-The platform uses **Ethereum smart contracts** to make every loan transparent, immutable, and tamper-proof. Vendors apply with their Aadhaar card, get verified via KYC, and receive funds to their wallet within 24 hours. Lenders can invest, track their portfolio, analyze risk, and withdraw returns â€” all through a modern dark-themed web dashboard.
+The platform uses **Ethereum smart contracts** to make every loan transparent, immutable, and tamper-proof. Vendors apply with their Aadhaar card, get verified via KYC, and receive funds to their wallet within 24 hours. Lenders can invest, track their portfolio, analyze risk, and withdraw returns Ã¢â‚¬â€ all through a modern dark-themed web dashboard.
 
 ### Goals
 - Remove friction from the microloan process for unbanked vendors
@@ -47,8 +47,8 @@ The platform uses **Ethereum smart contracts** to make every loan transparent, i
 
 ### For Vendors
 - Register with Aadhaar + wallet address (no bank account required)
-- Apply for loans up to â‚¹1,00,000
-- Track loan status (Pending â†’ Approved â†’ Repaid)
+- Apply for loans up to Ã¢â€šÂ¹1,00,000
+- Track loan status (Pending Ã¢â€ â€™ Approved Ã¢â€ â€™ Repaid)
 - View all transactions and repayment history
 - Repayment Planner to calculate weekly/monthly payment schedules
 - Daily Checklist to manage business tasks
@@ -63,9 +63,9 @@ The platform uses **Ethereum smart contracts** to make every loan transparent, i
 - View and approve loan requests
 - Track active loans, investment history, and portfolio
 - Withdraw funds back to wallet
-- **Risk Analyzer** â€” score-based loan risk assessment with visual dashboards
-- **Yield Planner** â€” calculate expected returns based on interest rates and tenure
-- **Opportunity Radar** â€” discover high-potential loan opportunities across vendors
+- **Risk Analyzer** Ã¢â‚¬â€ score-based loan risk assessment with visual dashboards
+- **Yield Planner** Ã¢â‚¬â€ calculate expected returns based on interest rates and tenure
+- **Opportunity Radar** Ã¢â‚¬â€ discover high-potential loan opportunities across vendors
 - Two-Factor Authentication (TOTP)
 
 ### Platform-Wide
@@ -108,37 +108,37 @@ The platform uses **Ethereum smart contracts** to make every loan transparent, i
 ## 4. System Architecture
 
 ```
-â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                        CLIENT (React)                           â”‚
-â”‚  Vendor Dashboard â”€â”€â”                                           â”‚
-â”‚  Lender Dashboard â”€â”€â”¤â”€â”€â–º Axios HTTP â”€â”€â–º Express REST API        â”‚
-â”‚  Auth Pages â”€â”€â”€â”€â”€â”€â”€â”€â”˜         â”‚                                 â”‚
-â”‚                               â”‚                                 â”‚
-â”‚                    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”                      â”‚
-â”‚                    â”‚   Backend (Node.js) â”‚                      â”‚
-â”‚                    â”‚  - Route handlers   â”‚                      â”‚
-â”‚                    â”‚  - JWT middleware   â”‚                      â”‚
-â”‚                    â”‚  - KYC encryption   â”‚                      â”‚
-â”‚                    â””â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”˜                      â”‚
-â”‚                       â”‚              â”‚                          â”‚
-â”‚              â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”  â”Œâ”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”             â”‚
-â”‚              â”‚  MongoDB   â”‚  â”‚  Ethereum Node    â”‚             â”‚
-â”‚              â”‚ (Mongoose) â”‚  â”‚  (Ganache/Infura) â”‚             â”‚
-â”‚              â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜             â”‚
-â”‚                                       â”‚                         â”‚
-â”‚                          â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”             â”‚
-â”‚                          â”‚   LoanContract.sol    â”‚             â”‚
-â”‚                          â”‚ - Vendor registration â”‚             â”‚
-â”‚                          â”‚ - Loan lifecycle      â”‚             â”‚
-â”‚                          â”‚ - Credit scoring      â”‚             â”‚
-â”‚                          â”‚ - Lender deposits     â”‚             â”‚
-â”‚                          â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜             â”‚
-â”‚                                                                 â”‚
-â”‚  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”  â”‚
-â”‚  â”‚      Oracle (node-cron)                                  â”‚  â”‚
-â”‚  â”‚   Reads vendor sales from DB â”€â”€â–º recordSales() on-chain  â”‚  â”‚
-â”‚  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜  â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
+Ã¢â€â€š                        CLIENT (React)                           Ã¢â€â€š
+Ã¢â€â€š  Vendor Dashboard Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â                                           Ã¢â€â€š
+Ã¢â€â€š  Lender Dashboard Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¤Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº Axios HTTP Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº Express REST API        Ã¢â€â€š
+Ã¢â€â€š  Auth Pages Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ         Ã¢â€â€š                                 Ã¢â€â€š
+Ã¢â€â€š                               Ã¢â€â€š                                 Ã¢â€â€š
+Ã¢â€â€š                    Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Â¼Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â                      Ã¢â€â€š
+Ã¢â€â€š                    Ã¢â€â€š   Backend (Node.js) Ã¢â€â€š                      Ã¢â€â€š
+Ã¢â€â€š                    Ã¢â€â€š  - Route handlers   Ã¢â€â€š                      Ã¢â€â€š
+Ã¢â€â€š                    Ã¢â€â€š  - JWT middleware   Ã¢â€â€š                      Ã¢â€â€š
+Ã¢â€â€š                    Ã¢â€â€š  - KYC encryption   Ã¢â€â€š                      Ã¢â€â€š
+Ã¢â€â€š                    Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ                      Ã¢â€â€š
+Ã¢â€â€š                       Ã¢â€â€š              Ã¢â€â€š                          Ã¢â€â€š
+Ã¢â€â€š              Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Â¼Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â  Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Â¼Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â             Ã¢â€â€š
+Ã¢â€â€š              Ã¢â€â€š  MongoDB   Ã¢â€â€š  Ã¢â€â€š  Ethereum Node    Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š              Ã¢â€â€š (Mongoose) Ã¢â€â€š  Ã¢â€â€š  (Ganache/Infura) Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š              Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ  Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ             Ã¢â€â€š
+Ã¢â€â€š                                       Ã¢â€â€š                         Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Â¼Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â             Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€â€š   LoanContract.sol    Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€â€š - Vendor registration Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€â€š - Loan lifecycle      Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€â€š - Credit scoring      Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€â€š - Lender deposits     Ã¢â€â€š             Ã¢â€â€š
+Ã¢â€â€š                          Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ             Ã¢â€â€š
+Ã¢â€â€š                                                                 Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€Å’Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â  Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€â€š      Oracle (node-cron)                                  Ã¢â€â€š  Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€â€š   Reads vendor sales from DB Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€“Âº recordSales() on-chain  Ã¢â€â€š  Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ  Ã¢â€â€š
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
 ```
 
 ---
@@ -147,154 +147,154 @@ The platform uses **Ethereum smart contracts** to make every loan transparent, i
 
 ```
 simplified-microloans/
-â”‚
-â”œâ”€â”€ contracts/
-â”‚   â””â”€â”€ LoanContract.sol          # Solidity smart contract
-â”‚
-â”œâ”€â”€ scripts/
-â”‚   â””â”€â”€ deploy.js                 # Hardhat deployment script
-â”‚
-â”œâ”€â”€ test/
-â”‚   â””â”€â”€ testLoanContract.js       # Smart contract unit tests
-â”‚
-â”œâ”€â”€ artifacts/                    # Compiled contract ABIs (auto-generated)
-â”‚
-â”œâ”€â”€ oracles/
-â”‚   â””â”€â”€ salesOracleSimulator.js   # Cron job: pushes vendor sales to blockchain
-â”‚
-â”œâ”€â”€ hardhat.config.js             # Hardhat network + compiler config
-â”œâ”€â”€ kycEncryption.js              # Root-level KYC util (reference)
-â”œâ”€â”€ package.json                  # Root dependencies (backend + blockchain)
-â”‚
-â”œâ”€â”€ backend/
-â”‚   â”œâ”€â”€ server.js                 # Entry point â€” starts Express on configured port
-â”‚   â”œâ”€â”€ app.js                    # Express app: CORS, routes, middleware setup
-â”‚   â”‚
-â”‚   â”œâ”€â”€ config/
-â”‚   â”‚   â””â”€â”€ db.js                 # MongoDB connection via Mongoose
-â”‚   â”‚
-â”‚   â”œâ”€â”€ models/
-â”‚   â”‚   â”œâ”€â”€ Vendor.js             # Vendor user schema
-â”‚   â”‚   â”œâ”€â”€ Lender.js             # Lender user schema
-â”‚   â”‚   â”œâ”€â”€ Loan.js               # Loan application schema
-â”‚   â”‚   â””â”€â”€ Transaction.js        # Transaction record schema
-â”‚   â”‚
-â”‚   â”œâ”€â”€ controllers/
-â”‚   â”‚   â”œâ”€â”€ vendorController.js   # Vendor auth + loan logic
-â”‚   â”‚   â”œâ”€â”€ lenderController.js   # Lender auth + approval logic
-â”‚   â”‚   â””â”€â”€ loanController.js     # Loan CRUD operations
-â”‚   â”‚
-â”‚   â”œâ”€â”€ routes/
-â”‚   â”‚   â”œâ”€â”€ vendorRoutes.js       # /api/vendor/*
-â”‚   â”‚   â”œâ”€â”€ lenderDashboardRoutes.js  # /api/lender/*
-â”‚   â”‚   â”œâ”€â”€ loanRoutes.js         # /api/loan/*
-â”‚   â”‚   â”œâ”€â”€ otpRoutes.js          # /api/otp/*
-â”‚   â”‚   â”œâ”€â”€ totpRoutes.js         # /api/totp/*
-â”‚   â”‚   â””â”€â”€ authRoutes.js         # /api/auth/* (forgot/reset password, 2FA)
-â”‚   â”‚
-â”‚   â”œâ”€â”€ middlewares/
-â”‚   â”‚   â”œâ”€â”€ auth.js               # JWT Bearer token verification
-â”‚   â”‚   â”œâ”€â”€ authenticate.js       # Alternate auth middleware
-â”‚   â”‚   â””â”€â”€ requireLender.js      # Role-guard: lender-only routes
-â”‚   â”‚
-â”‚   â”œâ”€â”€ utils/
-â”‚   â”‚   â”œâ”€â”€ blockchain.js         # Ethers.js contract instance
-â”‚   â”‚   â”œâ”€â”€ kycEncryption.js      # AES-256-CBC encrypt/decrypt Aadhaar
-â”‚   â”‚   â”œâ”€â”€ otpService.js         # Generate/verify OTP via email
-â”‚   â”‚   â”œâ”€â”€ totpService.js        # TOTP 2FA setup + verification
-â”‚   â”‚   â””â”€â”€ oracleHelper.js       # Push sales data to blockchain
-â”‚   â”‚
-â”‚   â””â”€â”€ uploads/                  # Multer upload destination (KYC images)
-â”‚
-â””â”€â”€ dhan-setu-frontend/
-    â”œâ”€â”€ package.json
-    â”œâ”€â”€ tailwind.config.js
-    â”œâ”€â”€ postcss.config.js
-    â”‚
-    â”œâ”€â”€ public/
-    â”‚   â””â”€â”€ index.html
-    â”‚
-    â””â”€â”€ src/
-        â”œâ”€â”€ App.js                # Root router â€” all route definitions
-        â”œâ”€â”€ index.js              # React entry point
-        â”œâ”€â”€ index.css             # Global dark theme CSS overrides
-        â”œâ”€â”€ App.css               # Base app styles
-        â”‚
-        â”œâ”€â”€ assets/
-        â”‚   â”œâ”€â”€ images/           # home1.png, home2.png (hero images)
-        â”‚   â””â”€â”€ icons/
-        â”‚
-        â”œâ”€â”€ components/
-        â”‚   â”œâ”€â”€ common/
-        â”‚   â”‚   â”œâ”€â”€ Button.jsx          # Reusable dark-themed button
-        â”‚   â”‚   â”œâ”€â”€ Input.jsx           # Dark-themed text input
-        â”‚   â”‚   â”œâ”€â”€ Select.jsx          # Dark-themed select box
-        â”‚   â”‚   â”œâ”€â”€ Alert.jsx           # Success/error/warning/info alerts
-        â”‚   â”‚   â”œâ”€â”€ Badge.jsx           # Status badge (active, pending, etc.)
-        â”‚   â”‚   â”œâ”€â”€ StatCard.jsx        # Dashboard metric card
-        â”‚   â”‚   â”œâ”€â”€ Table.jsx           # Dark-themed data table with search/sort
-        â”‚   â”‚   â”œâ”€â”€ Header.jsx          # Public page header/navbar
-        â”‚   â”‚   â”œâ”€â”€ Footer.jsx          # Site footer
-        â”‚   â”‚   â”œâ”€â”€ QuickAccessDock.jsx # Floating role-aware shortcuts dock
-        â”‚   â”‚   â”œâ”€â”€ ProtectedRoute.jsx  # Route guard (checks JWT + role)
-        â”‚   â”‚   â””â”€â”€ ErrorBoundary.jsx   # React error boundary
-        â”‚   â”‚
-        â”‚   â””â”€â”€ progress/
-        â”‚       â”œâ”€â”€ ProgressBar.jsx
-        â”‚       â””â”€â”€ StepIndicator.jsx
-        â”‚
-        â”œâ”€â”€ layouts/
-        â”‚   â””â”€â”€ DashboardLayout.jsx  # Shared sidebar + hamburger layout
-        â”‚
-        â”œâ”€â”€ pages/
-        â”‚   â”œâ”€â”€ Home.jsx             # Landing page
-        â”‚   â”œâ”€â”€ NotFound.jsx         # 404 page
-        â”‚   â”‚
-        â”‚   â”œâ”€â”€ Auth/
-        â”‚   â”‚   â”œâ”€â”€ Login.jsx
-        â”‚   â”‚   â”œâ”€â”€ Register.jsx
-        â”‚   â”‚   â”œâ”€â”€ VerifyOTP.jsx
-        â”‚   â”‚   â”œâ”€â”€ ForgotPassword.jsx
-        â”‚   â”‚   â”œâ”€â”€ ResetPassword.jsx
-        â”‚   â”‚   â”œâ”€â”€ EmailVerificationSuccess.jsx
-        â”‚   â”‚   â”œâ”€â”€ TwoFactorSetup.jsx
-        â”‚   â”‚   â””â”€â”€ AuthLayout.jsx
-        â”‚   â”‚
-        â”‚   â”œâ”€â”€ Vendor/
-        â”‚   â”‚   â”œâ”€â”€ Dashboard.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorLoans.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorTransactions.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorProfile.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorSettings.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorHelp.jsx
-        â”‚   â”‚   â”œâ”€â”€ LoanRequestForm.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorRepaymentPlanner.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorDailyChecklist.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorReminderCenter.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorExpenseTracker.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorSalesBooster.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorEasyAssist.jsx
-        â”‚   â”‚   â”œâ”€â”€ VendorTutorial.jsx
-        â”‚   â”‚   â””â”€â”€ VendorQuickGuide.jsx
-        â”‚   â”‚
-        â”‚   â””â”€â”€ Lender/
-        â”‚       â”œâ”€â”€ Dashboard.jsx
-        â”‚       â”œâ”€â”€ LenderLoans.jsx
-        â”‚       â”œâ”€â”€ LenderPortfolio.jsx
-        â”‚       â”œâ”€â”€ LenderTransactions.jsx
-        â”‚       â”œâ”€â”€ LenderInvestmentHistory.jsx
-        â”‚       â”œâ”€â”€ LenderWithdrawal.jsx
-        â”‚       â”œâ”€â”€ LenderRiskAnalyzer.jsx
-        â”‚       â”œâ”€â”€ LenderYieldPlanner.jsx
-        â”‚       â”œâ”€â”€ LenderOpportunityRadar.jsx
-        â”‚       â”œâ”€â”€ LenderProfile.jsx
-        â”‚       â”œâ”€â”€ LenderSettings.jsx
-        â”‚       â””â”€â”€ LenderHelp.jsx
-        â”‚
-        â””â”€â”€ utils/
-            â”œâ”€â”€ constants.js
-            â”œâ”€â”€ formatters.js
-            â””â”€â”€ validators.js
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ contracts/
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ LoanContract.sol          # Solidity smart contract
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ scripts/
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ deploy.js                 # Hardhat deployment script
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ test/
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ testLoanContract.js       # Smart contract unit tests
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ artifacts/                    # Compiled contract ABIs (auto-generated)
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ oracles/
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ salesOracleSimulator.js   # Cron job: pushes vendor sales to blockchain
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ hardhat.config.js             # Hardhat network + compiler config
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ kycEncryption.js              # Root-level KYC util (reference)
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ package.json                  # Root dependencies (backend + blockchain)
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ backend/
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ server.js                 # Entry point Ã¢â‚¬â€ starts Express on configured port
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ app.js                    # Express app: CORS, routes, middleware setup
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ config/
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ db.js                 # MongoDB connection via Mongoose
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ models/
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Vendor.js             # Vendor user schema
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Lender.js             # Lender user schema
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Loan.js               # Loan application schema
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Transaction.js        # Transaction record schema
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ controllers/
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ vendorController.js   # Vendor auth + loan logic
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ lenderController.js   # Lender auth + approval logic
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ loanController.js     # Loan CRUD operations
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ routes/
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ vendorRoutes.js       # /api/vendor/*
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ lenderDashboardRoutes.js  # /api/lender/*
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ loanRoutes.js         # /api/loan/*
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ otpRoutes.js          # /api/otp/*
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ totpRoutes.js         # /api/totp/*
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ authRoutes.js         # /api/auth/* (forgot/reset password, 2FA)
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ middlewares/
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ auth.js               # JWT Bearer token verification
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ authenticate.js       # Alternate auth middleware
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ requireLender.js      # Role-guard: lender-only routes
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ utils/
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ blockchain.js         # Ethers.js contract instance
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ kycEncryption.js      # AES-256-CBC encrypt/decrypt Aadhaar
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ otpService.js         # Generate/verify OTP via email
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ totpService.js        # TOTP 2FA setup + verification
+Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ oracleHelper.js       # Push sales data to blockchain
+Ã¢â€â€š   Ã¢â€â€š
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ uploads/                  # Multer upload destination (KYC images)
+Ã¢â€â€š
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ dhan-setu-frontend/
+    Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ package.json
+    Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ tailwind.config.js
+    Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ postcss.config.js
+    Ã¢â€â€š
+    Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ public/
+    Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ index.html
+    Ã¢â€â€š
+    Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ src/
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ App.js                # Root router Ã¢â‚¬â€ all route definitions
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ index.js              # React entry point
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ index.css             # Global dark theme CSS overrides
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ App.css               # Base app styles
+        Ã¢â€â€š
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ assets/
+        Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ images/           # home1.png, home2.png (hero images)
+        Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ icons/
+        Ã¢â€â€š
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ components/
+        Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ common/
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Button.jsx          # Reusable dark-themed button
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Input.jsx           # Dark-themed text input
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Select.jsx          # Dark-themed select box
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Alert.jsx           # Success/error/warning/info alerts
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Badge.jsx           # Status badge (active, pending, etc.)
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ StatCard.jsx        # Dashboard metric card
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Table.jsx           # Dark-themed data table with search/sort
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Header.jsx          # Public page header/navbar
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Footer.jsx          # Site footer
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ QuickAccessDock.jsx # Floating role-aware shortcuts dock
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ProtectedRoute.jsx  # Route guard (checks JWT + role)
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ ErrorBoundary.jsx   # React error boundary
+        Ã¢â€â€š   Ã¢â€â€š
+        Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ progress/
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ProgressBar.jsx
+        Ã¢â€â€š       Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ StepIndicator.jsx
+        Ã¢â€â€š
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ layouts/
+        Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ DashboardLayout.jsx  # Shared sidebar + hamburger layout
+        Ã¢â€â€š
+        Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ pages/
+        Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Home.jsx             # Landing page
+        Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ NotFound.jsx         # 404 page
+        Ã¢â€â€š   Ã¢â€â€š
+        Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Auth/
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Login.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Register.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VerifyOTP.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ForgotPassword.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ResetPassword.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ EmailVerificationSuccess.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ TwoFactorSetup.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ AuthLayout.jsx
+        Ã¢â€â€š   Ã¢â€â€š
+        Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Vendor/
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Dashboard.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorLoans.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorTransactions.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorProfile.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorSettings.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorHelp.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LoanRequestForm.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorRepaymentPlanner.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorDailyChecklist.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorReminderCenter.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorExpenseTracker.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorSalesBooster.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorEasyAssist.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ VendorTutorial.jsx
+        Ã¢â€â€š   Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ VendorQuickGuide.jsx
+        Ã¢â€â€š   Ã¢â€â€š
+        Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Lender/
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Dashboard.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderLoans.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderPortfolio.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderTransactions.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderInvestmentHistory.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderWithdrawal.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderRiskAnalyzer.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderYieldPlanner.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderOpportunityRadar.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderProfile.jsx
+        Ã¢â€â€š       Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ LenderSettings.jsx
+        Ã¢â€â€š       Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ LenderHelp.jsx
+        Ã¢â€â€š
+        Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ utils/
+            Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ constants.js
+            Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ formatters.js
+            Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ validators.js
 ```
 
 ---
@@ -308,14 +308,14 @@ simplified-microloans/
 
 | Struct | Fields |
 |---|---|
-| `Vendor` | walletAddress, totalSales, creditScore (0â€“1000), totalLoansRepaid, totalLoanDefaults, exists, isBlacklisted |
+| `Vendor` | walletAddress, totalSales, creditScore (0Ã¢â‚¬â€œ1000), totalLoansRepaid, totalLoanDefaults, exists, isBlacklisted |
 | `Lender` | walletAddress, totalLent, totalRepaid, availableBalance, exists |
 | `Loan` | loanId, lender, principalAmount, interestRate (basis points), disbursementDate, dueDate, amountRepaid, lateFeeRate, isFullyRepaid, isDefaulted, status |
 
 ### Loan Status Flow
 ```
-PENDING â†’ ACTIVE â†’ REPAYING â†’ COMPLETED
-                             â†’ DEFAULTED
+PENDING Ã¢â€ â€™ ACTIVE Ã¢â€ â€™ REPAYING Ã¢â€ â€™ COMPLETED
+                             Ã¢â€ â€™ DEFAULTED
 ```
 
 ### Key Functions
@@ -344,7 +344,7 @@ PENDING â†’ ACTIVE â†’ REPAYING â†’ COMPLETED
 ### Platform Parameters
 - Platform fee: **0.5%** (50 basis points)
 - Default grace period: **30 days**
-- Credit score range: **0â€“1000** (new vendors start at 500)
+- Credit score range: **0Ã¢â‚¬â€œ1000** (new vendors start at 500)
 - Interest rate stored in **basis points** (100 = 1%)
 
 ---
@@ -358,7 +358,7 @@ PENDING â†’ ACTIVE â†’ REPAYING â†’ COMPLETED
 | Method | Endpoint | Description |
 |---|---|---|
 | POST | `/api/vendor/register` | Register new vendor |
-| POST | `/api/vendor/login` | Vendor login â†’ returns JWT |
+| POST | `/api/vendor/login` | Vendor login Ã¢â€ â€™ returns JWT |
 | POST | `/api/vendor/profile` | Get vendor profile (protected) |
 | POST | `/api/lender/register` | Register new lender |
 | POST | `/api/lender/login` | Lender login (requires API key) |
@@ -403,7 +403,7 @@ PENDING â†’ ACTIVE â†’ REPAYING â†’ COMPLETED
 
 ### Static Files
 ```
-GET /uploads/:filename   â†’ Serve uploaded KYC images
+GET /uploads/:filename   Ã¢â€ â€™ Serve uploaded KYC images
 ```
 
 ---
@@ -422,16 +422,16 @@ Built with **React 19** (Create React App), **Tailwind CSS 3**, **React Router D
 
 ### Protected Routes
 `ProtectedRoute` component checks:
-1. `localStorage.getItem("token")` â€” if missing, redirects to `/login`
-2. `localStorage.getItem("role")` â€” must match `requiredRole` prop
+1. `localStorage.getItem("token")` Ã¢â‚¬â€ if missing, redirects to `/login`
+2. `localStorage.getItem("role")` Ã¢â‚¬â€ must match `requiredRole` prop
 
 ### QuickAccess Dock
 A floating panel (`QuickAccessDock.jsx`) docked to bottom-right:
-- **Closed by default** â€” shows small "Quick Access" toggle button
-- **Opens on click** â€” reveals 3 role-specific quick-action buttons
+- **Closed by default** Ã¢â‚¬â€ shows small "Quick Access" toggle button
+- **Opens on click** Ã¢â‚¬â€ reveals 3 role-specific quick-action buttons
 - **Lender shortcuts:** Risk Analyzer, Withdraw Funds, Help
 - **Vendor shortcuts:** Reminder Center, Expense Tracker, Help
-- Closes with âœ• button
+- Closes with Ã¢Å“â€¢ button
 
 ---
 
@@ -545,7 +545,7 @@ npx hardhat run scripts/deploy.js --network localhost
 The Oracle bridges real-world vendor sales data with the smart contract:
 
 1. **Connects to MongoDB** to fetch all registered vendors
-2. **Simulates daily sales** in range â‚¹100â€“â‚¹1000 per vendor (replace with real POS/UPI data in production)
+2. **Simulates daily sales** in range Ã¢â€šÂ¹100Ã¢â‚¬â€œÃ¢â€šÂ¹1000 per vendor (replace with real POS/UPI data in production)
 3. **Calls `recordSales(address, amount)`** on-chain via `oracleHelper.js`
 4. **Scheduled via `node-cron`** to run every day at 09:00 AM
 
@@ -649,21 +649,21 @@ npx hardhat run scripts/deploy.js --network localhost
 
 ### Development Mode
 
-**Terminal 1 â€” Backend:**
+**Terminal 1 Ã¢â‚¬â€ Backend:**
 ```bash
 npm run dev
 # Starts Express server on http://localhost:5000
 # Uses nodemon for auto-restart on changes
 ```
 
-**Terminal 2 â€” Frontend:**
+**Terminal 2 Ã¢â‚¬â€ Frontend:**
 ```bash
 cd dhan-setu-frontend
 npm start
 # Starts React dev server on http://localhost:3000
 ```
 
-**Terminal 3 â€” Oracle (optional):**
+**Terminal 3 Ã¢â‚¬â€ Oracle (optional):**
 ```bash
 node oracles/salesOracleSimulator.js
 # Runs once immediately, then schedules daily at 09:00 AM
@@ -752,7 +752,7 @@ POST /api/otp/verify
 |---|---|---|
 | `/` | `Home` | Landing page with features, how-it-works, testimonials, FAQ |
 | `/login` | `Login` | Dual-role login (vendor / lender with API key) |
-| `/register` | `Register` | 3-step registration (role â†’ info â†’ password + wallet) |
+| `/register` | `Register` | 3-step registration (role Ã¢â€ â€™ info Ã¢â€ â€™ password + wallet) |
 | `/verify-otp` | `VerifyOTP` | Email OTP verification after registration |
 | `/forgot-password` | `ForgotPassword` | Request password reset link |
 | `/reset-password` | `ResetPassword` | Set new password via tokenized link |
@@ -849,7 +849,7 @@ npx hardhat test
 
 ### Backend
 ```bash
-# No automated tests currently â€” manual testing via Postman recommended
+# No automated tests currently Ã¢â‚¬â€ manual testing via Postman recommended
 # Import endpoints from API Reference section above
 ```
 
@@ -872,17 +872,26 @@ npm run build
 
 ## License
 
-ISC License â€” see [LICENSE](LICENSE) for details.
+ISC License Ã¢â‚¬â€ see [LICENSE](LICENSE) for details.
 
 ---
 
 ## Author
 
-Built with â¤ï¸ for India's street vendors â€” making financial inclusion a reality through blockchain technology.
+Built with Ã¢ÂÂ¤Ã¯Â¸Â for India's street vendors Ã¢â‚¬â€ making financial inclusion a reality through blockchain technology.
 
 ---
 
-*DhanSetu â€” Blockchain Microloans Â· Ethereum Â· React Â· Node.js Â· MongoDB*
+*DhanSetu Ã¢â‚¬â€ Blockchain Microloans Ã‚Â· Ethereum Ã‚Â· React Ã‚Â· Node.js Ã‚Â· MongoDB*
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

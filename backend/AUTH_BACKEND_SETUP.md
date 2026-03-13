@@ -99,25 +99,25 @@ curl -X POST http://localhost:5000/api/auth/2fa/verify \
 
 The new authentication pages will automatically connect to these endpoints:
 
-- **ForgotPassword.jsx** â†’ `/api/auth/forgot-password`
-- **ResetPassword.jsx** â†’ `/api/auth/validate-reset-token` & `/api/auth/reset-password`
-- **TwoFactorSetup.jsx** â†’ `/api/auth/2fa/generate` & `/api/auth/2fa/verify`
+- **ForgotPassword.jsx** Ã¢â€ â€™ `/api/auth/forgot-password`
+- **ResetPassword.jsx** Ã¢â€ â€™ `/api/auth/validate-reset-token` & `/api/auth/reset-password`
+- **TwoFactorSetup.jsx** Ã¢â€ â€™ `/api/auth/2fa/generate` & `/api/auth/2fa/verify`
 
 ## Security Features
 
-âœ… **Password Reset:**
+Ã¢Å“â€¦ **Password Reset:**
 - Cryptographically secure tokens (SHA-256)
 - 1-hour expiration
 - One-time use tokens
 - Auto-cleanup of expired tokens
 
-âœ… **Two-Factor Authentication:**
+Ã¢Å“â€¦ **Two-Factor Authentication:**
 - TOTP standard (RFC 6238)
 - QR code generation
 - 10 backup codes
 - Email confirmation
 
-âœ… **Email Security:**
+Ã¢Å“â€¦ **Email Security:**
 - HTML email templates
 - Anti-phishing measures
 - Expiration warnings
@@ -132,3 +132,12 @@ The new authentication pages will automatically connect to these endpoints:
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

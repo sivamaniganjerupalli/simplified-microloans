@@ -1,4 +1,4 @@
-# âœ… PRODUCTION DEPLOYMENT PREPARATION - COMPLETE
+# Ã¢Å“â€¦ PRODUCTION DEPLOYMENT PREPARATION - COMPLETE
 
 **Status:** Ready for Public Deployment  
 **Date:** March 12, 2026  
@@ -9,7 +9,7 @@
 
 ---
 
-## ðŸ“¦ What's Been Prepared
+## Ã°Å¸â€œÂ¦ What's Been Prepared
 
 ### Configuration Files Created
 
@@ -33,14 +33,14 @@
 
 | File | Change | Status |
 |------|--------|--------|
-| `backend/app.js` | CORS ready with `FRONTEND_URL` | âœ… |
-| `backend/server.js` | Uses `process.env.PORT` | âœ… |
-| `backend/utils/blockchain.js` | ethers v6 compatible | âœ… |
-| `dhan-setu-frontend/` | Build tested locally | âœ… |
+| `backend/app.js` | CORS ready with `FRONTEND_URL` | Ã¢Å“â€¦ |
+| `backend/server.js` | Uses `process.env.PORT` | Ã¢Å“â€¦ |
+| `backend/utils/blockchain.js` | ethers v6 compatible | Ã¢Å“â€¦ |
+| `dhan-setu-frontend/` | Build tested locally | Ã¢Å“â€¦ |
 
 ---
 
-## ðŸš€ Two Ways to Deploy
+## Ã°Å¸Å¡â‚¬ Two Ways to Deploy
 
 ### Option A: QUICK START (Recommended for First-Time)
 **Read & Follow:** `QUICK_START_DEPLOYMENT.md`  
@@ -54,7 +54,7 @@
 
 ---
 
-## ðŸ“‹ Pre-Deployment Checklist
+## Ã°Å¸â€œâ€¹ Pre-Deployment Checklist
 
 ### Account Creation (BEFORE YOU START)
 - [ ] Create Render account: https://render.com
@@ -73,92 +73,92 @@
 
 ---
 
-## ðŸ“Š Environment Variables Summary
+## Ã°Å¸â€œÅ  Environment Variables Summary
 
 ### Backend (Render) - 14 Variables Required
 ```
-1. NODE_ENV              â†’ production
-2. MONGO_URI            â†’ From MongoDB Atlas
-3. JWT_SECRET           â†’ Generate new random
-4. PRIVATE_KEY          â†’ Your wallet key
-5. SEPOLIA_RPC_URL      â†’ From .env
-6. ETHERSCAN_API_KEY    â†’ From .env
-7. CONTRACT_ADDRESS     â†’ 0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
-8. BLOCKCHAIN_NETWORK   â†’ sepolia
-9. OTP_EMAIL            â†’ From .env
-10. OTP_PASS            â†’ From .env
-11. FAST2SMS_API_KEY    â†’ From .env
-12. KYC_SECRET          â†’ From .env
-13. API_KEY             â†’ From .env
-14. FRONTEND_URL        â†’ (update after Netlify deploy)
+1. NODE_ENV              Ã¢â€ â€™ production
+2. MONGO_URI            Ã¢â€ â€™ From MongoDB Atlas
+3. JWT_SECRET           Ã¢â€ â€™ Generate new random
+4. PRIVATE_KEY          Ã¢â€ â€™ Your wallet key
+5. SEPOLIA_RPC_URL      Ã¢â€ â€™ From .env
+6. ETHERSCAN_API_KEY    Ã¢â€ â€™ From .env
+7. CONTRACT_ADDRESS     Ã¢â€ â€™ 0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
+8. BLOCKCHAIN_NETWORK   Ã¢â€ â€™ sepolia
+9. OTP_EMAIL            Ã¢â€ â€™ From .env
+10. OTP_PASS            Ã¢â€ â€™ From .env
+11. FAST2SMS_API_KEY    Ã¢â€ â€™ From .env
+12. KYC_SECRET          Ã¢â€ â€™ From .env
+13. API_KEY             Ã¢â€ â€™ From .env
+14. FRONTEND_URL        Ã¢â€ â€™ (update after Netlify deploy)
 ```
 
 **Get all values from:** `ENV_VARIABLES_REFERENCE.md`
 
 ### Frontend (Netlify) - 5 Variables Required
 ```
-1. REACT_APP_API_URL              â†’ https://dhansetu-api.onrender.com/api
-2. REACT_APP_CONTRACT_ADDRESS     â†’ 0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
-3. REACT_APP_BLOCKCHAIN_NETWORK   â†’ sepolia
-4. REACT_APP_BLOCKCHAIN_NETWORK_IDâ†’ 11155111
-5. REACT_APP_ENV                  â†’ production
+1. REACT_APP_API_URL              Ã¢â€ â€™ https://dhansetu-api.onrender.com/api
+2. REACT_APP_CONTRACT_ADDRESS     Ã¢â€ â€™ 0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
+3. REACT_APP_BLOCKCHAIN_NETWORK   Ã¢â€ â€™ sepolia
+4. REACT_APP_BLOCKCHAIN_NETWORK_IDÃ¢â€ â€™ 11155111
+5. REACT_APP_ENV                  Ã¢â€ â€™ production
 ```
 
 ---
 
-## âœ¨ After Deployment
+## Ã¢Å“Â¨ After Deployment
 
 ### You'll Have
-- âœ… Public frontend URL (Netlify)
-- âœ… Public API endpoint (Render)
-- âœ… Cloud database (MongoDB Atlas)
-- âœ… Blockchain integration (Sepolia testnet)
-- âœ… Auto-deployments (on every GitHub push)
+- Ã¢Å“â€¦ Public frontend URL (Netlify)
+- Ã¢Å“â€¦ Public API endpoint (Render)
+- Ã¢Å“â€¦ Cloud database (MongoDB Atlas)
+- Ã¢Å“â€¦ Blockchain integration (Sepolia testnet)
+- Ã¢Å“â€¦ Auto-deployments (on every GitHub push)
 
 ### Your App Will Support
-- âœ… User registration
-- âœ… MetaMask wallet connection
-- âœ… Loan creation & management
-- âœ… Smart contract interactions
-- âœ… Real blockchain transactions
-- âœ… Multi-user concurrency
+- Ã¢Å“â€¦ User registration
+- Ã¢Å“â€¦ MetaMask wallet connection
+- Ã¢Å“â€¦ Loan creation & management
+- Ã¢Å“â€¦ Smart contract interactions
+- Ã¢Å“â€¦ Real blockchain transactions
+- Ã¢Å“â€¦ Multi-user concurrency
 
 ---
 
-## ðŸ”’ Security Verified
+## Ã°Å¸â€â€™ Security Verified
 
-- âœ… No secrets in source code
-- âœ… Environment variables for all sensitive data
-- âœ… CORS configured to allow only your domain
-- âœ… HTTPS automatic on both Netlify & Render
-- âœ… MongoDB connection from cloud
-- âœ… Private key never exposed
+- Ã¢Å“â€¦ No secrets in source code
+- Ã¢Å“â€¦ Environment variables for all sensitive data
+- Ã¢Å“â€¦ CORS configured to allow only your domain
+- Ã¢Å“â€¦ HTTPS automatic on both Netlify & Render
+- Ã¢Å“â€¦ MongoDB connection from cloud
+- Ã¢Å“â€¦ Private key never exposed
 
 ---
 
-## ðŸ“ˆ Deployment Architecture
+## Ã°Å¸â€œË† Deployment Architecture
 
 ```
-â”Œâ”€ Your GitHub Repository â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚                                          â”‚
-â”‚  â†’ Push code                             â”‚
-â”‚  â†“                                        â”‚
-â”‚  â”œâ”€ trigger Render build (backend)       â”‚
-â”‚  â”‚  â””â”€ Deploy to https://BACKEND_URL    â”‚
-â”‚  â”‚                                       â”‚
-â”‚  â””â”€ trigger Netlify build (frontend)    â”‚
-â”‚     â””â”€ Deploy to https://FRONTEND_URL   â”‚
-â”‚                                          â”‚
-â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+Ã¢â€Å’Ã¢â€â‚¬ Your GitHub Repository Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Â
+Ã¢â€â€š                                          Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€ â€™ Push code                             Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€ â€œ                                        Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€Å“Ã¢â€â‚¬ trigger Render build (backend)       Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€â€š  Ã¢â€â€Ã¢â€â‚¬ Deploy to https://BACKEND_URL    Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€â€š                                       Ã¢â€â€š
+Ã¢â€â€š  Ã¢â€â€Ã¢â€â‚¬ trigger Netlify build (frontend)    Ã¢â€â€š
+Ã¢â€â€š     Ã¢â€â€Ã¢â€â‚¬ Deploy to https://FRONTEND_URL   Ã¢â€â€š
+Ã¢â€â€š                                          Ã¢â€â€š
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€Ëœ
 
 Both services read environment variables
-â†’ Connect automatically
-â†’ App works end-to-end
+Ã¢â€ â€™ Connect automatically
+Ã¢â€ â€™ App works end-to-end
 ```
 
 ---
 
-## ðŸŽ¯ Success Criteria
+## Ã°Å¸Å½Â¯ Success Criteria
 
 After deployment completes, verify:
 
@@ -181,25 +181,25 @@ After deployment completes, verify:
 
 ---
 
-## âš ï¸ Important Reminders
+## Ã¢Å¡Â Ã¯Â¸Â Important Reminders
 
 ### Do NOT
-- âŒ Commit `.env` files to Git
-- âŒ Share private keys in messages
-- âŒ Use same secret for multiple apps
-- âŒ Deploy without testing locally first
-- âŒ Use production secrets in development
+- Ã¢ÂÅ’ Commit `.env` files to Git
+- Ã¢ÂÅ’ Share private keys in messages
+- Ã¢ÂÅ’ Use same secret for multiple apps
+- Ã¢ÂÅ’ Deploy without testing locally first
+- Ã¢ÂÅ’ Use production secrets in development
 
 ### Do
-- âœ… Keep private keys secure
-- âœ… Use strong JWT secrets (32+ chars)
-- âœ… Monitor API logs regularly
-- âœ… Test thoroughly on Sepolia first
-- âœ… Document your deployment
+- Ã¢Å“â€¦ Keep private keys secure
+- Ã¢Å“â€¦ Use strong JWT secrets (32+ chars)
+- Ã¢Å“â€¦ Monitor API logs regularly
+- Ã¢Å“â€¦ Test thoroughly on Sepolia first
+- Ã¢Å“â€¦ Document your deployment
 
 ---
 
-## ðŸ“ž Support Resources
+## Ã°Å¸â€œÅ¾ Support Resources
 
 ### Deployment Issues
 - **Render Docs:** https://render.com/docs
@@ -215,33 +215,33 @@ After deployment completes, verify:
 
 ---
 
-## ðŸ—‚ï¸ File Organization Reference
+## Ã°Å¸â€”â€šÃ¯Â¸Â File Organization Reference
 
 ```
 project-root/
-â”œâ”€â”€ backend/                          (Node.js server)
-â”‚   â”œâ”€â”€ app.js                       â† CORS configured
-â”‚   â”œâ”€â”€ server.js                    â† Uses process.env.PORT
-â”‚   â”œâ”€â”€ package.json                 â† Start script ready
-â”‚   â”œâ”€â”€ .env.production.template     â† Environment guide
-â”‚   â””â”€â”€ utils/blockchain.js          â† ethers v6 ready
-â”‚
-â”œâ”€â”€ dhan-setu-frontend/              (React app)
-â”‚   â”œâ”€â”€ netlify.toml                 â† Netlify config âœ…
-â”‚   â”œâ”€â”€ .env.production.template     â† Environment guide
-â”‚   â”œâ”€â”€ package.json                 â† Build script ready
-â”‚   â””â”€â”€ build/                       â† Generated on deploy
-â”‚
-â”œâ”€â”€ QUICK_START_DEPLOYMENT.md        â† START HERE ðŸ‘ˆ
-â”œâ”€â”€ PRODUCTION_DEPLOYMENT_GUIDE.md   â† Detailed guide
-â”œâ”€â”€ PRODUCTION_DEPLOYMENT_CHECKLIST.md
-â”œâ”€â”€ ENV_VARIABLES_REFERENCE.md       â† Get values here
-â””â”€â”€ render.yaml                      â† Reference config
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ backend/                          (Node.js server)
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ app.js                       Ã¢â€ Â CORS configured
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ server.js                    Ã¢â€ Â Uses process.env.PORT
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ package.json                 Ã¢â€ Â Start script ready
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ .env.production.template     Ã¢â€ Â Environment guide
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ utils/blockchain.js          Ã¢â€ Â ethers v6 ready
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ dhan-setu-frontend/              (React app)
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ netlify.toml                 Ã¢â€ Â Netlify config Ã¢Å“â€¦
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ .env.production.template     Ã¢â€ Â Environment guide
+Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ package.json                 Ã¢â€ Â Build script ready
+Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ build/                       Ã¢â€ Â Generated on deploy
+Ã¢â€â€š
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ QUICK_START_DEPLOYMENT.md        Ã¢â€ Â START HERE Ã°Å¸â€˜Ë†
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ PRODUCTION_DEPLOYMENT_GUIDE.md   Ã¢â€ Â Detailed guide
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ PRODUCTION_DEPLOYMENT_CHECKLIST.md
+Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ ENV_VARIABLES_REFERENCE.md       Ã¢â€ Â Get values here
+Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ render.yaml                      Ã¢â€ Â Reference config
 ```
 
 ---
 
-## ðŸš€ Ready to Deploy?
+## Ã°Å¸Å¡â‚¬ Ready to Deploy?
 
 ### Next Steps:
 1. **Read:** `QUICK_START_DEPLOYMENT.md`
@@ -250,49 +250,49 @@ project-root/
 4. **Deploy Frontend:** Follow Netlify instructions (5 min)
 5. **Connect:** Update FRONTEND_URL in Render
 6. **Test:** Run through verification checklist
-7. **Done:** Your app is live! ðŸŽ‰
+7. **Done:** Your app is live! Ã°Å¸Å½â€°
 
 ---
 
-## ðŸ“Š Deployment Timeline
+## Ã°Å¸â€œÅ  Deployment Timeline
 
 ```
 Time        Action                                   Status
-â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-0 min       Start deployment                        â†“
-5 min       Backend deployed on Render             âœ… Live
-10 min      Frontend deployed on Netlify           âœ… Live
-11 min      Update FRONTEND_URL in Render          âœ… Done
-12 min      Backend redeploys with CORS fix        âœ… Live
-15 min      Run verification tests                 âœ… Passed
-15+ min     Application is PUBLIC and LIVE! ðŸŽ‰
+Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+0 min       Start deployment                        Ã¢â€ â€œ
+5 min       Backend deployed on Render             Ã¢Å“â€¦ Live
+10 min      Frontend deployed on Netlify           Ã¢Å“â€¦ Live
+11 min      Update FRONTEND_URL in Render          Ã¢Å“â€¦ Done
+12 min      Backend redeploys with CORS fix        Ã¢Å“â€¦ Live
+15 min      Run verification tests                 Ã¢Å“â€¦ Passed
+15+ min     Application is PUBLIC and LIVE! Ã°Å¸Å½â€°
 ```
 
 ---
 
-## âœ… Deployment Complete Notification
+## Ã¢Å“â€¦ Deployment Complete Notification
 
 When you see this in Render & Netlify dashboards:
-- Render: "Live" (green checkmark) âœ…
-- Netlify: "Published" (green) âœ…
+- Render: "Live" (green checkmark) Ã¢Å“â€¦
+- Netlify: "Published" (green) Ã¢Å“â€¦
 
 **Your application is now accessible to anyone on the internet!**
 
 ---
 
-## ðŸŽ“ What You Learned
+## Ã°Å¸Å½â€œ What You Learned
 
 By completing this deployment, you've:
-- âœ… Set up CI/CD (continuous integration/deployment)
-- âœ… Configured cloud infrastructure
-- âœ… Managed environment variables
-- âœ… Integrated frontend + backend
-- âœ… Connected smart contracts to web app
-- âœ… Achieved production-ready architecture
+- Ã¢Å“â€¦ Set up CI/CD (continuous integration/deployment)
+- Ã¢Å“â€¦ Configured cloud infrastructure
+- Ã¢Å“â€¦ Managed environment variables
+- Ã¢Å“â€¦ Integrated frontend + backend
+- Ã¢Å“â€¦ Connected smart contracts to web app
+- Ã¢Å“â€¦ Achieved production-ready architecture
 
 ---
 
-## ðŸ“ˆ Future Enhancements
+## Ã°Å¸â€œË† Future Enhancements
 
 After deployment, consider:
 1. **Monitoring:** Set up error tracking (Sentry)
@@ -304,10 +304,19 @@ After deployment, consider:
 
 ---
 
-**ðŸŽ‰ Congratulations! You're ready to go PUBLIC!**
+**Ã°Å¸Å½â€° Congratulations! You're ready to go PUBLIC!**
 
 **Questions?** See the detailed guides above or check the troubleshooting section in each document.
 
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.

@@ -1,4 +1,4 @@
-# ðŸ”‘ Production Environment Variables - Where to Get Each Value
+# Ã°Å¸â€â€˜ Production Environment Variables - Where to Get Each Value
 
 **Use this guide to fill in Render & Netlify environment variables**
 
@@ -11,7 +11,7 @@
 ```bash
 # From MongoDB Atlas dashboard
 1. Go to: https://cloud.mongodb.com
-2. Project â†’ Connect â†’ Drivers
+2. Project Ã¢â€ â€™ Connect Ã¢â€ â€™ Drivers
 3. Copy connection string
 4. Replace <password> with your database password
 ```
@@ -61,7 +61,7 @@ PRIVATE_KEY=41c1a3c06b63e510702093436905fe1bb93c4e9ba9749c9ace2bdf790509f9fe
 PRIVATE_KEY=41c1a3c06b63e510702093436905fe1bb93c4e9ba9749c9ace2bdf790509f9fe
 ```
 
-âš ï¸ **NEVER share this publicly** âš ï¸
+Ã¢Å¡Â Ã¯Â¸Â **NEVER share this publicly** Ã¢Å¡Â Ã¯Â¸Â
 
 ---
 
@@ -117,7 +117,7 @@ OTP_EMAIL=sivamaniganjerupalli@gmail.com
 OTP_PASS=ntfd pnkw ngkc fkuu
 ```
 
-âš ï¸ This is Gmail App Password, NOT your actual password
+Ã¢Å¡Â Ã¯Â¸Â This is Gmail App Password, NOT your actual password
 
 ---
 
@@ -228,7 +228,7 @@ REACT_APP_ENV=production
 
 ---
 
-## ðŸ“‹ Copy-Paste Ready Values
+## Ã°Å¸â€œâ€¹ Copy-Paste Ready Values
 
 ### Backend (Save these for Render)
 
@@ -260,7 +260,7 @@ REACT_APP_ENV=production
 
 ---
 
-## âœ… Verification
+## Ã¢Å“â€¦ Verification
 
 ### Before Submitting to Render
 
@@ -279,3 +279,12 @@ REACT_APP_ENV=production
 
 ---
 Last reviewed: 2026-03-14
+
+## Recent Updates (Mar 2026)
+
+- Vendor pages now use live API-driven data for dashboard, loans, settings, transactions, and reminders.
+- Reminder Center is persisted through backend CRUD APIs at /api/reminders (vendor-scoped).
+- TOTP verification reliability was improved by persisting 2FA secrets in MongoDB instead of in-memory storage.
+- Loan apply upload handling now returns JSON-safe errors and uses a hardened absolute uploads path.
+- Lender approval flow now blocks self-wallet approvals when lender and vendor wallet addresses match.
+- Auth flow was hardened with better expired-token handling across protected routes.
