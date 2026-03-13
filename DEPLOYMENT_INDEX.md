@@ -1,15 +1,15 @@
-# Ã°Å¸â€œÅ¡ PRODUCTION DEPLOYMENT - COMPLETE DOCUMENTATION INDEX
+#  PRODUCTION DEPLOYMENT - COMPLETE DOCUMENTATION INDEX
 
 **Last Updated:** March 12, 2026  
-**Status:** Ã¢Å“â€¦ All Files Prepared - Ready to Deploy  
+**Status:**  All Files Prepared - Ready to Deploy  
 **Target:** Public deployment on Netlify (Frontend) + Render (Backend)
 
 ---
 
-## Ã°Å¸Å¡â‚¬ START HERE - Choose Your Path
+##  START HERE - Choose Your Path
 
-### Ã¢Å¡Â¡ I Just Want to Deploy (15 minutes)
-**Ã¢â€ â€™ Read:** [`QUICK_START_DEPLOYMENT.md`](./QUICK_START_DEPLOYMENT.md)
+###  I Just Want to Deploy (15 minutes)
+** Read:** [`QUICK_START_DEPLOYMENT.md`](./QUICK_START_DEPLOYMENT.md)
 
 **What you'll get:**
 - 5 simple deployment steps
@@ -19,8 +19,8 @@
 
 ---
 
-### Ã°Å¸â€œâ€“ I Want to Understand Everything (30 minutes)
-**Ã¢â€ â€™ Read:** [`PRODUCTION_DEPLOYMENT_GUIDE.md`](./PRODUCTION_DEPLOYMENT_GUIDE.md)
+###  I Want to Understand Everything (30 minutes)
+** Read:** [`PRODUCTION_DEPLOYMENT_GUIDE.md`](./PRODUCTION_DEPLOYMENT_GUIDE.md)
 
 **What you'll get:**
 - Complete walkthrough with explanations
@@ -30,8 +30,8 @@
 
 ---
 
-### Ã¢Å“â€¦ I Want a Detailed Checklist
-**Ã¢â€ â€™ Read:** [`PRODUCTION_DEPLOYMENT_CHECKLIST.md`](./PRODUCTION_DEPLOYMENT_CHECKLIST.md)
+###  I Want a Detailed Checklist
+** Read:** [`PRODUCTION_DEPLOYMENT_CHECKLIST.md`](./PRODUCTION_DEPLOYMENT_CHECKLIST.md)
 
 **What you'll get:**
 - Step-by-step checklist format
@@ -41,8 +41,8 @@
 
 ---
 
-### Ã°Å¸Å½Â¯ I Need Environment Variable Values
-**Ã¢â€ â€™ Read:** [`ENV_VARIABLES_REFERENCE.md`](./ENV_VARIABLES_REFERENCE.md)
+###  I Need Environment Variable Values
+** Read:** [`ENV_VARIABLES_REFERENCE.md`](./ENV_VARIABLES_REFERENCE.md)
 
 **What you'll get:**
 - Where to get each value
@@ -52,8 +52,8 @@
 
 ---
 
-### Ã°Å¸Å½Â¨ I'm a Visual Learner
-**Ã¢â€ â€™ Read:** [`DEPLOYMENT_VISUAL_GUIDE.md`](./DEPLOYMENT_VISUAL_GUIDE.md)
+###  I'm a Visual Learner
+** Read:** [`DEPLOYMENT_VISUAL_GUIDE.md`](./DEPLOYMENT_VISUAL_GUIDE.md)
 
 **What you'll get:**
 - Architecture diagrams
@@ -63,67 +63,67 @@
 
 ---
 
-## Ã°Å¸â€œâ€¹ Documentation Overview
+##  Documentation Overview
 
 | Document | Purpose | Time | Best For |
 |----------|---------|------|----------|
-| **QUICK_START_DEPLOYMENT.md** Ã¢Å¡Â¡ | Fast deployment | 5 min | First-time deployers |
-| **PRODUCTION_DEPLOYMENT_GUIDE.md** Ã°Å¸â€œâ€“ | Deep dive guide | 15 min | Understanding the process |
-| **PRODUCTION_DEPLOYMENT_CHECKLIST.md** Ã¢Å“â€¦ | Step-by-step checklist | 10 min | Following along |
-| **ENV_VARIABLES_REFERENCE.md** Ã°Å¸â€â€˜ | Getting variable values | 5 min | During deployment |
-| **DEPLOYMENT_VISUAL_GUIDE.md** Ã°Å¸Å½Â¨ | Visual explanations | 5 min | Visual learners |
-| **DEPLOYMENT_COMPLETE.md** Ã°Å¸Å½â€° | Post-deploy summary | 5 min | After deployment |
+| **QUICK_START_DEPLOYMENT.md**  | Fast deployment | 5 min | First-time deployers |
+| **PRODUCTION_DEPLOYMENT_GUIDE.md**  | Deep dive guide | 15 min | Understanding the process |
+| **PRODUCTION_DEPLOYMENT_CHECKLIST.md**  | Step-by-step checklist | 10 min | Following along |
+| **ENV_VARIABLES_REFERENCE.md**  | Getting variable values | 5 min | During deployment |
+| **DEPLOYMENT_VISUAL_GUIDE.md**  | Visual explanations | 5 min | Visual learners |
+| **DEPLOYMENT_COMPLETE.md**  | Post-deploy summary | 5 min | After deployment |
 
 ---
 
-## Ã°Å¸Å½Â¯ Deployment Overview
+##  Deployment Overview
 
 ### What Gets Deployed
 
 ```
 FRONTEND (React App)
-Ã¢â€Å“Ã¢â€â‚¬ Deploys to: Netlify
-Ã¢â€Å“Ã¢â€â‚¬ URL: https://your-site-name.netlify.app
-Ã¢â€Å“Ã¢â€â‚¬ Port: Auto (HTTPS only)
-Ã¢â€â€Ã¢â€â‚¬ Auto-deploy: On every git push
+ Deploys to: Netlify
+ URL: https://your-site-name.netlify.app
+ Port: Auto (HTTPS only)
+ Auto-deploy: On every git push
 
 BACKEND (Node.js API)
-Ã¢â€Å“Ã¢â€â‚¬ Deploys to: Render
-Ã¢â€Å“Ã¢â€â‚¬ URL: https://your-backend-name.onrender.com
-Ã¢â€Å“Ã¢â€â‚¬ Port: Dynamic (from environment)
-Ã¢â€â€Ã¢â€â‚¬ Auto-deploy: On every git push
+ Deploys to: Render
+ URL: https://your-backend-name.onrender.com
+ Port: Dynamic (from environment)
+ Auto-deploy: On every git push
 
 DATABASE (MongoDB)
-Ã¢â€Å“Ã¢â€â‚¬ Already: MongoDB Atlas (cloud)
-Ã¢â€Å“Ã¢â€â‚¬ Connection: Via MONGO_URI environment variable
-Ã¢â€â€Ã¢â€â‚¬ Auto-sync: Triggered by backend API
+ Already: MongoDB Atlas (cloud)
+ Connection: Via MONGO_URI environment variable
+ Auto-sync: Triggered by backend API
 
 BLOCKCHAIN (Smart Contract)
-Ã¢â€Å“Ã¢â€â‚¬ Already: Deployed on Sepolia testnet
-Ã¢â€Å“Ã¢â€â‚¬ Address: 0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
-Ã¢â€â€Ã¢â€â‚¬ Access: Via web3.js calls from frontend
+ Already: Deployed on Sepolia testnet
+ Address: 0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
+ Access: Via web3.js calls from frontend
 ```
 
 ---
 
-## Ã¢ÂÂ±Ã¯Â¸Â Deployment Timeline
+##  Deployment Timeline
 
 ```
 Task                        Time    Who Checks
-Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+
 Prepare Render account      2 min   You
 Prepare Netlify account     2 min   You
 Deploy backend to Render    5 min   Render
 Deploy frontend to Netlify  5 min   Netlify
 Connect CORS                1 min   You
 Verify everything works     2 min   You
-Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
-TOTAL                      ~15 min  Ã¢Å“â€¦ DONE!
+
+TOTAL                      ~15 min   DONE!
 ```
 
 ---
 
-## Ã°Å¸â€â€˜ What You Need Before Starting
+##  What You Need Before Starting
 
 ### Accounts
 - [ ] GitHub account with your code
@@ -143,17 +143,17 @@ TOTAL                      ~15 min  Ã¢Å“â€¦ DONE!
 
 ---
 
-## Ã°Å¸â€œÅ  Services Overview
+##  Services Overview
 
 ### Netlify (Frontend)
 ```
 Free Tier Includes:
-Ã¢Å“â€¦ Unlimited sites
-Ã¢Å“â€¦ Unlimited bandwidth
-Ã¢Å“â€¦ HTTPS everywhere
-Ã¢Å“â€¦ Git auto-deploy
-Ã¢Å“â€¦ 100GB/month storage
-Ã¢Å“â€¦ Basic CI/CD
+ Unlimited sites
+ Unlimited bandwidth
+ HTTPS everywhere
+ Git auto-deploy
+ 100GB/month storage
+ Basic CI/CD
 
 Cost: Free (forever)
 ```
@@ -161,24 +161,24 @@ Cost: Free (forever)
 ### Render (Backend)
 ```
 Free Tier Includes:
-Ã¢Å“â€¦ 100GB data transfer
-Ã¢Å“â€¦ First 750 compute hours/month
-Ã¢Å“â€¦ 100MB storage
-Ã¢Å“â€¦ Git auto-deploy
-Ã¢Å“â€¦ Auto SSL/TLS
-Ã¢Å¡Â Ã¯Â¸Â Sleeps after 15 min inactivity
+ 100GB data transfer
+ First 750 compute hours/month
+ 100MB storage
+ Git auto-deploy
+ Auto SSL/TLS
+ Sleeps after 15 min inactivity
 
-Cost: Free Ã¢â€ â€™ Best at ~$7/month (no sleeping)
+Cost: Free  Best at ~$7/month (no sleeping)
 ```
 
 ### MongoDB Atlas (Database)
 ```
 Free Tier Includes:
-Ã¢Å“â€¦ 512MB storage
-Ã¢Å“â€¦ Unlimited connections
-Ã¢Å“â€¦ Shared cluster
-Ã¢Å“â€¦ HTTPS connections
-Ã¢Å“â€¦ Automatic backups
+ 512MB storage
+ Unlimited connections
+ Shared cluster
+ HTTPS connections
+ Automatic backups
 
 Cost: Already set up (free tier)
 Upgrade: $57/month for dedicated hardware
@@ -186,45 +186,45 @@ Upgrade: $57/month for dedicated hardware
 
 ---
 
-## Ã°Å¸Å’Â Final URLs You'll Have
+##  Final URLs You'll Have
 
 After successful deployment:
 
 ```
-Ã°Å¸Å’Â Frontend      https://your-site-name.netlify.app
-Ã°Å¸â€â€” Backend API   https://your-api-name.onrender.com/api
-Ã°Å¸â€™Â¾ Contract      https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
-Ã°Å¸â€œÅ  Dashboard     https://mongodb.com/v2/cloud
+ Frontend      https://your-site-name.netlify.app
+ Backend API   https://your-api-name.onrender.com/api
+ Contract      https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
+ Dashboard     https://mongodb.com/v2/cloud
 ```
 
 ---
 
-## Ã¢Å¡â„¢Ã¯Â¸Â Files Prepared for You
+##  Files Prepared for You
 
 ### Configuration Files
-- Ã¢Å“â€¦ `dhan-setu-frontend/netlify.toml` - Netlify can find this
-- Ã¢Å“â€¦ `render.yaml` - Reference configuration
-- Ã¢Å“â€¦ `backend/.env.production.template` - Environment guide
-- Ã¢Å“â€¦ `dhan-setu-frontend/.env.production.template` - Environment guide
+-  `dhan-setu-frontend/netlify.toml` - Netlify can find this
+-  `render.yaml` - Reference configuration
+-  `backend/.env.production.template` - Environment guide
+-  `dhan-setu-frontend/.env.production.template` - Environment guide
 
 ### Documentation Files (YOU ARE HERE)
-- Ã¢Å“â€¦ `QUICK_START_DEPLOYMENT.md` - 15-min guide
-- Ã¢Å“â€¦ `PRODUCTION_DEPLOYMENT_GUIDE.md` - Full guide
-- Ã¢Å“â€¦ `PRODUCTION_DEPLOYMENT_CHECKLIST.md` - Checklist
-- Ã¢Å“â€¦ `ENV_VARIABLES_REFERENCE.md` - Variable guide
-- Ã¢Å“â€¦ `DEPLOYMENT_VISUAL_GUIDE.md` - Visual guide
-- Ã¢Å“â€¦ `DEPLOYMENT_COMPLETE.md` - Post-deploy info
-- Ã¢Å“â€¦ `DEPLOYMENT_INDEX.md` - This file!
+-  `QUICK_START_DEPLOYMENT.md` - 15-min guide
+-  `PRODUCTION_DEPLOYMENT_GUIDE.md` - Full guide
+-  `PRODUCTION_DEPLOYMENT_CHECKLIST.md` - Checklist
+-  `ENV_VARIABLES_REFERENCE.md` - Variable guide
+-  `DEPLOYMENT_VISUAL_GUIDE.md` - Visual guide
+-  `DEPLOYMENT_COMPLETE.md` - Post-deploy info
+-  `DEPLOYMENT_INDEX.md` - This file!
 
 ### Code Updates
-- Ã¢Å“â€¦ `backend/app.js` - CORS configured
-- Ã¢Å“â€¦ `backend/server.js` - Uses PORT env var
-- Ã¢Å“â€¦ `backend/utils/blockchain.js` - ethers v6
-- Ã¢Å“â€¦ `dhan-setu-frontend/` - Build ready
+-  `backend/app.js` - CORS configured
+-  `backend/server.js` - Uses PORT env var
+-  `backend/utils/blockchain.js` - ethers v6
+-  `dhan-setu-frontend/` - Build ready
 
 ---
 
-## Ã°Å¸Å½Â¯ By the Numbers
+##  By the Numbers
 
 | Metric | Value |
 |--------|-------|
@@ -239,7 +239,7 @@ After successful deployment:
 
 ---
 
-## Ã°Å¸Å¡Â¨ Before Deployment - Checklist
+##  Before Deployment - Checklist
 
 **Local Development**
 - [ ] Backend runs locally: `npm start` (from backend/)
@@ -262,35 +262,35 @@ After successful deployment:
 
 ---
 
-## Ã°Å¸â€œÅ  Deployment Decision Tree
+##  Deployment Decision Tree
 
 ```
 Do you want to deploy?
-Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬ YES, I'm ready now!
-Ã¢â€â€š  Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Open: QUICK_START_DEPLOYMENT.md
-Ã¢â€â€š      Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Follow 5 steps
-Ã¢â€â€š          Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Done in 15 min
-Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬ I'll do it, but I want to understand first
-Ã¢â€â€š  Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Open: PRODUCTION_DEPLOYMENT_GUIDE.md
-Ã¢â€â€š      Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Read full explanation
-Ã¢â€â€š          Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Then follow QUICK_START_DEPLOYMENT.md
-Ã¢â€â€š
-Ã¢â€Å“Ã¢â€â‚¬ I'm visual, show me diagrams
-Ã¢â€â€š  Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Open: DEPLOYMENT_VISUAL_GUIDE.md
-Ã¢â€â€š      Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ See flowcharts and architecture
-Ã¢â€â€š          Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Then follow QUICK_START_DEPLOYMENT.md
-Ã¢â€â€š
-Ã¢â€â€Ã¢â€â‚¬ I need to know what values to use
-   Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Open: ENV_VARIABLES_REFERENCE.md
-       Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Find where to get each value
-           Ã¢â€â€Ã¢â€â‚¬Ã¢â€ â€™ Then follow QUICK_START_DEPLOYMENT.md
+
+ YES, I'm ready now!
+   Open: QUICK_START_DEPLOYMENT.md
+       Follow 5 steps
+           Done in 15 min
+
+ I'll do it, but I want to understand first
+   Open: PRODUCTION_DEPLOYMENT_GUIDE.md
+       Read full explanation
+           Then follow QUICK_START_DEPLOYMENT.md
+
+ I'm visual, show me diagrams
+   Open: DEPLOYMENT_VISUAL_GUIDE.md
+       See flowcharts and architecture
+           Then follow QUICK_START_DEPLOYMENT.md
+
+ I need to know what values to use
+    Open: ENV_VARIABLES_REFERENCE.md
+        Find where to get each value
+            Then follow QUICK_START_DEPLOYMENT.md
 ```
 
 ---
 
-## Ã°Å¸Å½â€œ What You'll Learn
+##  What You'll Learn
 
 By completing this deployment, you'll understand:
 
@@ -303,13 +303,13 @@ By completing this deployment, you'll understand:
 
 ---
 
-## Ã°Å¸â€œÅ¾ Getting Help
+##  Getting Help
 
 ### Common Issues
-- **"CORS error"** Ã¢â€ â€™ Check `FRONTEND_URL` in Render environment
-- **"Cannot reach API"** Ã¢â€ â€™ Verify Render status is "Live"
-- **"Build failed"** Ã¢â€ â€™ Check Netlify build logs
-- **"MetaMask won't connect"** Ã¢â€ â€™ Ensure Sepolia is selected
+- **"CORS error"**  Check `FRONTEND_URL` in Render environment
+- **"Cannot reach API"**  Verify Render status is "Live"
+- **"Build failed"**  Check Netlify build logs
+- **"MetaMask won't connect"**  Ensure Sepolia is selected
 
 **Solution:** Check the specific document's troubleshooting section
 
@@ -321,7 +321,7 @@ By completing this deployment, you'll understand:
 
 ---
 
-## Ã°Å¸Å½â€° Next Steps
+##  Next Steps
 
 ### Immediate (Today)
 1. [ ] Choose your starting document from the list above
@@ -344,42 +344,42 @@ By completing this deployment, you'll understand:
 
 ---
 
-## Ã¢Å“Â¨ Success Criteria
+##  Success Criteria
 
 Your deployment is successful when:
 
-- Ã¢Å“â€¦ Frontend loads at `https://your-site.netlify.app`
-- Ã¢Å“â€¦ API responds from backend
-- Ã¢Å“â€¦ No CORS errors in browser console
-- Ã¢Å“â€¦ Can register new account
-- Ã¢Å“â€¦ MetaMask connects to Sepolia
-- Ã¢Å“â€¦ Database records create
-- Ã¢Å“â€¦ Blockchain transactions show on Etherscan
+-  Frontend loads at `https://your-site.netlify.app`
+-  API responds from backend
+-  No CORS errors in browser console
+-  Can register new account
+-  MetaMask connects to Sepolia
+-  Database records create
+-  Blockchain transactions show on Etherscan
 
 ---
 
-## Ã°Å¸Å¡â‚¬ Ready? Start Here!
+##  Ready? Start Here!
 
 Pick your path and begin:
 
-### Ã¢Å¡Â¡ **I'm Ready Now**
-Ã¢â€ â€™ [`QUICK_START_DEPLOYMENT.md`](./QUICK_START_DEPLOYMENT.md)
+###  **I'm Ready Now**
+ [`QUICK_START_DEPLOYMENT.md`](./QUICK_START_DEPLOYMENT.md)
 
-### Ã°Å¸â€œâ€“ **I Want to Learn**
-Ã¢â€ â€™ [`PRODUCTION_DEPLOYMENT_GUIDE.md`](./PRODUCTION_DEPLOYMENT_GUIDE.md)
+###  **I Want to Learn**
+ [`PRODUCTION_DEPLOYMENT_GUIDE.md`](./PRODUCTION_DEPLOYMENT_GUIDE.md)
 
-### Ã¢Å“â€¦ **Give Me a Checklist**
-Ã¢â€ â€™ [`PRODUCTION_DEPLOYMENT_CHECKLIST.md`](./PRODUCTION_DEPLOYMENT_CHECKLIST.md)
+###  **Give Me a Checklist**
+ [`PRODUCTION_DEPLOYMENT_CHECKLIST.md`](./PRODUCTION_DEPLOYMENT_CHECKLIST.md)
 
-### Ã°Å¸â€â€˜ **What Values Do I Use?**
-Ã¢â€ â€™ [`ENV_VARIABLES_REFERENCE.md`](./ENV_VARIABLES_REFERENCE.md)
+###  **What Values Do I Use?**
+ [`ENV_VARIABLES_REFERENCE.md`](./ENV_VARIABLES_REFERENCE.md)
 
-### Ã°Å¸Å½Â¨ **Show Me Visuals**
-Ã¢â€ â€™ [`DEPLOYMENT_VISUAL_GUIDE.md`](./DEPLOYMENT_VISUAL_GUIDE.md)
+###  **Show Me Visuals**
+ [`DEPLOYMENT_VISUAL_GUIDE.md`](./DEPLOYMENT_VISUAL_GUIDE.md)
 
 ---
 
-**Ã°Å¸Å½â€° Your production deployment is fully documented and ready to go! Choose your starting point above and begin! Ã°Å¸Å¡â‚¬**
+** Your production deployment is fully documented and ready to go! Choose your starting point above and begin! **
 
 ---
 

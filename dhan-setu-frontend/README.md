@@ -1,6 +1,6 @@
-# DhanSetu Ã¢â‚¬â€ Frontend
+# DhanSetu  Frontend
 
-> React 19 Ã‚Â· Tailwind CSS Ã‚Â· React Router v7 Ã‚Â· Ethers.js Ã‚Â· Dark Theme
+> React 19  Tailwind CSS  React Router v7  Ethers.js  Dark Theme
 
 This is the frontend application for **DhanSetu**, a blockchain-powered microloan platform for India's street vendors.
 
@@ -54,19 +54,19 @@ REACT_APP_API_URL=http://localhost:5000
 
 ```
 src/
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ App.js                 # Root router
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ index.css              # Global dark theme CSS
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ layouts/
-Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ DashboardLayout.jsx  # Sidebar + hamburger nav
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ pages/
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Home.jsx           # Public landing page
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Auth/              # Login, Register, OTP, ForgotPwd, Reset, 2FA
-Ã¢â€â€š   Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ Vendor/            # All vendor dashboard pages (15 pages)
-Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ Lender/            # All lender dashboard pages (12 pages)
-Ã¢â€Å“Ã¢â€â‚¬Ã¢â€â‚¬ components/
-Ã¢â€â€š   Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ common/            # Button, Input, Select, Alert, Badge, Table, StatCard,
-Ã¢â€â€š                          # Header, Footer, QuickAccessDock, ProtectedRoute, ErrorBoundary
-Ã¢â€â€Ã¢â€â‚¬Ã¢â€â‚¬ utils/                 # constants, formatters, validators
+ App.js                 # Root router
+ index.css              # Global dark theme CSS
+ layouts/
+    DashboardLayout.jsx  # Sidebar + hamburger nav
+ pages/
+    Home.jsx           # Public landing page
+    Auth/              # Login, Register, OTP, ForgotPwd, Reset, 2FA
+    Vendor/            # All vendor dashboard pages (15 pages)
+    Lender/            # All lender dashboard pages (12 pages)
+ components/
+    common/            # Button, Input, Select, Alert, Badge, Table, StatCard,
+                          # Header, Footer, QuickAccessDock, ProtectedRoute, ErrorBoundary
+ utils/                 # constants, formatters, validators
 ```
 
 ---
@@ -119,7 +119,7 @@ src/
 - **Dashboard bg:** `#0A0F1E`
 - **Card bg:** `bg-slate-900/55` with `backdrop-blur`
 - **Borders:** `border-slate-600/30`
-- **Primary accent:** cyan Ã¢â€ â€™ blue gradient (`from-cyan-500 to-blue-600`)
+- **Primary accent:** cyan  blue gradient (`from-cyan-500 to-blue-600`)
 - **Text:** slate-100 / slate-300 / slate-400
 - **CSS scope classes:** `vendor-modern-scope`, `lender-modern-scope` (applied in DashboardLayout)
 

@@ -1,8 +1,8 @@
-# Ã¢Å“â€¦ Deployment Verification Checklist
+#  Deployment Verification Checklist
 
 Last Updated: March 12, 2026
 
-## Backend Configuration Ã¢Å“â€¦
+## Backend Configuration 
 
 - [x] `.env` file has `CONTRACT_ADDRESS=0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f`
 - [x] `.env` file has `BLOCKCHAIN_NETWORK=sepolia`
@@ -12,28 +12,28 @@ Last Updated: March 12, 2026
 - [x] `backend/tests/testSepoliaContract.js` created and passing
 - [x] Hardhat config uses etherscan v2 API (simple string key)
 
-## Frontend Configuration Ã¢Å“â€¦
+## Frontend Configuration 
 
 - [x] `dhan-setu-frontend/src/config/blockchain.config.js` created
 - [x] `dhan-setu-frontend/.env.example` created
 - [ ] `dhan-setu-frontend/.env` copied from .env.example (USER ACTION)
 - [ ] Frontend can import `BLOCKCHAIN_CONFIG` (verify in components)
 
-## Smart Contract Verification Ã¢Å“â€¦
+## Smart Contract Verification 
 
 - [x] Contract deployed to Sepolia: `0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f`
-- [x] Contract verified on Etherscan Ã¢Å“â€œ
+- [x] Contract verified on Etherscan 
 - [x] Etherscan explorer shows source code
 - [x] Contract code matches local `/contracts/LoanContract.sol`
 
-## Documentation Ã¢Å“â€¦
+## Documentation 
 
 - [x] `DEPLOYMENT_STRATEGY.md` created (phases, checklist, mainnet plan)
 - [x] `SEPOLIA_TESTING_GUIDE.md` created (quick start, troubleshooting)
 - [x] `DEPLOYMENT_SUMMARY.md` created (status, changes, timeline)
 - [x] This checklist created (`DEPLOYMENT_CHECKLIST.md`)
 
-## Testing & Validation Ã¢Å“â€¦
+## Testing & Validation 
 
 - [x] `testSepoliaContract.js` runs without errors
 - [x] RPC connection to Sepolia working
@@ -41,7 +41,7 @@ Last Updated: March 12, 2026
 - [x] Account has test ETH: 0.1198 ETH
 - [x] Latest block number fetched: 10429063+
 
-## Ready for User Testing Ã°Å¸Å¡â‚¬
+## Ready for User Testing 
 
 ### Before Starting Backend
 
@@ -56,7 +56,7 @@ Last Updated: March 12, 2026
 cd backend
 npm install  # if not done
 node server.js
-# Ã¢Å“â€¦ Should see: Server running on port 5000
+#  Should see: Server running on port 5000
 ```
 
 ### Starting Frontend
@@ -65,7 +65,7 @@ node server.js
 cd dhan-setu-frontend
 npm install  # if not done
 npm start
-# Ã¢Å“â€¦ Should open http://localhost:3000
+#  Should open http://localhost:3000
 ```
 
 ### First Test Flow
@@ -82,12 +82,12 @@ npm start
 
 | Setting | Value | Status |
 |---------|-------|--------|
-| Network | Sepolia | Ã¢Å“â€¦ |
-| Chain ID | 11155111 | Ã¢Å“â€¦ |
-| RPC URL | Infura Sepolia | Ã¢Å“â€¦ |
-| Contract Address | 0x43eb6... | Ã¢Å“â€¦ |
-| Signer Wallet | 0x1593... | Ã¢Å“â€¦ |
-| Test ETH Balance | 0.1198 | Ã¢Å“â€¦ |
+| Network | Sepolia |  |
+| Chain ID | 11155111 |  |
+| RPC URL | Infura Sepolia |  |
+| Contract Address | 0x43eb6... |  |
+| Signer Wallet | 0x1593... |  |
+| Test ETH Balance | 0.1198 |  |
 
 ## Files Modified
 
@@ -149,7 +149,7 @@ cd dhan-setu-frontend && npm start
 
 ---
 
-**Status**: Ã¢Å“â€¦ All systems ready for Sepolia testnet testing!
+**Status**:  All systems ready for Sepolia testnet testing!
 
 Last verified: March 12, 2026
 

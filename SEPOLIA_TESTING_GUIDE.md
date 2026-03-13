@@ -1,6 +1,6 @@
 # Sepolia Testnet Quick Start Guide
 
-## Ã°Å¸Å¡â‚¬ Getting Started with DhanSetu on Sepolia
+##  Getting Started with DhanSetu on Sepolia
 
 ### Prerequisites
 - MetaMask wallet extension installed
@@ -12,8 +12,8 @@
 
 1. **Install MetaMask**: https://metamask.io
 2. **Add Sepolia Network**:
-   - Open MetaMask Ã¢â€ â€™ Settings Ã¢â€ â€™ Networks
-   - Click "Add Network" Ã¢â€ â€™ "Add a popular network"
+   - Open MetaMask  Settings  Networks
+   - Click "Add Network"  "Add a popular network"
    - Select "Sepolia"
 3. **Get Test ETH**: Free from faucets:
    - https://sepoliafaucet.com
@@ -94,15 +94,15 @@ You should see:
 ### Step 6: Verify Data Consistency
 
 Check that:
-- Ã¢Å“â€¦ Loan appears in MongoDB
-- Ã¢Å“â€¦ Status matches blockchain
-- Ã¢Å“â€¦ Amount and dates are correct
-- Ã¢Å“â€¦ User wallets match MetaMask
-- Ã¢Å“â€¦ Transaction hashes visible on Etherscan
+-  Loan appears in MongoDB
+-  Status matches blockchain
+-  Amount and dates are correct
+-  User wallets match MetaMask
+-  Transaction hashes visible on Etherscan
 
 ---
 
-## Ã°Å¸Ââ€º Troubleshooting
+##  Troubleshooting
 
 ### "Network sepolia doesn't exist"
 - Update hardhat.config.js network name to match
@@ -129,7 +129,7 @@ Check that:
 
 ---
 
-## Ã°Å¸â€œÅ  Common Actions & Gas Costs
+##  Common Actions & Gas Costs
 
 | Action | Gas Used | Cost (in ETH) | Est. Cost (USD) |
 |--------|----------|---------------|-----------------|
@@ -142,17 +142,17 @@ Check that:
 
 ---
 
-## Ã°Å¸â€â€” Useful Links
+##  Useful Links
 
 - **Smart Context**: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f#code
 - **Your Contract Events**: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f#events
 - **Network Status**: https://sepolia.etherscan.io
 - **Gas Tracker**: https://sepolia.etherscan.io/gastracker
-- **Test Accounts**: MetaMask Ã¢â€ â€™ Create multiple accounts to test different roles
+- **Test Accounts**: MetaMask  Create multiple accounts to test different roles
 
 ---
 
-## Ã¢Å“â€¦ Testing Checklist
+##  Testing Checklist
 
 Before moving to production, test:
 
@@ -171,7 +171,7 @@ Before moving to production, test:
 
 ---
 
-## Ã°Å¸Å¡Â¨ Production Migration Checklist
+##  Production Migration Checklist
 
 When ready for mainnet, ensure:
 - [ ] All Sepolia tests passed

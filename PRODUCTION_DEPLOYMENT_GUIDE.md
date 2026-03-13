@@ -8,7 +8,7 @@
 
 ---
 
-## Prerequisites Ã¢Å“â€¦
+## Prerequisites 
 
 - [ ] Netlify account (free at https://netlify.com)
 - [ ] Render account (free at https://render.com)
@@ -91,8 +91,8 @@ Render assigns a dynamic PORT. Ensure backend uses it:
 
 ```javascript
 // backend/server.js
-const PORT = process.env.PORT || 5000;  // Ã¢Å“â€¦ Correct
-// NOT: const PORT = 5000;              // Ã¢ÂÅ’ Wrong for Render
+const PORT = process.env.PORT || 5000;  //  Correct
+// NOT: const PORT = 5000;              //  Wrong for Render
 ```
 
 ---
@@ -103,7 +103,7 @@ const PORT = process.env.PORT || 5000;  // Ã¢Å“â€¦ Correct
 
 1. Go to https://render.com
 2. Sign up (GitHub recommended for easy deploy)
-3. Dashboard Ã¢â€ â€™ New+ Ã¢â€ â€™ Web Service
+3. Dashboard  New+  Web Service
 
 ### 2.2 Connect Repository
 
@@ -128,7 +128,7 @@ Fill in the form:
 
 ### 2.4 Set Environment Variables
 
-In Render dashboard Ã¢â€ â€™ Environment:
+In Render dashboard  Environment:
 
 ```
 MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/dhansetu
@@ -146,14 +146,14 @@ FRONTEND_URL=(leave empty for now, update after Netlify deploy)
 
 ### 2.5 Deploy
 
-Click "Create Web Service" Ã¢â€ â€™ Render builds and deploys
+Click "Create Web Service"  Render builds and deploys
 
-**Wait for deployment to complete** Ã¢â€ â€™ You'll get a URL like:
+**Wait for deployment to complete**  You'll get a URL like:
 ```
 https://dhansetu-api.onrender.com
 ```
 
-Ã¢Å“â€¦ Save this URL - you'll need it for frontend
+ Save this URL - you'll need it for frontend
 
 ---
 
@@ -234,7 +234,7 @@ npm run build
 
 ### 4.2 Create New Site
 
-Dashboard Ã¢â€ â€™ Add new site Ã¢â€ â€™ Import existing project
+Dashboard  Add new site  Import existing project
 
 - Select your repository
 - Choose branch: `main`
@@ -244,7 +244,7 @@ Dashboard Ã¢â€ â€™ Add new site Ã¢â€ â€™ Import existing p
 
 ### 4.3 Set Environment Variables
 
-Netlify dashboard Ã¢â€ â€™ Site settings Ã¢â€ â€™ Build & deploy Ã¢â€ â€™ Environment:
+Netlify dashboard  Site settings  Build & deploy  Environment:
 
 ```
 REACT_APP_API_URL=https://dhansetu-api.onrender.com/api
@@ -258,12 +258,12 @@ REACT_APP_ENV=production
 
 Click "Deploy site"
 
-**Netlify deploys automatically** Ã¢â€ â€™ You get a URL:
+**Netlify deploys automatically**  You get a URL:
 ```
 https://your-site-name.netlify.app
 ```
 
-Ã¢Å“â€¦ Save this URL
+ Save this URL
 
 ---
 
@@ -272,7 +272,7 @@ https://your-site-name.netlify.app
 Now that you have both URLs, update backend:
 
 1. Go to Render dashboard
-2. Your service Ã¢â€ â€™ Environment Ã¢â€ â€™ Edit `FRONTEND_URL`
+2. Your service  Environment  Edit `FRONTEND_URL`
 3. Set: `https://your-site-name.netlify.app`
 4. Render auto-redeploys
 
@@ -283,12 +283,12 @@ Now that you have both URLs, update backend:
 ### If you have your own domain:
 
 **Netlify:**
-1. Domain management Ã¢â€ â€™ Add domain
+1. Domain management  Add domain
 2. Update nameservers to Netlify
 3. Or use CNAME records
 
 **Render:**
-1. Custom domain Ã¢â€ â€™ Add domain
+1. Custom domain  Add domain
 2. Point to Render with CNAME record
 
 ---
@@ -301,10 +301,10 @@ Now that you have both URLs, update backend:
 # Visit your Netlify URL
 https://your-site-name.netlify.app
 
-Ã¢Å“â€¦ Page loads without errors
-Ã¢Å“â€¦ Navbar visible
-Ã¢Å“â€¦ Navigation works
-Ã¢Å“â€¦ No 404 errors
+ Page loads without errors
+ Navbar visible
+ Navigation works
+ No 404 errors
 ```
 
 ### 7.2 Backend Tests
@@ -338,7 +338,7 @@ curl https://dhansetu-api.onrender.com/api/health
 
 ### Render Logs
 
-Render dashboard Ã¢â€ â€™ Service Ã¢â€ â€™ Logs
+Render dashboard  Service  Logs
 
 View real-time logs while backend runs:
 - Check for errors
@@ -347,7 +347,7 @@ View real-time logs while backend runs:
 
 ### Netlify Logs
 
-Netlify dashboard Ã¢â€ â€™ Site Ã¢â€ â€™ Deploys
+Netlify dashboard  Site  Deploys
 
 View build logs:
 - Deployment status
@@ -362,10 +362,10 @@ View build logs:
 
 **Solution:**
 ```javascript
-// Check API URL in Network tab (DevTools Ã¢â€ â€™ Network)
+// Check API URL in Network tab (DevTools  Network)
 // Should see requests to https://dhansetu-api.onrender.com/api/...
 
-// If seeing http:// instead of https:// Ã¢â€ â€™ CORS error
+// If seeing http:// instead of https://  CORS error
 // Fix: Ensure REACT_APP_API_URL is correct
 ```
 
@@ -373,7 +373,7 @@ View build logs:
 
 **Solution:**
 ```
-Render Ã¢â€ â€™ Environment Ã¢â€ â€™ Edit FRONTEND_URL
+Render  Environment  Edit FRONTEND_URL
 Make sure it matches your Netlify deployment URL
 Redeploy backend
 ```

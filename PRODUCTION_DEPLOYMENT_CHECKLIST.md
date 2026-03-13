@@ -1,4 +1,4 @@
-# Ã°Å¸Å¡â‚¬ Production Deployment Checklist
+#  Production Deployment Checklist
 
 **Status**: Ready to Deploy  
 **Date**: March 12, 2026  
@@ -6,7 +6,7 @@
 
 ---
 
-## Ã¢Å“â€¦ Pre-Deployment (TODAY)
+##  Pre-Deployment (TODAY)
 
 ### Backend Preparation
 
@@ -33,16 +33,16 @@
 
 ---
 
-## Ã°Å¸â€œâ€¹ Deployment Steps (IN ORDER)
+##  Deployment Steps (IN ORDER)
 
 ### Step 1: Create Render Account & Deploy Backend (5 min)
 
 - [ ] Go to https://render.com
 - [ ] Sign up with GitHub
 - [ ] Authorize GitHub access to your repo
-- [ ] Dashboard Ã¢â€ â€™ New+ Ã¢â€ â€™ Web Service
+- [ ] Dashboard  New+  Web Service
 - [ ] Connect repository
-- [ ] **Select `backend` as root directory** Ã¢Å¡Â Ã¯Â¸Â
+- [ ] **Select `backend` as root directory** 
 - [ ] Build command: `npm install`
 - [ ] Start command: `npm start`
 - [ ] Add environment variables (from `backend/.env.production.template`):
@@ -61,10 +61,10 @@
   KYC_SECRET=<your_secret>
   API_KEY=<your_key>
   ```
-- [ ] Leave `FRONTEND_URL` empty for now Ã¢Å¡Â Ã¯Â¸Â
+- [ ] Leave `FRONTEND_URL` empty for now 
 - [ ] Click "Create Web Service"
 - [ ] **WAIT for deployment to complete** (~3-5 min)
-- [ ] Ã¢Å“â€¦ **Note your Render URL:** `https://dhansetu-api.onrender.com`
+- [ ]  **Note your Render URL:** `https://dhansetu-api.onrender.com`
 
 ### Step 2: Update Frontend Config
 
@@ -76,16 +76,16 @@
   REACT_APP_BLOCKCHAIN_NETWORK_ID=11155111
   REACT_APP_ENV=production
   ```
-- [ ] **Do NOT commit** `.env.production` Ã¢Å¡Â Ã¯Â¸Â
+- [ ] **Do NOT commit** `.env.production` 
 - [ ] Test locally: `npm run build` (in dhan-setu-frontend)
-- [ ] Verify no errors Ã¢â€ â€™ creates `/build` folder
+- [ ] Verify no errors  creates `/build` folder
 
 ### Step 3: Create Netlify Account & Deploy Frontend (5 min)
 
 - [ ] Go to https://netlify.com
 - [ ] Sign up with GitHub
 - [ ] Authorize GitHub access
-- [ ] Dashboard Ã¢â€ â€™ Add new site Ã¢â€ â€™ Import existing project
+- [ ] Dashboard  Add new site  Import existing project
 - [ ] Select your repository
 - [ ] Configure build:
   - Base directory: `dhan-setu-frontend`
@@ -101,25 +101,25 @@
   ```
 - [ ] Click "Deploy site"
 - [ ] **WAIT for build to complete** (~3 min)
-- [ ] Ã¢Å“â€¦ **Note your Netlify URL:** `https://your-site-name.netlify.app`
-- [ ] Test: Visit your Netlify URL Ã¢â€ â€™ should load without errors
+- [ ]  **Note your Netlify URL:** `https://your-site-name.netlify.app`
+- [ ] Test: Visit your Netlify URL  should load without errors
 
 ### Step 4: Update Backend with Frontend URL
 
 - [ ] Go to Render Dashboard
 - [ ] Select your backend service
-- [ ] Environment Ã¢â€ â€™ Edit
+- [ ] Environment  Edit
 - [ ] Add/Update:
   ```
   FRONTEND_URL=https://your-site-name.netlify.app
   ```
-- [ ] Save Ã¢â€ â€™ Render auto-redeploys (~1 min)
-- [ ] Ã¢Å“â€¦ Confirm "Deploy in Progress" completes
+- [ ] Save  Render auto-redeploys (~1 min)
+- [ ]  Confirm "Deploy in Progress" completes
 
 ### Step 5: Test End-to-End
 
 - [ ] Visit frontend: `https://your-site-name.netlify.app`
-- [ ] Open browser DevTools Ã¢â€ â€™ Network tab
+- [ ] Open browser DevTools  Network tab
 - [ ] Register new account
 - [ ] Test MetaMask connection
 - [ ] Check Network tab:
@@ -131,18 +131,18 @@
 
 ---
 
-## Ã°Å¸â€â€” Deployment URLs (AFTER COMPLETION)
+##  Deployment URLs (AFTER COMPLETION)
 
 ```
-Ã°Å¸Å’Â Frontend:  https://your-site-name.netlify.app
-Ã°Å¸â€â€” Backend:   https://dhansetu-api.onrender.com
-Ã°Å¸â€œÂ¡ API:       https://dhansetu-api.onrender.com/api
-Ã¢â€ºâ€œÃ¯Â¸Â  Contract:  https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
+ Frontend:  https://your-site-name.netlify.app
+ Backend:   https://dhansetu-api.onrender.com
+ API:       https://dhansetu-api.onrender.com/api
+  Contract:  https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
 ```
 
 ---
 
-## Ã¢Å¡Â Ã¯Â¸Â Common Issues & Solutions
+##  Common Issues & Solutions
 
 ### Issue: CORS errors in browser console
 
@@ -150,7 +150,7 @@
 ```
 1. Check FRONTEND_URL in Render environment
 2. Ensure it matches your Netlify URL exactly
-3. Render Ã¢â€ â€™ Redeploy
+3. Render  Redeploy
 4. Refresh browser (clear cache: Ctrl+Shift+Delete)
 ```
 
@@ -183,7 +183,7 @@
 1. Ensure MetaMask is on Sepolia network
 2. Check browser console for errors
 3. Verify REACT_APP_BLOCKCHAIN_NETWORK_ID=11155111
-4. Try: MetaMask Ã¢â€ â€™ Settings Ã¢â€ â€™ Extension Ã¢â€ â€™ Storage Ã¢â€ â€™ Clear site data
+4. Try: MetaMask  Settings  Extension  Storage  Clear site data
 5. Refresh page
 ```
 
@@ -199,7 +199,7 @@
 
 ---
 
-## Ã°Å¸â€œÅ  Verification Checklist
+##  Verification Checklist
 
 ### Frontend (Netlify)
 - [ ] Site loads at public URL
@@ -225,30 +225,30 @@
 
 ---
 
-## Ã°Å¸â€â€™ Security Reminders
+##  Security Reminders
 
-- Ã¢Å“â€¦ No `.env.production` committed to git
-- Ã¢Å“â€¦ Private keys in environment variables (not code)
-- Ã¢Å“â€¦ MongoDB connection string secured
-- Ã¢Å“â€¦ JWT secret is strong (32+ chars)
-- Ã¢Å“â€¦ CORS only allows Netlify domain
-- Ã¢Å“â€¦ HTTPS enabled (automatic on both services)
+-  No `.env.production` committed to git
+-  Private keys in environment variables (not code)
+-  MongoDB connection string secured
+-  JWT secret is strong (32+ chars)
+-  CORS only allows Netlify domain
+-  HTTPS enabled (automatic on both services)
 
 ---
 
-## Ã°Å¸â€œÂ± Share Public URLs
+##  Share Public URLs
 
 Once deployment completes, share these URLs:
 
 ```
-Ã°Å¸â€â€” APPLICATION: https://your-site-name.netlify.app
+ APPLICATION: https://your-site-name.netlify.app
 ```
 
 That's it! Users can access the full application at that URL.
 
 ---
 
-## Ã°Å¸Å¡Â¨ Maintenance & Monitoring
+##  Maintenance & Monitoring
 
 ### Daily
 - [ ] Check Render logs for errors
@@ -267,7 +267,7 @@ That's it! Users can access the full application at that URL.
 
 ---
 
-## Ã°Å¸â€œÅ¾ Support Links
+##  Support Links
 
 - **Render Docs:** https://render.com/docs/deploy-node-express-app
 - **Netlify Docs:** https://docs.netlify.com/frameworks/react/
@@ -276,13 +276,13 @@ That's it! Users can access the full application at that URL.
 
 ---
 
-## Ã¢Å“â€¦ Deployment Complete!
+##  Deployment Complete!
 
 Once all steps done, your application is:
-- Ã°Å¸Å’Â **Publicly accessible**
-- Ã¢Å¡Â¡ **Scalable**
-- Ã°Å¸â€Â **Secure**
-- Ã°Å¸Å¡â‚¬ **Production-ready**
+-  **Publicly accessible**
+-  **Scalable**
+-  **Secure**
+-  **Production-ready**
 
 
 ---

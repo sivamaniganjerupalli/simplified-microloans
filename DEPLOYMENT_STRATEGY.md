@@ -1,11 +1,11 @@
 # DhanSetu Blockchain Deployment Strategy
 
-## Current Status Ã¢Å“â€¦
+## Current Status 
 
 - **Smart Contract**: Deployed to Sepolia Testnet
 - **Contract Address**: `0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f`
 - **Network**: Sepolia (Chain ID: 11155111)
-- **Verification**: Verified on Etherscan Ã¢Å“â€œ
+- **Verification**: Verified on Etherscan 
 - **Explorer**: https://sepolia.etherscan.io/address/0x43eb6e7886fd677eBb5fFAEf2c688eB04aC8247f
 - **Backend**: Configured to use Sepolia RPC via `SEPOLIA_RPC_URL`
 - **Test ETH Balance**: 0.1198 ETH available
@@ -41,7 +41,7 @@ File: `hardhat.config.js`
 
 ---
 
-## Phase 1: Sepolia Testnet Testing (CURRENT) Ã°Å¸Å¸Â¢
+## Phase 1: Sepolia Testnet Testing (CURRENT) 
 
 ### What to Test
 1. **User Registration & KYC**
@@ -116,11 +116,11 @@ Before mainnet, address:
 ## Phase 3: Production Mainnet Deployment (FUTURE)
 
 ### Prerequisites
-- Ã¢Å“â€¦ Full Sepolia testing complete (2-4 weeks minimum)
-- Ã¢Å“â€¦ No critical bugs in transaction flow
-- Ã¢Å“â€¦ Smart contract audited (optional but recommended)
-- Ã¢Å“â€¦ Mainnet ETH secured for deployment + operations
-- Ã¢Å“â€¦ Production infrastructure ready
+-  Full Sepolia testing complete (2-4 weeks minimum)
+-  No critical bugs in transaction flow
+-  Smart contract audited (optional but recommended)
+-  Mainnet ETH secured for deployment + operations
+-  Production infrastructure ready
 
 ### Mainnet Deployment Steps
 1. **Update hardhat.config.js** - Add Ethereum mainnet network
@@ -164,37 +164,37 @@ Key LoanContract functions (call from backend/frontend):
 
 ```solidity
 // Core Loan Operations
-- createLoan(amount, duration, interestRate) Ã¢â€ â€™ returns loanId
-- approveLoan(loanId) Ã¢â€ â€™ lender approves
-- disburseLoan(loanId) Ã¢â€ â€™ send funds to vendor
-- repayLoan(loanId, amount) Ã¢â€ â€™ make payment
+- createLoan(amount, duration, interestRate)  returns loanId
+- approveLoan(loanId)  lender approves
+- disburseLoan(loanId)  send funds to vendor
+- repayLoan(loanId, amount)  make payment
 
 // View Functions
-- getLoans(borrower) Ã¢â€ â€™ array of loans
-- getLoan(loanId) Ã¢â€ â€™ loan details
-- getTotalBorrowed(borrower) Ã¢â€ â€™ total amount
-- getInterestDue(loanId) Ã¢â€ â€™ interest calculation
+- getLoans(borrower)  array of loans
+- getLoan(loanId)  loan details
+- getTotalBorrowed(borrower)  total amount
+- getInterestDue(loanId)  interest calculation
 ```
 
 ---
 
 ## Important Notes
 
-Ã¢Å¡Â Ã¯Â¸Â **Before Mainnet:**
+ **Before Mainnet:**
 - Test withdrawal/transfer functions thoroughly
 - Verify gas cost calculations
 - Test with different user types (vendor, lender, borrower)
 - Ensure database-blockchain synchronization works reliably
 - Have a rollback plan ready
 
-Ã°Å¸â€Â **Security Checklist:**
+ **Security Checklist:**
 - No hardcoded private keys in code
 - Use environment variables for all secrets
 - Enable rate limiting on API endpoints
 - Implement transaction validation on both sides
 - Monitor for unusual contract activity on Etherscan
 
-Ã°Å¸â€œÅ  **Monitoring After Deployment:**
+ **Monitoring After Deployment:**
 - Set up alerts for failed transactions
 - Track gas prices and costs
 - Monitor contract balance
@@ -215,13 +215,13 @@ Key LoanContract functions (call from backend/frontend):
 
 ## Next Immediate Actions
 
-1. Ã¢Å“â€¦ Add `.env` to frontend with contract address
-2. Ã¢Å“â€¦ Test loan creation flow end-to-end
-3. Ã¢Å“â€¦ Verify all transactions appear on Etherscan
-4. Ã¢Å“â€¦ Test with multiple MetaMask accounts
-5. Ã¢ÂÂ³ Plan 2-4 week Sepolia testing phase
-6. Ã¢ÂÂ³ Document any bugs/improvements found
-7. Ã¢ÂÂ³ Schedule mainnet deployment review
+1.  Add `.env` to frontend with contract address
+2.  Test loan creation flow end-to-end
+3.  Verify all transactions appear on Etherscan
+4.  Test with multiple MetaMask accounts
+5.  Plan 2-4 week Sepolia testing phase
+6.  Document any bugs/improvements found
+7.  Schedule mainnet deployment review
 
 
 ---
