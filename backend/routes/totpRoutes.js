@@ -11,17 +11,20 @@ router.post("/setup", async (req, res) => {
     const { qrCodeURL } = await generateTOTPSecret(email);
     res.json({ success: true, qrCode: qrCodeURL });
   } catch (err) {
-    res.status(500).json({ success: false, message: "QR generation failed" });
+    res.status(400).json({ success: false, message: err.message || "QR generation failed" });
   }
 });
 
 // Verify TOTP
-router.post("/verify", (req, res) => {
+router.post("/verify", async (req, res) => {
   const { email, token } = req.body;
+  if (!email || !token) {
+    return res.status(400).json({ success: false, message: "Email and token are required." });
+  }
 
-  const valid = verifyTOTP(email, token);
+  const valid = await verifyTOTP(email, token);
   if (!valid) {
-    return res.status(400).json({ success: false, message: "Invalid code" });
+    return res.status(400).json({ success: false, message: "Invalid or expired authenticator code." });
   }
 
   res.json({ success: true, message: "TOTP verified" });

@@ -261,8 +261,8 @@ const LoanRequestForm = () => {
     setLoadingVerifyTOTP(true);
     try {
       const res = await axios.post(`${API_BASE_URL}/totp/verify`, {
-        email: formData.email,
-        token: totpCode,
+        email: String(formData.email || "").trim().toLowerCase(),
+        token: String(totpCode || "").replace(/\s+/g, "").trim(),
       });
 
       if (res.data.success) {
@@ -273,7 +273,7 @@ const LoanRequestForm = () => {
       }
     } catch (err) {
       console.error("TOTP verify error:", err.response?.data || err.message);
-      alert("Invalid TOTP code");
+      alert(err.response?.data?.message || "Invalid TOTP code");
     } finally {
       setLoadingVerifyTOTP(false);
     }
