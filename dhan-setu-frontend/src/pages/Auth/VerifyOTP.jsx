@@ -7,7 +7,7 @@ import { API_BASE_URL } from "../../utils/constants";
 const VerifyOTP = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState(location.state?.email || "");
+  const [email, setEmail] = useState((location.state?.email || "").trim().toLowerCase());
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -28,9 +28,16 @@ const VerifyOTP = () => {
     setLoading(true);
     setError("");
     setSuccessMsg((current) => current || "");
+    const normalizedEmail = String(email || "").trim().toLowerCase();
 
-    if (!email) {
+    if (!normalizedEmail) {
       setError("Please enter your email.");
+      setLoading(false);
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setError("Please enter a valid email address.");
       setLoading(false);
       return;
     }
@@ -38,12 +45,13 @@ const VerifyOTP = () => {
     try {
       const response = await axios.post(
         `${API_BASE_URL}/otp/send`,
-        { email }
+        { email: normalizedEmail }
       );
 
       if (response.data.success) {
+        setEmail(normalizedEmail);
         setOtpSent(true);
-        setSuccessMsg("OTP has been sent to " + email);
+        setSuccessMsg("OTP has been sent to " + normalizedEmail);
         setTimeLeft(120); // 2 minutes
       } else {
         setError(response.data.message || "Failed to send OTP");
@@ -85,9 +93,16 @@ const VerifyOTP = () => {
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     const otpCode = otp.join("");
+    const normalizedEmail = String(email || "").trim().toLowerCase();
     setLoading(true);
     setError("");
     setSuccessMsg("");
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      setError("Please enter a valid email address.");
+      setLoading(false);
+      return;
+    }
 
     if (otpCode.length !== 6) {
       setError("Please enter a valid 6-digit OTP.");
@@ -99,7 +114,7 @@ const VerifyOTP = () => {
       const response = await axios.post(
         `${API_BASE_URL}/otp/verify`,
         {
-          email,
+          email: normalizedEmail,
           otp: otpCode,
         }
       );
@@ -195,10 +210,12 @@ const VerifyOTP = () => {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        disabled={!!location.state?.email}
                         placeholder="Enter your registered email"
                         className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-600 focus:outline-none transition-colors disabled:bg-gray-100"
                       />
+                      <p className="mt-2 text-xs text-gray-500">
+                        If the prefilled email is wrong, update it here before sending OTP.
+                      </p>
                     </div>
 
                     {error && (
