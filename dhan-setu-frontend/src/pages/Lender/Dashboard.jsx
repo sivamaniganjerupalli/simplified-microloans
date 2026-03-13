@@ -91,14 +91,7 @@ const LenderDashboard = () => {
     );
   }
 
-  const monthlyData = [
-    { month: 'Jan', loans: 4, revenue: 12 },
-    { month: 'Feb', loans: 6, revenue: 18 },
-    { month: 'Mar', loans: 8, revenue: 24 },
-    { month: 'Apr', loans: 5, revenue: 15 },
-    { month: 'May', loans: 9, revenue: 27 },
-    { month: 'Jun', loans: 12, revenue: 36 },
-  ];
+  const monthlyData = dashboardData?.monthlyPerformance || [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100">
@@ -144,8 +137,6 @@ const LenderDashboard = () => {
             value={dashboardData?.walletBalance || "0.000 ETH"}
             icon={Wallet}
             color="blue"
-            trend="up"
-            trendValue="+8.2%"
           />
           <StatCard
             title="Loans Funded"
@@ -166,8 +157,6 @@ const LenderDashboard = () => {
             subtitle="Repayments received"
             icon={DollarSign}
             color="amber"
-            trend="up"
-            trendValue="+12%"
           />
         </div>
 
@@ -196,6 +185,9 @@ const LenderDashboard = () => {
                 <Line type="monotone" dataKey="revenue" stroke="#9333ea" strokeWidth={3} dot={{ fill: '#9333ea', r: 4 }} />
               </LineChart>
             </ResponsiveContainer>
+            {monthlyData.length === 0 && (
+              <p className="mt-3 text-sm text-gray-500">No lending activity available yet.</p>
+            )}
           </div>
 
           {/* Quick Actions */}

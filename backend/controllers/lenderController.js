@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const { ethers } = require("ethers");
+const mongoose = require("mongoose");
 
 const Loan = require("../models/Loan");
 const Transaction = require("../models/Transaction");
@@ -8,9 +9,15 @@ const Lender = require("../models/Lender");
 const { encryptKYC } = require("../utils/kycEncryption");
 const { sendLenderApiKeyEmail } = require("../utils/emailService");
 
-const provider = new ethers.JsonRpcProvider(
-  process.env.GANACHE_RPC_URL || "http://127.0.0.1:8545"
-);
+const getRpcUrl = () => {
+  const network = (process.env.BLOCKCHAIN_NETWORK || "sepolia").toLowerCase();
+  if (network === "ganache" || network === "localhost") {
+    return process.env.GANACHE_RPC_URL || "http://127.0.0.1:8545";
+  }
+  return process.env.SEPOLIA_RPC_URL || "https://rpc.sepolia.org";
+};
+
+const provider = new ethers.JsonRpcProvider(getRpcUrl());
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
 const isHashedPassword = (value = "") => value.startsWith("$2a$") || value.startsWith("$2b$");
@@ -296,6 +303,10 @@ const getLenderDashboard = async (req, res) => {
       return res.status(400).json({ success: false, message: "Lender ID is required." });
     }
 
+    if (!mongoose.isValidObjectId(lenderId)) {
+      return res.status(400).json({ success: false, message: "Invalid lender ID." });
+    }
+
     const lender = await Lender.findById(lenderId);
 
     if (!lender) {
@@ -305,15 +316,18 @@ const getLenderDashboard = async (req, res) => {
     let walletBalanceEth = "0.0000";
 
     try {
-      const balance = await provider.getBalance(lender.walletAddress);
-      walletBalanceEth = ethers.formatEther(balance);
+      if (lender.walletAddress && ethers.isAddress(lender.walletAddress)) {
+        const balance = await provider.getBalance(lender.walletAddress);
+        walletBalanceEth = ethers.formatEther(balance);
+      }
     } catch (err) {
-      console.warn("Wallet balance fetch failed:", err.message);
+      console.warn("Wallet balance fetch failed:", err.message, "rpc:", getRpcUrl());
     }
 
-    const fundedLoans = await Loan.find({ lenderId, status: "Approved" }).lean();
+    const fundedLoans = await Loan.find({ lenderId: lender._id, status: "Approved" }).lean();
 
     const loansFunded = fundedLoans.length;
+    const activeLoans = fundedLoans.filter((loan) => !loan.repaid).length;
     const totalFundedAmount = fundedLoans.reduce(
       (sum, loan) => sum + (parseFloat(loan.loanAmount) || 0),
       0
@@ -327,7 +341,7 @@ const getLenderDashboard = async (req, res) => {
       (a, b) => new Date(b.approvedAt || b.updatedAt) - new Date(a.approvedAt || a.updatedAt)
     )[0];
 
-    const txns = await Transaction.find({ lenderId }).sort({ createdAt: -1 }).lean();
+    const txns = await Transaction.find({ lenderId: lender._id }).sort({ createdAt: -1 }).lean();
 
     const totalReceived = txns
       .filter((tx) => tx.type === "Repayment")
@@ -343,11 +357,53 @@ const getLenderDashboard = async (req, res) => {
       hash: tx.hash || "",
     }));
 
+    const monthFormatter = new Intl.DateTimeFormat("en-IN", { month: "short" });
+    const monthlyBuckets = [];
+    const bucketMap = new Map();
+
+    for (let i = 5; i >= 0; i -= 1) {
+      const date = new Date();
+      date.setDate(1);
+      date.setMonth(date.getMonth() - i);
+      const key = `${date.getFullYear()}-${date.getMonth()}`;
+      const bucket = {
+        month: monthFormatter.format(date),
+        loans: 0,
+        revenue: 0,
+      };
+      monthlyBuckets.push(bucket);
+      bucketMap.set(key, bucket);
+    }
+
+    fundedLoans.forEach((loan) => {
+      const date = new Date(loan.approvedAt || loan.updatedAt || loan.createdAt);
+      if (Number.isNaN(date.getTime())) return;
+      const key = `${date.getFullYear()}-${date.getMonth()}`;
+      const bucket = bucketMap.get(key);
+      if (bucket) bucket.loans += 1;
+    });
+
+    txns
+      .filter((tx) => tx.type === "Repayment")
+      .forEach((tx) => {
+        const date = new Date(tx.createdAt);
+        if (Number.isNaN(date.getTime())) return;
+        const key = `${date.getFullYear()}-${date.getMonth()}`;
+        const bucket = bucketMap.get(key);
+        if (bucket) bucket.revenue += parseFloat(tx.amount) || 0;
+      });
+
+    const monthlyPerformance = monthlyBuckets.map((bucket) => ({
+      ...bucket,
+      revenue: Number(bucket.revenue.toFixed(4)),
+    }));
+
     return res.status(200).json({
       success: true,
       lenderName: lender.fullname || "Lender",
       walletBalance: `${parseFloat(walletBalanceEth).toFixed(4)} ETH`,
       loansFunded,
+      activeLoans,
       totalFundedAmount: Number(totalFundedAmount.toFixed(4)),
       activeVendors: activeVendorsSet.size,
       lastFundedLoan: lastFundedLoan
@@ -361,6 +417,7 @@ const getLenderDashboard = async (req, res) => {
       nextExpectedRepayment: "N/A",
       totalReceived: Number(totalReceived.toFixed(4)),
       transactions,
+      monthlyPerformance,
     });
   } catch (err) {
     console.error("getLenderDashboard error:", err.message);
@@ -529,8 +586,12 @@ const getLenderLoans = async (req, res) => {
   try {
     const lenderId = req.params.lenderId;
 
+    if (!lenderId || !mongoose.isValidObjectId(lenderId)) {
+      return res.status(200).json({ success: true, loans: [] });
+    }
+
     const loans = await Loan.find({
-      $or: [{ lenderId }, { status: "Pending" }],
+      $or: [{ lenderId: new mongoose.Types.ObjectId(lenderId) }, { status: "Pending" }],
     }).sort({ createdAt: -1 });
 
     return res.status(200).json({ success: true, loans });

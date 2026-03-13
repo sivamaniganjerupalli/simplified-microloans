@@ -355,6 +355,13 @@ const LenderLoans = () => {
 
   // Fetch all loans for this lender
   const fetchLoans = async () => {
+    if (!lenderId || !token) {
+      setLoans([]);
+      setError("Please login to view your loans.");
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
       const res = await axios.get(`${API_URL}/lender/${lenderId}/loans`, {
@@ -364,7 +371,15 @@ const LenderLoans = () => {
       setError("");
     } catch (err) {
       console.error("Fetch error:", err.message);
-      setError("Failed to load loans. Please try again later.");
+      const status = err.response?.status;
+      if (status === 400 || status === 404) {
+        setLoans([]);
+        setError("");
+      } else if (status === 401) {
+        setError("Session expired. Please login again.");
+      } else {
+        setError(err.response?.data?.message || "Failed to load loans. Please try again later.");
+      }
     } finally {
       setLoading(false);
     }
