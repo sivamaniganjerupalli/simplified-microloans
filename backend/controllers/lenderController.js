@@ -145,10 +145,15 @@ const registerLender = async (req, res) => {
 
       return res.status(400).json({
         success: false,
-        message: "Email or Aadhaar already registered.",
         duplicateField: existingLender.email === trimmedEmail ? "email"
           : existingLender.phone === trimmedPhone ? "phone"
           : "aadhaarNumber",
+        message:
+          existingLender.email === trimmedEmail
+            ? "Email already registered. Please use another email or login."
+            : existingLender.phone === trimmedPhone
+              ? "Phone number already registered. Please use another phone number or login."
+              : "Aadhaar number already registered. Please use another Aadhaar number or login.",
       });
     }
 

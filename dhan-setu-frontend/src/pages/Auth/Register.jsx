@@ -179,9 +179,15 @@ const Register = () => {
         setError(response.data.message || "Registration failed");
       }
     } catch (err) {
+      const duplicateField = err.response?.data?.duplicateField;
+      const fallbackByField = {
+        email: "Email already registered. Please use another email or login.",
+        phone: "Phone number already registered. Please use another phone number or login.",
+        aadhaarNumber: "Aadhaar number already registered. Please use another Aadhaar number or login.",
+      };
       const errorMsg =
         err.response?.data?.message ||
-        err.response?.data?.duplicateField ||
+        (duplicateField ? fallbackByField[duplicateField] : null) ||
         "Registration error";
       setError(errorMsg);
     } finally {
