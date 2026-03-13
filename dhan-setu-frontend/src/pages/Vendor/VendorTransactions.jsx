@@ -86,13 +86,13 @@ const StatusPill = ({ type }) => {
     <span
       className={`${base} bg-slate-50 text-slate-600 border border-slate-100`}
     >
-      {type || "â€”"}
+      {type || "--"}
     </span>
   );
 };
 
 const AmountCell = ({ amount, showINR, rate }) => {
-  if (typeof amount !== "number" || isNaN(amount)) return <span>â€”</span>;
+  if (typeof amount !== "number" || isNaN(amount)) return <span>--</span>;
 
   const inrValue = showINR && rate ? amount * rate : null;
 
@@ -153,8 +153,8 @@ const VendorTransactions = () => {
             return {
               id: tx._id || `${tx.date}-${tx.type}-${tx.amount}`,
               amount: !isNaN(amount) ? amount : null,
-              date: tx.date || "â€”",
-              type: tx.type || "â€”",
+              date: tx.date || "--",
+              type: tx.type || "--",
             };
           });
 
@@ -395,7 +395,7 @@ const VendorTransactions = () => {
     const now = new Date();
 
     return transactions.filter((tx) => {
-      if (!tx.date || tx.date === "â€”") return false;
+      if (!tx.date || tx.date === "--") return false;
       const txDate = new Date(tx.date);
       if (Number.isNaN(txDate.getTime())) return false;
 
@@ -633,7 +633,7 @@ const VendorTransactions = () => {
                             Paid
                           </span>
                         ) : (
-                          <span className="text-[11px] text-slate-400">â€”</span>
+                          <span className="text-[11px] text-slate-400">--</span>
                         )}
                       </td>
                     </tr>
