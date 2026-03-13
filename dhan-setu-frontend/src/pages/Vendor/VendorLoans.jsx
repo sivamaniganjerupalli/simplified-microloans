@@ -56,7 +56,7 @@ const VendorLoans = () => {
       setLoans(res.data.loans || []);
       setError("");
     } catch (err) {
-      console.error("âŒ Error fetching loans:", err);
+      console.error("Error fetching loans:", err);
       setError(err.response?.data?.message || "Failed to fetch loans");
     } finally {
       setLoading(false);
@@ -144,7 +144,7 @@ const VendorLoans = () => {
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
               <p className="text-sm font-medium text-red-900 flex-1">{error}</p>
-              <button onClick={() => setError("")} className="text-red-600 hover:text-red-800">âœ•</button>
+              <button onClick={() => setError("")} className="text-red-600 hover:text-red-800">X</button>
             </div>
           </div>
         )}

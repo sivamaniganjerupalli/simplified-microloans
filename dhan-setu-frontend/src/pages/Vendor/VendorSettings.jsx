@@ -164,7 +164,7 @@ const VendorSettings = () => {
                 onClick={() => setMessage({ type: "", text: "" })}
                 className={message.type === "success" ? "text-emerald-600 hover:text-emerald-800" : "text-red-600 hover:text-red-800"}
               >
-                âœ•
+                X
               </button>
             </div>
           </div>

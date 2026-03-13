@@ -248,10 +248,10 @@ const VendorQuickGuide = () => {
               <div>
                 <p className="font-bold text-blue-900 mb-2">Remember:</p>
                 <ul className="text-sm text-blue-800 space-y-1">
-                  <li>â€¢ <strong>Pending:</strong> Lender is reviewing your request</li>
-                  <li>â€¢ <strong>Approved:</strong> Funds are sent to your wallet</li>
-                  <li>â€¢ <strong>Rejected:</strong> Update profile details and apply again</li>
-                  <li>â€¢ <strong>Repaid:</strong> Loan is complete</li>
+                  <li>- <strong>Pending:</strong> Lender is reviewing your request</li>
+                  <li>- <strong>Approved:</strong> Funds are sent to your wallet</li>
+                  <li>- <strong>Rejected:</strong> Update profile details and apply again</li>
+                  <li>- <strong>Repaid:</strong> Loan is complete</li>
                 </ul>
               </div>
             </div>

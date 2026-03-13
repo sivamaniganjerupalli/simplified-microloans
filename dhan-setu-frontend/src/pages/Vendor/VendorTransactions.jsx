@@ -24,7 +24,7 @@ const LoadingState = () => (
       ))}
     </div>
     <p className="mt-3 text-xs text-slate-400">
-      Loading your recent transactionsâ€¦
+      Loading your recent transactions...
     </p>
   </div>
 );
@@ -104,7 +104,7 @@ const AmountCell = ({ amount, showINR, rate }) => {
       </span>
       {inrValue && (
         <span className="text-[11px] text-slate-500">
-          â‰ˆ{" "}
+          approx {" "}
           {new Intl.NumberFormat("en-IN", {
             style: "currency",
             currency: "INR",
@@ -471,7 +471,7 @@ const VendorTransactions = () => {
             <div className="flex items-start gap-3">
               <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
               <p className="text-sm font-medium text-red-900 flex-1">{error}</p>
-              <button onClick={() => setError("")} className="text-red-600 hover:text-red-800">âœ•</button>
+              <button onClick={() => setError("")} className="text-red-600 hover:text-red-800">X</button>
             </div>
           </div>
         )}
@@ -480,7 +480,7 @@ const VendorTransactions = () => {
             <div className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
               <p className="text-sm font-medium text-emerald-900 flex-1">{success}</p>
-              <button onClick={() => setSuccess("")} className="text-emerald-600 hover:text-emerald-800">âœ•</button>
+              <button onClick={() => setSuccess("")} className="text-emerald-600 hover:text-emerald-800">X</button>
             </div>
           </div>
         )}
@@ -526,7 +526,7 @@ const VendorTransactions = () => {
               </label>
               {showINR && (
                 <p className="text-[10px] text-slate-400">
-                  Approx: 1 ETH â‰ˆ{" "}
+                  Approx: 1 ETH approx{" "}
                   {new Intl.NumberFormat("en-IN", {
                     style: "currency",
                     currency: "INR",
@@ -645,7 +645,7 @@ const VendorTransactions = () => {
             {/* Footer Note */}
             <div className="px-4 py-3 border-t border-slate-100 bg-slate-50/60 text-[11px] text-slate-500 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <p>
-                ðŸ’¡ For any mismatch in amounts or dates, please contact{" "}
+                Note: For any mismatch in amounts or dates, please contact{" "}
                 <span className="font-semibold text-slate-700">
                   support@dhansetu.io
                 </span>

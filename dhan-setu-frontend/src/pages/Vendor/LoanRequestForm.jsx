@@ -394,7 +394,7 @@ const LoanRequestForm = () => {
   const renderStep1 = () => (
     <section className="space-y-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 md:p-6">
       <h2 className="text-base font-bold text-slate-900">
-        Step 1 Â· Personal & Identity Details
+        Step 1 - Personal & Identity Details
       </h2>
       <p className="text-sm text-slate-600">
         Enter your legal details exactly as shown on your Aadhaar card.
@@ -457,7 +457,7 @@ const LoanRequestForm = () => {
   const renderStep2 = () => (
     <section className="space-y-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 md:p-6">
       <h2 className="text-base font-bold text-slate-900">
-        Step 2 Â· Contact & Security Verification
+        Step 2 - Contact & Security Verification
       </h2>
       <p className="text-sm text-slate-600">
         Complete both checks to protect your account and loan application.
@@ -572,7 +572,7 @@ const LoanRequestForm = () => {
   const renderStep3 = () => (
     <section className="space-y-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 md:p-6">
       <h2 className="text-base font-bold text-slate-900">
-        Step 3 Â· Loan Details (â‚¹ â†’ ETH)
+        Step 3 - Loan Details (INR to ETH)
       </h2>
       <p className="text-sm text-slate-600">
         Add your loan request details. ETH value is auto-calculated from live INR price.
@@ -582,7 +582,7 @@ const LoanRequestForm = () => {
         <Input
           id="loanAmountINR"
           name="loanAmountINR"
-          label="Loan Amount (â‚¹ - Rupees)"
+          label="Loan Amount (INR - Rupees)"
           value={formData.loanAmountINR}
           onChange={handleChange}
           required
@@ -603,11 +603,11 @@ const LoanRequestForm = () => {
       </div>
 
       <div className="text-xs text-slate-500 rounded-xl border border-slate-100 bg-white p-3">
-        {ethPriceLoading && <p>Loading current ETH price in INRâ€¦</p>}
+        {ethPriceLoading && <p>Loading current ETH price in INR...</p>}
         {ethPriceError && <p className="text-red-600">{ethPriceError}</p>}
         {ethPriceINR && !ethPriceLoading && !ethPriceError && (
           <p>
-            Current 1 ETH â‰ˆ â‚¹{" "}
+            Current 1 ETH approx INR {" "}
             <span className="font-semibold">
               {ethPriceINR.toLocaleString()}
             </span>
@@ -647,7 +647,7 @@ const LoanRequestForm = () => {
   const renderStep4 = () => (
     <section className="space-y-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 md:p-6">
       <h2 className="text-base font-bold text-slate-900">
-        Step 4 Â· Wallet, Location & Uploads
+        Step 4 - Wallet, Location & Uploads
       </h2>
       <p className="text-sm text-slate-600">
         Connect your wallet and upload clear document photos for faster approval.
@@ -723,7 +723,7 @@ const LoanRequestForm = () => {
   const renderStep5 = () => (
     <section className="space-y-5 rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-4 md:p-6">
       <h2 className="text-base font-bold text-slate-900">
-        Step 5 Â· Review & Submit
+        Step 5 - Review & Submit
       </h2>
 
       <p className="text-sm text-slate-600">
@@ -765,7 +765,7 @@ const LoanRequestForm = () => {
         <div className="space-y-1">
           <h3 className="font-semibold text-slate-800 text-sm">Loan</h3>
           <p>
-            <strong>Amount:</strong> â‚¹ {formData.loanAmountINR}{" "}
+            <strong>Amount:</strong> INR {formData.loanAmountINR}{" "}
             {formData.loanAmountETH && (
               <span>(~ {formData.loanAmountETH} ETH)</span>
             )}
