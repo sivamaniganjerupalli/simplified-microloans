@@ -11,10 +11,21 @@ const JWT_SECRET = process.env.JWT_SECRET || "secret_key";
 router.post('/send', async (req, res) => {
   const { email } = req.body;
   try {
+    if (!email || !String(email).trim()) {
+      return res.status(400).json({ success: false, message: 'Email is required' });
+    }
+
     await sendOTP(email);
     res.json({ success: true, message: 'OTP sent successfully' });
   } catch (err) {
-    res.status(500).json({ success: false, message: 'Failed to send OTP', error: err.message });
+    const message = err.message || 'Failed to send OTP';
+    const status =
+      message.includes('Missing SMTP credentials') || message.includes('timed out')
+        ? 503
+        : 500;
+
+    console.error('OTP send error:', message);
+    res.status(status).json({ success: false, message, error: message });
   }
 });
 

@@ -168,8 +168,13 @@ const Register = () => {
       });
 
       if (response.data.success) {
-        alert("Registration successful! Please verify your email.");
-        navigate("/verify-otp", { state: { email: formData.email } });
+        navigate("/verify-otp", {
+          state: {
+            email: formData.email,
+            autoSendOtp: true,
+            registrationSuccess: "Registration successful! Please verify your email.",
+          },
+        });
       } else {
         setError(response.data.message || "Registration failed");
       }

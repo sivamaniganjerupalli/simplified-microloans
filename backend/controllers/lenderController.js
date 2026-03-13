@@ -25,6 +25,20 @@ const hashPassword = async (plain) => bcrypt.hash(plain, 10);
 
 const getLenderLoginApiKey = () => process.env.LENDER_API_KEY || process.env.API_KEY || "";
 
+const queueLenderApiKeyEmail = (email, fullName, lenderApiKey, label = 'registration') => {
+  if (!lenderApiKey) {
+    console.warn('Lender API key email skipped: LENDER_API_KEY/API_KEY is not configured.');
+    return;
+  }
+
+  setImmediate(async () => {
+    const emailResult = await sendLenderApiKeyEmail(email, fullName, lenderApiKey);
+    if (!emailResult.success) {
+      console.warn(`Lender API key email failed (${label}):`, emailResult.error);
+    }
+  });
+};
+
 const registerLender = async (req, res) => {
   try {
     const {
@@ -110,18 +124,12 @@ const registerLender = async (req, res) => {
         await existingLender.save();
 
         const lenderApiKey = getLenderLoginApiKey();
-        if (lenderApiKey) {
-          const emailResult = await sendLenderApiKeyEmail(
-            existingLender.email,
-            existingLender.fullname,
-            lenderApiKey
-          );
-          if (!emailResult.success) {
-            console.warn("Lender API key email failed (test mode):", emailResult.error);
-          }
-        } else {
-          console.warn("Lender API key email skipped: LENDER_API_KEY/API_KEY is not configured.");
-        }
+        queueLenderApiKeyEmail(
+          existingLender.email,
+          existingLender.fullname,
+          lenderApiKey,
+          'test mode'
+        );
 
         return res.status(200).json({
           success: true,
@@ -165,18 +173,7 @@ const registerLender = async (req, res) => {
     });
 
     const lenderApiKey = getLenderLoginApiKey();
-    if (lenderApiKey) {
-      const emailResult = await sendLenderApiKeyEmail(
-        lender.email,
-        lender.fullname,
-        lenderApiKey
-      );
-      if (!emailResult.success) {
-        console.warn("Lender API key email failed:", emailResult.error);
-      }
-    } else {
-      console.warn("Lender API key email skipped: LENDER_API_KEY/API_KEY is not configured.");
-    }
+    queueLenderApiKeyEmail(lender.email, lender.fullname, lenderApiKey);
 
     return res.status(201).json({
       success: true,

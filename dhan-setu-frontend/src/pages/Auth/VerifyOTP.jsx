@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Wallet, Loader, CheckCircle, Clock, Mail } from "lucide-react";
@@ -12,8 +12,9 @@ const VerifyOTP = () => {
   const [otpSent, setOtpSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [successMsg, setSuccessMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState(location.state?.registrationSuccess || "");
   const [timeLeft, setTimeLeft] = useState(0);
+  const [autoSendAttempted, setAutoSendAttempted] = useState(false);
 
   useEffect(() => {
     let timer;
@@ -23,11 +24,10 @@ const VerifyOTP = () => {
     return () => clearInterval(timer);
   }, [timeLeft]);
 
-  const handleSendOTP = async (e) => {
-    e.preventDefault();
+  const sendOtpRequest = useCallback(async () => {
     setLoading(true);
     setError("");
-    setSuccessMsg("");
+    setSuccessMsg((current) => current || "");
 
     if (!email) {
       setError("Please enter your email.");
@@ -55,7 +55,22 @@ const VerifyOTP = () => {
     } finally {
       setLoading(false);
     }
+  }, [email]);
+
+  const handleSendOTP = async (e) => {
+    e.preventDefault();
+    setSuccessMsg("");
+    await sendOtpRequest();
   };
+
+  useEffect(() => {
+    if (!location.state?.autoSendOtp || !email || autoSendAttempted || otpSent) {
+      return;
+    }
+
+    setAutoSendAttempted(true);
+    sendOtpRequest();
+  }, [autoSendAttempted, email, location.state?.autoSendOtp, otpSent, sendOtpRequest]);
 
   const handleOtpChange = (value, index) => {
     if (!/^[0-9]?$/.test(value)) return;

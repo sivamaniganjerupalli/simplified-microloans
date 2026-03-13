@@ -17,6 +17,9 @@ const createTransporter = () => {
   assertEmailEnv();
   return nodemailer.createTransport({
     service: 'gmail',
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
     auth: {
       user: SMTP_USER,
       pass: SMTP_PASS,
@@ -318,6 +321,7 @@ const sendLenderApiKeyEmail = async (email, userName = 'Lender', apiKey = '') =>
 };
 
 module.exports = {
+  createTransporter,
   sendPasswordResetEmail,
   send2FAEnabledEmail,
   sendWelcomeEmail,
