@@ -20,6 +20,7 @@ import Badge from "../../components/common/Badge";
 import Alert from "../../components/common/Alert";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { API_BASE_URL } from "../../utils/constants";
+import dashboardBg from "../../assets/images/dashboard-bg.jpg";
 
 const LenderDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
@@ -97,6 +98,10 @@ const LenderDashboard = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100">
       {/* Animated Header */}
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${dashboardBg})` }}
+        />
         <div className="absolute inset-0 bg-black/10" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '1s' }} />

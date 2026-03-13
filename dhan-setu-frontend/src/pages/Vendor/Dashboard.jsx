@@ -15,6 +15,7 @@ import {
   PlusCircle
 } from "lucide-react";
 import { API_BASE_URL } from "../../utils/constants";
+import dashboardBg from "../../assets/images/dashboard-bg.jpg";
 
 const VendorDashboard = () => {
   const [dashboardData, setDashboardData] = useState(null);
@@ -135,6 +136,10 @@ const VendorDashboard = () => {
     <div className="min-h-screen">
       {/* Animated Header */}
       <div className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${dashboardBg})` }}
+        />
         <div className="absolute inset-0 bg-black/10" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 animate-pulse" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 animate-pulse" style={{ animationDelay: '1s' }} />

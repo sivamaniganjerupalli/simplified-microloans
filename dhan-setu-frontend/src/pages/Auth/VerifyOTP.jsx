@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { Wallet, Loader, CheckCircle, Clock, Mail } from "lucide-react";
 import { API_BASE_URL } from "../../utils/constants";
+import authBg from "../../assets/images/auth-bg.jpg";
 
 const VerifyOTP = () => {
   const navigate = useNavigate();
@@ -135,7 +136,11 @@ const VerifyOTP = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-blue-100 flex items-center justify-center px-4 py-12">
+    <div
+      className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-cover bg-center"
+      style={{ backgroundImage: `url(${authBg})` }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0A0F1E]/82 via-blue-950/80 to-purple-950/82" />
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl" />
