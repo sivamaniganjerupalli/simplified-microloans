@@ -99,25 +99,25 @@ curl -X POST http://localhost:5000/api/auth/2fa/verify \
 
 The new authentication pages will automatically connect to these endpoints:
 
-- **ForgotPassword.jsx** → `/api/auth/forgot-password`
-- **ResetPassword.jsx** → `/api/auth/validate-reset-token` & `/api/auth/reset-password`
-- **TwoFactorSetup.jsx** → `/api/auth/2fa/generate` & `/api/auth/2fa/verify`
+- **ForgotPassword.jsx** â†’ `/api/auth/forgot-password`
+- **ResetPassword.jsx** â†’ `/api/auth/validate-reset-token` & `/api/auth/reset-password`
+- **TwoFactorSetup.jsx** â†’ `/api/auth/2fa/generate` & `/api/auth/2fa/verify`
 
 ## Security Features
 
-✅ **Password Reset:**
+âœ… **Password Reset:**
 - Cryptographically secure tokens (SHA-256)
 - 1-hour expiration
 - One-time use tokens
 - Auto-cleanup of expired tokens
 
-✅ **Two-Factor Authentication:**
+âœ… **Two-Factor Authentication:**
 - TOTP standard (RFC 6238)
 - QR code generation
 - 10 backup codes
 - Email confirmation
 
-✅ **Email Security:**
+âœ… **Email Security:**
 - HTML email templates
 - Anti-phishing measures
 - Expiration warnings
@@ -129,3 +129,6 @@ The new authentication pages will automatically connect to these endpoints:
 3. Password reset tokens auto-expire after 1 hour
 4. Backup codes are one-time use only
 5. All passwords are hashed with bcrypt (salt rounds: 10)
+
+---
+Last reviewed: 2026-03-14

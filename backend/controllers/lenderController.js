@@ -635,7 +635,11 @@ const approveLoan = async (req, res) => {
       return res.status(404).json({ success: false, message: "Loan not found" });
     }
 
-    if (lender?.walletAddress && loan.walletAddress && String(lender.walletAddress).toLowerCase() === String(loan.walletAddress).toLowerCase()) {
+    if (
+      lender?.walletAddress &&
+      loan.walletAddress &&
+      String(lender.walletAddress).toLowerCase() === String(loan.walletAddress).toLowerCase()
+    ) {
       return res.status(400).json({
         success: false,
         message: "Vendor wallet address matches lender wallet address. Vendor must update wallet and resubmit the request.",

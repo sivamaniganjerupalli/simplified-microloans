@@ -1,4 +1,4 @@
-# 🔑 Production Environment Variables - Where to Get Each Value
+# ðŸ”‘ Production Environment Variables - Where to Get Each Value
 
 **Use this guide to fill in Render & Netlify environment variables**
 
@@ -11,7 +11,7 @@
 ```bash
 # From MongoDB Atlas dashboard
 1. Go to: https://cloud.mongodb.com
-2. Project → Connect → Drivers
+2. Project â†’ Connect â†’ Drivers
 3. Copy connection string
 4. Replace <password> with your database password
 ```
@@ -61,7 +61,7 @@ PRIVATE_KEY=41c1a3c06b63e510702093436905fe1bb93c4e9ba9749c9ace2bdf790509f9fe
 PRIVATE_KEY=41c1a3c06b63e510702093436905fe1bb93c4e9ba9749c9ace2bdf790509f9fe
 ```
 
-⚠️ **NEVER share this publicly** ⚠️
+âš ï¸ **NEVER share this publicly** âš ï¸
 
 ---
 
@@ -117,7 +117,7 @@ OTP_EMAIL=sivamaniganjerupalli@gmail.com
 OTP_PASS=ntfd pnkw ngkc fkuu
 ```
 
-⚠️ This is Gmail App Password, NOT your actual password
+âš ï¸ This is Gmail App Password, NOT your actual password
 
 ---
 
@@ -228,7 +228,7 @@ REACT_APP_ENV=production
 
 ---
 
-## 📋 Copy-Paste Ready Values
+## ðŸ“‹ Copy-Paste Ready Values
 
 ### Backend (Save these for Render)
 
@@ -260,7 +260,7 @@ REACT_APP_ENV=production
 
 ---
 
-## ✅ Verification
+## âœ… Verification
 
 ### Before Submitting to Render
 
@@ -276,3 +276,6 @@ REACT_APP_ENV=production
 - [x] Contract address verified on Etherscan
 - [x] Network ID is 11155111
 
+
+---
+Last reviewed: 2026-03-14

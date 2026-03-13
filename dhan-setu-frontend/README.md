@@ -1,6 +1,6 @@
-# DhanSetu — Frontend
+# DhanSetu â€” Frontend
 
-> React 19 · Tailwind CSS · React Router v7 · Ethers.js · Dark Theme
+> React 19 Â· Tailwind CSS Â· React Router v7 Â· Ethers.js Â· Dark Theme
 
 This is the frontend application for **DhanSetu**, a blockchain-powered microloan platform for India's street vendors.
 
@@ -54,19 +54,19 @@ REACT_APP_API_URL=http://localhost:5000
 
 ```
 src/
-├── App.js                 # Root router
-├── index.css              # Global dark theme CSS
-├── layouts/
-│   └── DashboardLayout.jsx  # Sidebar + hamburger nav
-├── pages/
-│   ├── Home.jsx           # Public landing page
-│   ├── Auth/              # Login, Register, OTP, ForgotPwd, Reset, 2FA
-│   ├── Vendor/            # All vendor dashboard pages (15 pages)
-│   └── Lender/            # All lender dashboard pages (12 pages)
-├── components/
-│   └── common/            # Button, Input, Select, Alert, Badge, Table, StatCard,
-│                          # Header, Footer, QuickAccessDock, ProtectedRoute, ErrorBoundary
-└── utils/                 # constants, formatters, validators
+â”œâ”€â”€ App.js                 # Root router
+â”œâ”€â”€ index.css              # Global dark theme CSS
+â”œâ”€â”€ layouts/
+â”‚   â””â”€â”€ DashboardLayout.jsx  # Sidebar + hamburger nav
+â”œâ”€â”€ pages/
+â”‚   â”œâ”€â”€ Home.jsx           # Public landing page
+â”‚   â”œâ”€â”€ Auth/              # Login, Register, OTP, ForgotPwd, Reset, 2FA
+â”‚   â”œâ”€â”€ Vendor/            # All vendor dashboard pages (15 pages)
+â”‚   â””â”€â”€ Lender/            # All lender dashboard pages (12 pages)
+â”œâ”€â”€ components/
+â”‚   â””â”€â”€ common/            # Button, Input, Select, Alert, Badge, Table, StatCard,
+â”‚                          # Header, Footer, QuickAccessDock, ProtectedRoute, ErrorBoundary
+â””â”€â”€ utils/                 # constants, formatters, validators
 ```
 
 ---
@@ -119,7 +119,7 @@ src/
 - **Dashboard bg:** `#0A0F1E`
 - **Card bg:** `bg-slate-900/55` with `backdrop-blur`
 - **Borders:** `border-slate-600/30`
-- **Primary accent:** cyan → blue gradient (`from-cyan-500 to-blue-600`)
+- **Primary accent:** cyan â†’ blue gradient (`from-cyan-500 to-blue-600`)
 - **Text:** slate-100 / slate-300 / slate-400
 - **CSS scope classes:** `vendor-modern-scope`, `lender-modern-scope` (applied in DashboardLayout)
 
@@ -195,3 +195,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+Last reviewed: 2026-03-14

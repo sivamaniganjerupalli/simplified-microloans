@@ -1,33 +1,33 @@
-# 🎯 Production Deployment - Visual Guide
+# ðŸŽ¯ Production Deployment - Visual Guide
 
 ## Overall Architecture
 
 ```
-                                    ┌─ PUBLIC INTERNET ─┐
-                                    │                   │
-┌─────────────────┐               ┌─────────────────┐ │ ┌─────────────────┐
-│  Your Computer  │               │    RENDER       │ │ │    NETLIFY      │
-│                 │               │    Backend API  │ │ │  Frontend App   │
-│  • Local Dev    │               │                 │ │ │                 │
-│  • Git Repo     │ ──PUSH CD───► │  Node.js Server │◄─┼─┤  React Build   │
-│                 │               │    Port 8080    │ │ │                 │
-└─────────────────┘               └─────────────────┘ │ └─────────────────┘
-                                        │             │         │
-                                        ▼             │         ▼
-                                  ┌──────────────┐    │    ┌──────────────┐
-                                  │ MongoDB Atlas│    │    │  Browser     │
-                                  │   (Cloud DB) │    │    │  MetaMask    │
-                                  └──────────────┘    │    └──────────────┘
-                                        │             │         │
-                                        └─────────────┼─────────┘
-                                                      │
+                                    â”Œâ”€ PUBLIC INTERNET â”€â”
+                                    â”‚                   â”‚
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”               â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚  Your Computer  â”‚               â”‚    RENDER       â”‚ â”‚ â”‚    NETLIFY      â”‚
+â”‚                 â”‚               â”‚    Backend API  â”‚ â”‚ â”‚  Frontend App   â”‚
+â”‚  â€¢ Local Dev    â”‚               â”‚                 â”‚ â”‚ â”‚                 â”‚
+â”‚  â€¢ Git Repo     â”‚ â”€â”€PUSH CDâ”€â”€â”€â–º â”‚  Node.js Server â”‚â—„â”€â”¼â”€â”¤  React Build   â”‚
+â”‚                 â”‚               â”‚    Port 8080    â”‚ â”‚ â”‚                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜               â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                        â”‚             â”‚         â”‚
+                                        â–¼             â”‚         â–¼
+                                  â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”    â”‚    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                  â”‚ MongoDB Atlasâ”‚    â”‚    â”‚  Browser     â”‚
+                                  â”‚   (Cloud DB) â”‚    â”‚    â”‚  MetaMask    â”‚
+                                  â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜    â”‚    â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                        â”‚             â”‚         â”‚
+                                        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                                                      â”‚
                                                    HTTPS
-                                                      │
-                                        ┌─────────────────────┐
-                                        │   Sepolia Testnet   │
-                                        │  Smart Contract     │
-                                        │ 0x43eb6e786fd677...│
-                                        └─────────────────────┘
+                                                      â”‚
+                                        â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+                                        â”‚   Sepolia Testnet   â”‚
+                                        â”‚  Smart Contract     â”‚
+                                        â”‚ 0x43eb6e786fd677...â”‚
+                                        â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -37,96 +37,96 @@
 ### Phase 1: Backend Deployment (Render)
 
 ```
-┌─ STEP 1 ─────────────────────────────────────┐
-│ Create Render Account & Connect GitHub       │
-│ • Go to render.com                           │
-│ • Sign up with GitHub                        │
-│ • Click "Deploy from GitHub"                 │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 2 ─────────────────────────────────────┐
-│ Configure Backend Service                    │
-│ • Select repository                          │
-│ • Set root directory: backend                │
-│ • Build command: npm install                 │
-│ • Start command: npm start                   │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 3 ─────────────────────────────────────┐
-│ Add Environment Variables (14 total)         │
-│ • MONGO_URI                                  │
-│ • JWT_SECRET                                 │
-│ • PRIVATE_KEY                                │
-│ • SEPOLIA_RPC_URL                            │
-│ • ... (others from template)                 │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 4 ─────────────────────────────────────┐
-│ Deploy                                        │
-│ • Click "Create Web Service"                 │
-│ • ⏳ Wait 3-5 minutes                         │
-│ • ✅ Status: "Live"                          │
-│ • 📝 URL: https://dhansetu-api.onrender.com │
-└──────────────────────────────────────────────┘
+â”Œâ”€ STEP 1 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Create Render Account & Connect GitHub       â”‚
+â”‚ â€¢ Go to render.com                           â”‚
+â”‚ â€¢ Sign up with GitHub                        â”‚
+â”‚ â€¢ Click "Deploy from GitHub"                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 2 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Configure Backend Service                    â”‚
+â”‚ â€¢ Select repository                          â”‚
+â”‚ â€¢ Set root directory: backend                â”‚
+â”‚ â€¢ Build command: npm install                 â”‚
+â”‚ â€¢ Start command: npm start                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 3 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Add Environment Variables (14 total)         â”‚
+â”‚ â€¢ MONGO_URI                                  â”‚
+â”‚ â€¢ JWT_SECRET                                 â”‚
+â”‚ â€¢ PRIVATE_KEY                                â”‚
+â”‚ â€¢ SEPOLIA_RPC_URL                            â”‚
+â”‚ â€¢ ... (others from template)                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 4 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Deploy                                        â”‚
+â”‚ â€¢ Click "Create Web Service"                 â”‚
+â”‚ â€¢ â³ Wait 3-5 minutes                         â”‚
+â”‚ â€¢ âœ… Status: "Live"                          â”‚
+â”‚ â€¢ ðŸ“ URL: https://dhansetu-api.onrender.com â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Phase 2: Frontend Deployment (Netlify)
 
 ```
-┌─ STEP 1 ─────────────────────────────────────┐
-│ Create Netlify Account & Connect GitHub      │
-│ • Go to netlify.com                          │
-│ • Sign up with GitHub                        │
-│ • Click "Import existing project"            │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 2 ─────────────────────────────────────┐
-│ Configure Frontend Build                     │
-│ • Base directory: dhan-setu-frontend         │
-│ • Build command: npm run build               │
-│ • Publish directory: build                   │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 3 ─────────────────────────────────────┐
-│ Add Environment Variables (5 total)          │
-│ • REACT_APP_API_URL                          │
-│ • REACT_APP_CONTRACT_ADDRESS                 │
-│ • REACT_APP_BLOCKCHAIN_NETWORK               │
-│ • ... (others from template)                 │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 4 ─────────────────────────────────────┐
-│ Deploy                                        │
-│ • Click "Deploy site"                        │
-│ • ⏳ Wait 3-5 minutes                         │
-│ • ✅ Status: "Published"                     │
-│ • 📝 URL: https://your-site.netlify.app     │
-└──────────────────────────────────────────────┘
+â”Œâ”€ STEP 1 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Create Netlify Account & Connect GitHub      â”‚
+â”‚ â€¢ Go to netlify.com                          â”‚
+â”‚ â€¢ Sign up with GitHub                        â”‚
+â”‚ â€¢ Click "Import existing project"            â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 2 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Configure Frontend Build                     â”‚
+â”‚ â€¢ Base directory: dhan-setu-frontend         â”‚
+â”‚ â€¢ Build command: npm run build               â”‚
+â”‚ â€¢ Publish directory: build                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 3 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Add Environment Variables (5 total)          â”‚
+â”‚ â€¢ REACT_APP_API_URL                          â”‚
+â”‚ â€¢ REACT_APP_CONTRACT_ADDRESS                 â”‚
+â”‚ â€¢ REACT_APP_BLOCKCHAIN_NETWORK               â”‚
+â”‚ â€¢ ... (others from template)                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 4 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Deploy                                        â”‚
+â”‚ â€¢ Click "Deploy site"                        â”‚
+â”‚ â€¢ â³ Wait 3-5 minutes                         â”‚
+â”‚ â€¢ âœ… Status: "Published"                     â”‚
+â”‚ â€¢ ðŸ“ URL: https://your-site.netlify.app     â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ### Phase 3: Connect Frontend to Backend
 
 ```
-┌─ STEP 1 ─────────────────────────────────────┐
-│ Update Backend CORS Configuration            │
-│ • Go back to Render dashboard                │
-│ • Select your backend service                │
-│ • Environment → Edit                         │
-│ • Find FRONTEND_URL                          │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 2 ─────────────────────────────────────┐
-│ Set Frontend URL                             │
-│ • FRONTEND_URL=https://your-site.netlify.app│
-│ • Save                                       │
-└──────────────────────────────────────────────┘
-                      ▼
-┌─ STEP 3 ─────────────────────────────────────┐
-│ Render Auto-Redeploys                        │
-│ • Backend automatically rebuilds             │
-│ • ⏳ Wait 1-2 minutes                         │
-│ • ✅ CORS now fixed!                         │
-└──────────────────────────────────────────────┘
+â”Œâ”€ STEP 1 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Update Backend CORS Configuration            â”‚
+â”‚ â€¢ Go back to Render dashboard                â”‚
+â”‚ â€¢ Select your backend service                â”‚
+â”‚ â€¢ Environment â†’ Edit                         â”‚
+â”‚ â€¢ Find FRONTEND_URL                          â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 2 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Set Frontend URL                             â”‚
+â”‚ â€¢ FRONTEND_URL=https://your-site.netlify.appâ”‚
+â”‚ â€¢ Save                                       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                      â–¼
+â”Œâ”€ STEP 3 â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ Render Auto-Redeploys                        â”‚
+â”‚ â€¢ Backend automatically rebuilds             â”‚
+â”‚ â€¢ â³ Wait 1-2 minutes                         â”‚
+â”‚ â€¢ âœ… CORS now fixed!                         â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
 
 ---
@@ -137,63 +137,63 @@
 
 ```
 User Browser
-    │
-    ├─ Visits: https://your-site.netlify.app
-    │  ✅ Static files loaded from Netlify CDN
-    │
-    ├─ Clicks "Register"
-    │  ✅ React form rendered (frontend)
-    │
-    ├─ Enters data + connects MetaMask
-    │  ✅ MetaMask popup shown
-    │
-    └─ Submits form
-       │
-       └─ 📤 HTTPS POST to https://dhansetu-api.onrender.com/api/auth/register
-          │
-          ├─ ✅ Backend receives request
-          │
-          ├─ 🔐 Validate + hash password
-          │
-          ├─ 💾 Store in MongoDB Atlas
-          │
-          └─ 📥 Response back to frontend
-             │
-             └─ ✅ User sees success message
-                └─ 🎉 Account created!
+    â”‚
+    â”œâ”€ Visits: https://your-site.netlify.app
+    â”‚  âœ… Static files loaded from Netlify CDN
+    â”‚
+    â”œâ”€ Clicks "Register"
+    â”‚  âœ… React form rendered (frontend)
+    â”‚
+    â”œâ”€ Enters data + connects MetaMask
+    â”‚  âœ… MetaMask popup shown
+    â”‚
+    â””â”€ Submits form
+       â”‚
+       â””â”€ ðŸ“¤ HTTPS POST to https://dhansetu-api.onrender.com/api/auth/register
+          â”‚
+          â”œâ”€ âœ… Backend receives request
+          â”‚
+          â”œâ”€ ðŸ” Validate + hash password
+          â”‚
+          â”œâ”€ ðŸ’¾ Store in MongoDB Atlas
+          â”‚
+          â””â”€ ðŸ“¥ Response back to frontend
+             â”‚
+             â””â”€ âœ… User sees success message
+                â””â”€ ðŸŽ‰ Account created!
 ```
 
 ### User Creates Loan Request
 
 ```
 User Browser (Frontend)
-    │
-    ├─ Fills loan form
-    │  ✅ Form validation locally
-    │
-    └─ Clicks "Submit"
-       │
-       ├─ 📤 POST request to backend API
-       │
-       ├─ Backend processes loan
-       │  │
-       │  ├─ Validate data
-       │  │
-       │  ├─ Store in MongoDB
-       │  │
-       │  └─ Call smart contract
-       │     │
-       │     └─ 🔗 Web3 request
-       │        │
-       │        └─ Send to Sepolia blockchain
-       │           │
-       │           └─ ✅ Transaction confirmed
-       │
-       └─ 📥 Response to frontend
-          │
-          └─ Update UI
-             └─ Show transaction hash
-                └─ Link to Etherscan
+    â”‚
+    â”œâ”€ Fills loan form
+    â”‚  âœ… Form validation locally
+    â”‚
+    â””â”€ Clicks "Submit"
+       â”‚
+       â”œâ”€ ðŸ“¤ POST request to backend API
+       â”‚
+       â”œâ”€ Backend processes loan
+       â”‚  â”‚
+       â”‚  â”œâ”€ Validate data
+       â”‚  â”‚
+       â”‚  â”œâ”€ Store in MongoDB
+       â”‚  â”‚
+       â”‚  â””â”€ Call smart contract
+       â”‚     â”‚
+       â”‚     â””â”€ ðŸ”— Web3 request
+       â”‚        â”‚
+       â”‚        â””â”€ Send to Sepolia blockchain
+       â”‚           â”‚
+       â”‚           â””â”€ âœ… Transaction confirmed
+       â”‚
+       â””â”€ ðŸ“¥ Response to frontend
+          â”‚
+          â””â”€ Update UI
+             â””â”€ Show transaction hash
+                â””â”€ Link to Etherscan
 ```
 
 ---
@@ -204,44 +204,44 @@ User Browser (Frontend)
 
 ```
 You: git push origin main
-           │
-           ▼
+           â”‚
+           â–¼
     GitHub (receives code)
-           │
-      ┌────┴────┐
-      │          │
-      ▼          ▼
+           â”‚
+      â”Œâ”€â”€â”€â”€â”´â”€â”€â”€â”€â”
+      â”‚          â”‚
+      â–¼          â–¼
    Render    Netlify
    Backend   Frontend
    Builds    Builds
-      │          │
-      ├────────┬─┘
-      │        │
+      â”‚          â”‚
+      â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”˜
+      â”‚        â”‚
    Tests  Tests
-      │        │
-      └─────┬──┘
-           │
-           ▼
-       ✅ Deploy
+      â”‚        â”‚
+      â””â”€â”€â”€â”€â”€â”¬â”€â”€â”˜
+           â”‚
+           â–¼
+       âœ… Deploy
 ```
 
 ### Environment Variables Flow
 
 ```
 Render Environment Variables
-    ├─ Read at startup
-    ├─ Available as process.env.VAR
-    └─ Used by:
-       ├─ MongoDB connection
-       ├─ JWT signing
-       ├─ Blockchain calls
-       └─ Email service
+    â”œâ”€ Read at startup
+    â”œâ”€ Available as process.env.VAR
+    â””â”€ Used by:
+       â”œâ”€ MongoDB connection
+       â”œâ”€ JWT signing
+       â”œâ”€ Blockchain calls
+       â””â”€ Email service
 
 Netlify Environment Variables
-    ├─ Read during build
-    ├─ Injected as REACT_APP_*
-    └─ Available as:
-       └─ process.env.REACT_APP_VAR
+    â”œâ”€ Read during build
+    â”œâ”€ Injected as REACT_APP_*
+    â””â”€ Available as:
+       â””â”€ process.env.REACT_APP_VAR
 ```
 
 ---
@@ -250,27 +250,27 @@ Netlify Environment Variables
 
 ```
 Private Key (KEPT SECURE - Only on Render)
-    ├─ Only on Render backend
-    ├─ Never sent to frontend
-    ├─ Never exposed to browser
-    └─ Used only for signing blockchain transactions
+    â”œâ”€ Only on Render backend
+    â”œâ”€ Never sent to frontend
+    â”œâ”€ Never exposed to browser
+    â””â”€ Used only for signing blockchain transactions
 
 Database Password (KEPT SECURE - Only on Render)
-    ├─ Only in MONGO_URI env var
-    ├─ Never in frontend
-    ├─ Only for server-to-DB connection
-    └─ Not accessible from browser
+    â”œâ”€ Only in MONGO_URI env var
+    â”œâ”€ Never in frontend
+    â”œâ”€ Only for server-to-DB connection
+    â””â”€ Not accessible from browser
 
 JWT Secret (KEPT SECURE - Only on Render)
-    ├─ Used to sign user tokens
-    ├─ Verified on backend only
-    └─ Never sent to frontend code
+    â”œâ”€ Used to sign user tokens
+    â”œâ”€ Verified on backend only
+    â””â”€ Never sent to frontend code
 
 Frontend (EXPOSED - Public Repo)
-    ├─ Contract address (public anyway)
-    ├─ RPC URL (public anyway)
-    ├─ Network configuration (public anyway)
-    └─ NO sensitive keys exposed!
+    â”œâ”€ Contract address (public anyway)
+    â”œâ”€ RPC URL (public anyway)
+    â”œâ”€ Network configuration (public anyway)
+    â””â”€ NO sensitive keys exposed!
 ```
 
 ---
@@ -282,24 +282,24 @@ Frontend (EXPOSED - Public Repo)
 ```
 Task: Check if everything is working
 
-┌─ Render Dashboard
-│  └─ Service status: Live? ✅
-│     └─ If Red/Yellow: Check logs
-│
-├─ Netlify Dashboard
-│  └─ Site status: Published? ✅
-│     └─ If warning: Check logs
-│
-├─ Your App
-│  └─ Load: https://your-site.netlify.app
-│     ├─ Page loads? ✅
-│     ├─ No console errors? ✅
-│     └─ Can register? ✅
-│
-└─ Database
-   └─ MongoDB Atlas
-      ├─ Collections have data? ✅
-      └─ Recent entries? ✅
+â”Œâ”€ Render Dashboard
+â”‚  â””â”€ Service status: Live? âœ…
+â”‚     â””â”€ If Red/Yellow: Check logs
+â”‚
+â”œâ”€ Netlify Dashboard
+â”‚  â””â”€ Site status: Published? âœ…
+â”‚     â””â”€ If warning: Check logs
+â”‚
+â”œâ”€ Your App
+â”‚  â””â”€ Load: https://your-site.netlify.app
+â”‚     â”œâ”€ Page loads? âœ…
+â”‚     â”œâ”€ No console errors? âœ…
+â”‚     â””â”€ Can register? âœ…
+â”‚
+â””â”€ Database
+   â””â”€ MongoDB Atlas
+      â”œâ”€ Collections have data? âœ…
+      â””â”€ Recent entries? âœ…
 ```
 
 ---
@@ -310,26 +310,26 @@ Task: Check if everything is working
 
 ```
 Developer: Changes code locally
-           │
-           └─ git add .
-              └─ git commit -m "message"
-                 └─ git push origin main
-                    │
-                    ▼
+           â”‚
+           â””â”€ git add .
+              â””â”€ git commit -m "message"
+                 â””â”€ git push origin main
+                    â”‚
+                    â–¼
               GitHub Receives Push
-                    │
-              ┌─────┴──────┐
-              │             │
-              ▼             ▼
+                    â”‚
+              â”Œâ”€â”€â”€â”€â”€â”´â”€â”€â”€â”€â”€â”€â”
+              â”‚             â”‚
+              â–¼             â–¼
           Render Job    Netlify Job
-          • Checks out  • Checks out
-          • npm install • npm run build
-          • npm start   • Uploads to CDN
-              │             │
-              └──────┬───────┘
-                     │
-                     ▼
-          ✅ Live (typically <5 min)
+          â€¢ Checks out  â€¢ Checks out
+          â€¢ npm install â€¢ npm run build
+          â€¢ npm start   â€¢ Uploads to CDN
+              â”‚             â”‚
+              â””â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”˜
+                     â”‚
+                     â–¼
+          âœ… Live (typically <5 min)
 ```
 
 ---
@@ -337,80 +337,80 @@ Developer: Changes code locally
 ## Deployment Checklist - Visual
 
 ```
-┌─────────────────────────────────────────────┐
-│ BEFORE DEPLOYING                            │
-├─────────────────────────────────────────────┤
-│ Local Environment                           │
-│ ☑ Backend runs: npm start                  │
-│ ☑ Frontend runs: npm start                 │
-│ ☑ MongoDB connection OK                    │
-│ ☑ MetaMask works on localhost              │
-│ ☑ Tests pass                               │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────┐
-│ GITHUB READY                                │
-├─────────────────────────────────────────────┤
-│ ☑ Code committed                           │
-│ ☑ Default branch: main                     │
-│ ☑ No sensitive data in repo                │
-│ ☑ .gitignore includes .env                 │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────┐
-│ ACCOUNTS CREATED                            │
-├─────────────────────────────────────────────┤
-│ ☑ Render account                           │
-│ ☑ Netlify account                          │
-│ ☑ Both GitHub-connected                    │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────┐
-│ DEPLOY BACKEND                              │
-├─────────────────────────────────────────────┤
-│ ☑ Create Render service                    │
-│ ☑ Add all env variables                    │
-│ ☑ Status: Live                             │
-│ ☑ Copy URL                                 │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────┐
-│ DEPLOY FRONTEND                             │
-├─────────────────────────────────────────────┤
-│ ☑ Create Netlify site                      │
-│ ☑ Add all env variables                    │
-│ ☑ Status: Published                        │
-│ ☑ Copy URL                                 │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────┐
-│ CONNECT SERVICES                            │
-├─────────────────────────────────────────────┤
-│ ☑ Update FRONTEND_URL in Render            │
-│ ☑ Render redeploys                         │
-│ ☑ Status: Live again                       │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-┌─────────────────────────────────────────────┐
-│ TEST & VERIFY                               │
-├─────────────────────────────────────────────┤
-│ ☑ Frontend loads                           │
-│ ☑ No CORS errors                           │
-│ ☑ Register flow works                      │
-│ ☑ MetaMask connects                        │
-│ ☑ Blockchain txns appear                   │
-└─────────────────────────────────────────────┘
-                    │
-                    ▼
-        🎉 DEPLOYMENT COMPLETE! 🎉
-                    │
-                    ▼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ BEFORE DEPLOYING                            â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ Local Environment                           â”‚
+â”‚ â˜‘ Backend runs: npm start                  â”‚
+â”‚ â˜‘ Frontend runs: npm start                 â”‚
+â”‚ â˜‘ MongoDB connection OK                    â”‚
+â”‚ â˜‘ MetaMask works on localhost              â”‚
+â”‚ â˜‘ Tests pass                               â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ GITHUB READY                                â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â˜‘ Code committed                           â”‚
+â”‚ â˜‘ Default branch: main                     â”‚
+â”‚ â˜‘ No sensitive data in repo                â”‚
+â”‚ â˜‘ .gitignore includes .env                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ ACCOUNTS CREATED                            â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â˜‘ Render account                           â”‚
+â”‚ â˜‘ Netlify account                          â”‚
+â”‚ â˜‘ Both GitHub-connected                    â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ DEPLOY BACKEND                              â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â˜‘ Create Render service                    â”‚
+â”‚ â˜‘ Add all env variables                    â”‚
+â”‚ â˜‘ Status: Live                             â”‚
+â”‚ â˜‘ Copy URL                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ DEPLOY FRONTEND                             â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â˜‘ Create Netlify site                      â”‚
+â”‚ â˜‘ Add all env variables                    â”‚
+â”‚ â˜‘ Status: Published                        â”‚
+â”‚ â˜‘ Copy URL                                 â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ CONNECT SERVICES                            â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â˜‘ Update FRONTEND_URL in Render            â”‚
+â”‚ â˜‘ Render redeploys                         â”‚
+â”‚ â˜‘ Status: Live again                       â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+â”‚ TEST & VERIFY                               â”‚
+â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
+â”‚ â˜‘ Frontend loads                           â”‚
+â”‚ â˜‘ No CORS errors                           â”‚
+â”‚ â˜‘ Register flow works                      â”‚
+â”‚ â˜‘ MetaMask connects                        â”‚
+â”‚ â˜‘ Blockchain txns appear                   â”‚
+â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+                    â”‚
+                    â–¼
+        ðŸŽ‰ DEPLOYMENT COMPLETE! ðŸŽ‰
+                    â”‚
+                    â–¼
         Your app is now PUBLIC!
 ```
 
@@ -420,55 +420,58 @@ Developer: Changes code locally
 
 ```
 Project Root
-│
-├── QUICK_START_DEPLOYMENT.md ←── START HERE
-├── PRODUCTION_DEPLOYMENT_GUIDE.md
-├── ENV_VARIABLES_REFERENCE.md
-└── [Other files]
+â”‚
+â”œâ”€â”€ QUICK_START_DEPLOYMENT.md â†â”€â”€ START HERE
+â”œâ”€â”€ PRODUCTION_DEPLOYMENT_GUIDE.md
+â”œâ”€â”€ ENV_VARIABLES_REFERENCE.md
+â””â”€â”€ [Other files]
 
 Backend Directory
-├── netlify.toml ←── Netlify config
+â”œâ”€â”€ netlify.toml â†â”€â”€ Netlify config
 
 Frontend Directory
-├── render.yaml ←── Render reference
-├── .env.production.template
-└── [Other files]
+â”œâ”€â”€ render.yaml â†â”€â”€ Render reference
+â”œâ”€â”€ .env.production.template
+â””â”€â”€ [Other files]
 
 After Deployment:
-├── Live at: https://your-site-name.netlify.app
-├── API at: https://dhansetu-api.onrender.com/api
-└── Contract: https://sepolia.etherscan.io/address/...
+â”œâ”€â”€ Live at: https://your-site-name.netlify.app
+â”œâ”€â”€ API at: https://dhansetu-api.onrender.com/api
+â””â”€â”€ Contract: https://sepolia.etherscan.io/address/...
 ```
 
 ---
 
-## Success - You're Live! 🚀
+## Success - You're Live! ðŸš€
 
 ```
        Your Computer
        (Development)
-              │
-              │ (git push)
-              │
-              ▼
+              â”‚
+              â”‚ (git push)
+              â”‚
+              â–¼
          GitHub Repo
-              │
-         ┌────┴────┐
-         │          │
-         ▼          ▼
+              â”‚
+         â”Œâ”€â”€â”€â”€â”´â”€â”€â”€â”€â”
+         â”‚          â”‚
+         â–¼          â–¼
       Render    Netlify
       Backend   Frontend
-         │          │
-         │◄─ CORS ──┤
-         │          │
-         └────┬─────┘
-              │
-              ▼
-         PUBLIC! 🌐
+         â”‚          â”‚
+         â”‚â—„â”€ CORS â”€â”€â”¤
+         â”‚          â”‚
+         â””â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”˜
+              â”‚
+              â–¼
+         PUBLIC! ðŸŒ
     Anyone can visit:
     https://your-site-name.netlify.app
 ```
 
 ---
 
-Done! Your deployment is fully visualized. Now go deploy! 🚀
+Done! Your deployment is fully visualized. Now go deploy! ðŸš€
+
+---
+Last reviewed: 2026-03-14
