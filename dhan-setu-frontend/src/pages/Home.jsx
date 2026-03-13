@@ -6,6 +6,9 @@ import {
   BadgeCheck, BarChart3, Smartphone
 } from 'lucide-react';
 import home1 from '../assets/images/home1.png';
+import home3 from '../assets/images/home3.png';
+import home4 from '../assets/images/home4.png';
+import home5 from '../assets/images/home5.png';
 
 /* ─── tiny reusable pill ────────────────────────────────────────── */
 const Pill = ({ children }) => (
@@ -137,6 +140,24 @@ const Home = () => {
       text: 'Simple app, big buttons, even explained in Hindi. Perfect for people like me.',
       rating: 5,
       avatar: 'AP',
+    },
+  ];
+
+  const vendorMoments = [
+    {
+      src: home3,
+      title: 'Fresh Inventory, Daily Growth',
+      desc: 'DhanSetu helps vendors restock faster and keep sales moving every day.',
+    },
+    {
+      src: home4,
+      title: 'Built for Busy Streets',
+      desc: 'A simple mobile flow that works during peak market hours without paperwork delays.',
+    },
+    {
+      src: home5,
+      title: 'Trust Through Transparency',
+      desc: 'Every loan update stays visible and secure with blockchain-backed records.',
     },
   ];
 
@@ -441,6 +462,41 @@ const Home = () => {
               Start Your Application
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ── VENDOR MOMENTS ─────────────────────────────────────── */}
+      <section className="py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 space-y-4">
+            <Pill><Users className="w-3 h-3" />From the Ground</Pill>
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+              Built around real vendor{' '}
+              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">workdays</span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Not stock photos for style only. These visuals represent the speed and simplicity DhanSetu is designed for.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {vendorMoments.map((item, i) => (
+              <article
+                key={i}
+                className="bg-white/[0.04] border border-white/10 rounded-2xl overflow-hidden hover:border-white/20 transition-all"
+              >
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  className="w-full h-52 object-cover"
+                />
+                <div className="p-6 space-y-2">
+                  <h3 className="text-white font-bold text-lg">{item.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
