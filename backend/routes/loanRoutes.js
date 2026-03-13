@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const {
   applyLoan,
@@ -12,8 +13,13 @@ const {
 } = require("../controllers/loanController");
 const authMiddleware = require("../middlewares/auth");
 
+const uploadsDir = path.join(__dirname, "..", "uploads");
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
+  destination: (req, file, cb) => cb(null, uploadsDir),
   filename: (req, file, cb) => {
     const uniqueName = `${file.fieldname}-${uuidv4()}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
@@ -33,13 +39,31 @@ const upload = multer({
   },
 });
 
-router.post(
-  "/apply",
-  authMiddleware,
+const loanUploadMiddleware = (req, res, next) => {
   upload.fields([
     { name: "aadhaarImage", maxCount: 1 },
     { name: "businessImage", maxCount: 1 },
-  ]),
+  ])(req, res, (err) => {
+    if (!err) return next();
+
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({
+        success: false,
+        message: err.message,
+      });
+    }
+
+    return res.status(400).json({
+      success: false,
+      message: err.message || "File upload failed",
+    });
+  });
+};
+
+router.post(
+  "/apply",
+  authMiddleware,
+  loanUploadMiddleware,
   applyLoan
 );
 

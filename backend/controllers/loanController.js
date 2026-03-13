@@ -72,7 +72,13 @@ exports.applyLoan = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("Apply loan error:", err.message);
+    console.error("Apply loan error:", {
+      message: err.message,
+      vendorId: req.user?.id,
+      bodyKeys: Object.keys(req.body || {}),
+      hasFiles: !!req.files,
+      fileKeys: Object.keys(req.files || {}),
+    });
     return res.status(500).json({
       success: false,
       message: "Loan application failed",
