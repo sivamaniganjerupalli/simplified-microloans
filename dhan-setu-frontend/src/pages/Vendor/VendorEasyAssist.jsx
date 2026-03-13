@@ -5,8 +5,6 @@ import {
   Wallet,
   CreditCard,
   HelpCircle,
-  Phone,
-  MessageCircle,
   ArrowRight,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -128,28 +126,6 @@ const VendorEasyAssist = () => {
               </div>
             );
           })}
-        </div>
-
-        <div className="mt-6 rounded-3xl bg-gradient-to-r from-red-500 to-pink-500 p-6 text-white shadow-xl">
-          <p className="text-lg font-bold">Need urgent support?</p>
-          <div className="mt-4 flex flex-col sm:flex-row gap-3">
-            <a
-              href="tel:+919876543210"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-white text-red-700 font-bold"
-            >
-              <Phone className="w-5 h-5" />
-              Call Support
-            </a>
-            <a
-              href="https://wa.me/919876543210"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-2xl bg-green-500 text-white font-bold"
-            >
-              <MessageCircle className="w-5 h-5" />
-              WhatsApp
-            </a>
-          </div>
         </div>
       </main>
     </div>

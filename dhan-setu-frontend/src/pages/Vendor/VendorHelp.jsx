@@ -4,11 +4,8 @@ import {
   BookOpen,
   Shield,
   TrendingUp,
-  Mail,
   ChevronDown,
   ChevronUp,
-  Phone,
-  MessageCircle,
   Play,
   FileText,
   Wallet,
@@ -16,7 +13,6 @@ import {
   CheckCircle,
   AlertCircle,
   ArrowRight,
-  Users,
   Info,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -126,25 +122,6 @@ const VendorHelp = () => {
       </div>
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 mt-0 pb-12 space-y-10">
-        <div className="rounded-3xl bg-gradient-to-r from-red-500 to-pink-500 p-8 text-white shadow-2xl">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h2 className="text-2xl font-bold mb-1">Need Help Right Now?</h2>
-              <p className="text-white/90">Call or message support anytime between 9 AM and 9 PM.</p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-red-600 rounded-2xl font-bold text-lg">
-                <Phone className="w-5 h-5" />
-                Call Support
-              </a>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 text-white rounded-2xl font-bold text-lg">
-                <MessageCircle className="w-5 h-5" />
-                WhatsApp
-              </a>
-            </div>
-          </div>
-        </div>
-
         <section>
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Common Tasks</h2>
@@ -161,7 +138,6 @@ const VendorHelp = () => {
             <QuickActionCard icon={AlertCircle} title="Reminder Center" description="Set custom reminders for repayment and tasks." onClick={() => navigate("/vendor/reminders")} gradient="from-violet-500 to-purple-500" badge="New" />
             <QuickActionCard icon={Wallet} title="Expense Tracker" description="Track daily expenses and profit." onClick={() => navigate("/vendor/expense-tracker")} gradient="from-cyan-500 to-blue-500" badge="New" />
             <QuickActionCard icon={TrendingUp} title="Sales Booster" description="See which days sell best and improve weak days." onClick={() => navigate("/vendor/sales-booster")} gradient="from-fuchsia-500 to-violet-500" badge="New" />
-            <QuickActionCard icon={Users} title="Contact Support" description="Message support team for any issue." onClick={() => window.open("https://wa.me/919876543210", "_blank")} gradient="from-indigo-500 to-blue-500" />
             <QuickActionCard icon={Info} title="Quick Guide" description="Open one-page instructions and safety tips." onClick={() => navigate("/vendor/quick-guide")} gradient="from-pink-500 to-rose-500" />
           </div>
         </section>
@@ -219,23 +195,6 @@ const VendorHelp = () => {
           </div>
         </section>
 
-        <section className="text-center">
-          <div className="inline-block rounded-3xl bg-white border-2 border-gray-200 p-8 shadow-xl">
-            <Mail className="w-12 h-12 text-indigo-600 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Still Need Help?</h3>
-            <p className="text-lg text-gray-600 mb-6">Reach support via WhatsApp or phone.</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-2xl font-bold text-lg shadow-lg">
-                <MessageCircle className="w-6 h-6" />
-                WhatsApp Support
-              </a>
-              <a href="tel:+919876543210" className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-2xl font-bold text-lg shadow-lg">
-                <Phone className="w-6 h-6" />
-                Call Support
-              </a>
-            </div>
-          </div>
-        </section>
       </main>
     </div>
   );

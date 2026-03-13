@@ -1,61 +1,98 @@
 import React, { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { Bell, Plus, Trash2, Clock3, Volume2, CheckCircle2 } from "lucide-react";
-
-const STORAGE_KEY = "vendor_reminders_v1";
-
-const defaultReminders = [
-  { id: "r1", title: "Check loan status", time: "09:00", done: false },
-  { id: "r2", title: "Set aside repayment money", time: "13:00", done: false },
-  { id: "r3", title: "Review transactions", time: "19:00", done: false },
-];
+import { API_BASE_URL } from "../../utils/constants";
 
 const VendorReminderCenter = () => {
+  const token = localStorage.getItem("token");
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("09:00");
-  const [reminders, setReminders] = useState(defaultReminders);
+  const [reminders, setReminders] = useState([]);
 
-  useEffect(() => {
+  const fetchReminders = async () => {
+    if (!token) return;
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setReminders(parsed);
-        }
-      }
+      const res = await axios.get(`${API_BASE_URL}/reminders`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const mapped = (res.data?.reminders || []).map((r) => ({
+        id: r._id,
+        title: r.title,
+        time: r.time,
+        done: !!r.done,
+      }));
+      setReminders(mapped);
     } catch {
-      // Keep defaults when storage is invalid.
+      setReminders([]);
     }
-  }, []);
+  };
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(reminders));
-  }, [reminders]);
+    fetchReminders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   const completedCount = useMemo(() => reminders.filter((item) => item.done).length, [reminders]);
 
-  const addReminder = (e) => {
+  const addReminder = async (e) => {
     e.preventDefault();
     const safeTitle = title.trim();
-    if (!safeTitle) return;
+    if (!safeTitle || !token) return;
 
-    const newItem = {
-      id: `${Date.now()}`,
-      title: safeTitle,
-      time,
-      done: false,
-    };
+    try {
+      const res = await axios.post(
+        `${API_BASE_URL}/reminders`,
+        { title: safeTitle, time },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    setReminders((prev) => [newItem, ...prev]);
-    setTitle("");
+      const reminder = res.data?.reminder;
+      if (reminder) {
+        setReminders((prev) => [
+          { id: reminder._id, title: reminder.title, time: reminder.time, done: !!reminder.done },
+          ...prev,
+        ]);
+      }
+      setTitle("");
+    } catch {
+      // No-op: keep current list
+    }
   };
 
-  const toggleDone = (id) => {
-    setReminders((prev) => prev.map((item) => (item.id === id ? { ...item, done: !item.done } : item)));
+  const toggleDone = async (id) => {
+    if (!token) return;
+    try {
+      const res = await axios.put(
+        `${API_BASE_URL}/reminders/${id}/toggle`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      const updated = res.data?.reminder;
+      if (updated) {
+        setReminders((prev) =>
+          prev.map((item) =>
+            item.id === id
+              ? { id: updated._id, title: updated.title, time: updated.time, done: !!updated.done }
+              : item
+          )
+        );
+      }
+    } catch {
+      // No-op
+    }
   };
 
-  const removeReminder = (id) => {
-    setReminders((prev) => prev.filter((item) => item.id !== id));
+  const removeReminder = async (id) => {
+    if (!token) return;
+    try {
+      await axios.delete(`${API_BASE_URL}/reminders/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setReminders((prev) => prev.filter((item) => item.id !== id));
+    } catch {
+      // No-op
+    }
   };
 
   const speakReminder = (text) => {

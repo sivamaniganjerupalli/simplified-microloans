@@ -158,8 +158,8 @@ const VendorLoans = () => {
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`} />
               <div className="relative space-y-2">
-                <p className="text-sm font-medium text-gray-600">{stat.label}</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                <p className="text-sm font-semibold text-slate-800">{stat.label}</p>
+                <p className="text-3xl font-bold text-slate-950">
                   {stat.value}
                 </p>
               </div>

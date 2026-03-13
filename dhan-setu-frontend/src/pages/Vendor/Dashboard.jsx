@@ -200,8 +200,8 @@ const VendorDashboard = () => {
                   </span>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-sm font-medium text-gray-600">{stat.label}</p>
-                  <p className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                  <p className="text-sm font-semibold text-slate-800">{stat.label}</p>
+                  <p className="text-2xl font-bold text-slate-950">
                     {stat.value}
                   </p>
                 </div>

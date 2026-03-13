@@ -63,6 +63,7 @@ app.use('/api/otp', require('./routes/otpRoutes'));
 app.use('/api/totp', require('./routes/totpRoutes'));
 app.use('/api/lender', lenderDashboardRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/reminders', require('./routes/reminderRoutes'));
 
 // Static file serving for uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
