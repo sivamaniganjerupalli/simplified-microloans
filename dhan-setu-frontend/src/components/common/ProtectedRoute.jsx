@@ -3,15 +3,15 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { STORAGE_KEYS } from '../../utils/constants';
 
-/**
- * ProtectedRoute Component
- * Protects routes that require authentication
- * 
- * @param {Object} props
- * @param {React.Component} props.children - Child components to render if authenticated
- * @param {string} props.requiredRole - Required role to access the route (optional)
- * @param {string} props.redirectTo - Path to redirect if not authenticated (default: '/login')
- */
+const isTokenExpired = (token) => {
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.exp * 1000 < Date.now();
+  } catch {
+    return true;
+  }
+};
+
 const ProtectedRoute = ({ 
   children, 
   requiredRole = null, 
@@ -20,14 +20,16 @@ const ProtectedRoute = ({
   const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
   const userRole = localStorage.getItem(STORAGE_KEYS.ROLE);
 
-  // Check if user is authenticated
-  if (!token) {
+  // Check if user is authenticated and token is not expired
+  if (!token || isTokenExpired(token)) {
+    localStorage.removeItem(STORAGE_KEYS.TOKEN);
+    localStorage.removeItem(STORAGE_KEYS.ROLE);
+    localStorage.removeItem(STORAGE_KEYS.USER_ID);
     return <Navigate to={redirectTo} replace />;
   }
 
   // Check if user has required role
   if (requiredRole && userRole !== requiredRole) {
-    // Redirect to appropriate dashboard based on user's role
     const roleDashboard = userRole === 'vendor' ? '/vendor' : '/lender';
     return <Navigate to={roleDashboard} replace />;
   }

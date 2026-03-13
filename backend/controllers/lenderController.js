@@ -275,7 +275,7 @@ const loginLender = async (req, res) => {
     );
 
     const token = jwt.sign({ id: lender._id, role: lender.role }, JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "7d",
     });
 
     return res.status(200).json({

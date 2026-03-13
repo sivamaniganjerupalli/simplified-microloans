@@ -252,7 +252,7 @@ exports.loginVendor = async (req, res) => {
     }
 
     const token = jwt.sign({ id: vendor._id, role: vendor.role }, JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "7d",
     });
 
     return res.status(200).json({

@@ -261,6 +261,13 @@ const LenderProfile = () => {
         }
       } catch (err) {
         console.error("Failed to load lender", err);
+        if (err.response?.status === 401 || err.response?.status === 403) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("role");
+          localStorage.removeItem("userId");
+          navigate("/login", { replace: true });
+          return;
+        }
         setError("Unable to load profile. Please try logging in again.");
       } finally {
         setLoading(false);
